@@ -638,3 +638,13 @@ th.sortable:hover{color:#dce5ef;background:#101823}
 #reviewTable .excellent .player-link,#reviewTable .excellent td.num b{color:#ffd166;font-weight:800}
 
 #profileAssessment{border:1px solid var(--review-color);background:var(--review-bg)}#profileAssessment .panel-title{color:var(--review-color)}#profileAverages{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}#profileDonationHistory{max-height:260px;overflow:auto}
+
+.profile-analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;align-items:start}
+.profile-analysis-grid .chart-box{height:300px}
+.profile-donation-chart{height:220px;padding:8px 16px}
+.profile-donation-share{text-align:center;padding:8px 16px;color:#ffd166;font-size:12px;line-height:1.5}
+#profileDonationHistory .list-row{grid-template-columns:minmax(0,1fr) auto;gap:16px}
+#profileDonationHistory .list-name,#profileDonationHistory .list-meta{word-break:normal;overflow-wrap:normal}
+#profileDonationHistory .list-value{white-space:nowrap}
+#profileDonationHistory{max-height:180px}
+@media(max-width:850px){.profile-analysis-grid{grid-template-columns:1fr}}

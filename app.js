@@ -617,9 +617,19 @@ function renderProfileDetails(p){
  $('#profileAverages').innerHTML=[['Średnia klanu — wojny z wpisem gracza',value(m.clanAverage)],['Średni wynik względem klanu',percent(m.relative)],['Średnia mocy — zapisane pomiary',m.powerAverage===null?'—':power(m.powerAverage)],['Średnia fiolek / tydzień',value(m.weeklyAverage)],['Suma wpłat tygodniowych',m.weeklyCount?fmt(m.weeklyTotal):'—'],['Tygodnie z wpisem fiolek',m.weeklyCount]].map(([label,val])=>'<div class="mini-stat"><div class="l">'+label+'</div><div class="v">'+val+'</div></div>').join('');
  $('#profileDonationHistory').innerHTML=m.donations.slice().reverse().map(h=>'<div class="list-row"><div><div class="list-name">'+escapeHtml(h.week)+(h.kind==='season'?' · Koniec sezonu':'')+'</div><div class="list-meta">Średnia klanu: '+value(h.clan)+'</div></div><div class="list-value">'+fmt(h.amount)+'<small style="display:block">'+(h.clan>0?percent(h.amount/h.clan*100):'—')+' średniej</small></div></div>').join('')||'<div class="empty">Brak zapisanych wpłat fiolek</div>';
  requestAnimationFrame(()=>{
- const labs=D.weeks.map(w=>w.week);
- lineChart('profileRelativeChart',labs,[{label:p.nick,data:labs.map(w=>{const h=m.matched.find(h=>h.week===w);return h?h.points/h.clan*100:null;}),color:'#63d8cb',spanGaps:false},{label:'Średnia klanu = 100%',data:labs.map(()=>100),color:'#8d9bad'}],n=>Math.round(n)+'%');
- lineChart('profileDonationChart',m.donations.map(h=>h.week+(h.kind==='season'?' · Koniec sezonu':'')),[{label:p.nick,data:m.donations.map(h=>h.amount),color:'#ffd166',spanGaps:false},{label:'Średnia klanu w tym okresie',data:m.donations.map(h=>h.clan),color:'#6ea8ff'}],fmt);
+ const history=m.matched,labels=history.map(h=>h.week),ratios=history.map(h=>h.points/h.clan*100);
+ killChart('profileRelativeChart');
+ if(typeof Chart!=='undefined')charts.profileRelativeChart=new Chart($('#profileRelativeChart'),{type:'bar',data:{labels,datasets:[{label:'Wynik gracza / średnia',data:ratios,backgroundColor:ratios.map(n=>n>=100?'#4abe5c':n>=65?'#eeb34b':'#ef6868'),borderRadius:5,maxBarThickness:42},{type:'line',label:'Średnia klanu = 100%',data:labels.map(()=>100),borderColor:'#a4b0c2',borderDash:[5,5],pointRadius:0,borderWidth:1.5}]},options:baseOptions(n=>Math.round(n)+'%')});
+ const periods=m.donations.slice().reverse();
+ $('#profileDonationPeriod').innerHTML=periods.map((h,i)=>'<option value="'+i+'">'+escapeHtml(h.week)+(h.kind==='season'?' · Koniec sezonu':' · Tydzień')+'</option>').join('');
+ $('#profileDonationPeriod').disabled=!periods.length;
+ const drawDonation=()=>{
+ const h=periods[Number($('#profileDonationPeriod').value)],records=h?D.players.flatMap(x=>(x.donationHistory||[]).filter(d=>d.week===h.week&&d.kind===h.kind&&Number.isFinite(d.amount))):[],total=records.reduce((sum,d)=>sum+d.amount,0);
+ killChart('profileDonationChart');
+ $('#profileDonationShare').textContent=h?fmt(h.amount)+' fiolek · '+percent(total?h.amount/total*100:0)+' wpłat klanu · Średnia: '+value(h.clan):'Brak zapisanych wpłat fiolek';
+ if(typeof Chart!=='undefined')charts.profileDonationChart=new Chart($('#profileDonationChart'),{type:'doughnut',data:{labels:h?[p.nick,'Pozostali gracze']:['Brak danych'],datasets:[{data:total>0?[h.amount,Math.max(0,total-h.amount)]:[1],backgroundColor:total>0?['#ffd166','#33465b']:['#25303e'],borderColor:'#0d131b',borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{position:'bottom',labels:{color:'#b9c4d2',boxWidth:12}},tooltip:{enabled:total>0,callbacks:{label:c=>c.label+': '+fmt(c.parsed)+' fiolek'}}}}});
+ };
+ $('#profileDonationPeriod').onchange=drawDonation;drawDonation();
  });
 }
 
