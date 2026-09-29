@@ -622,3 +622,17 @@ th.sortable:hover{color:#dce5ef;background:#101823}
  #donations .table-shell td[data-label]::before{content:attr(data-label);color:#99a7ba;font-size:11px;text-align:left}
  #donations .player-link{overflow-wrap:anywhere;text-align:left}
 }
+
+.review-category{--review-color:#8d9bad;--review-bg:#8d9bad08}
+.review-category.excellent{--review-color:#ffd166;--review-bg:#ffd16612}
+.review-category.strong{--review-color:#63d8cb;--review-bg:#63d8cb0b}
+.review-category.ok{--review-color:#76d89b;--review-bg:#76d89b08}
+.review-category.watch{--review-color:#f4b651;--review-bg:#f4b6510b}
+.review-category.high{--review-color:#ff8791;--review-bg:#ff879112}
+#reviewSummary{grid-template-columns:repeat(auto-fit,minmax(155px,1fr))}
+#reviewSummary .review-category{border:1px solid var(--review-color);background:var(--review-bg)}
+#reviewSummary .l{color:var(--review-color)}
+#reviewTable .review-category td{background:var(--review-bg);border-bottom:1px solid color-mix(in srgb,var(--review-color) 30%,transparent)}
+#reviewTable .review-category td:first-child{border-left:3px solid var(--review-color)}
+#reviewTable .review-status{color:var(--review-color);border:1px solid var(--review-color);background:var(--review-bg)}
+#reviewTable .excellent .player-link,#reviewTable .excellent td.num b{color:#ffd166;font-weight:800}

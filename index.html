@@ -6,12 +6,12 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="inppl-build" content="20260929193247">
+<meta name="inppl-build" content="20260929195128">
 <meta name="theme-color" content="#07090d">
 <title>INPPL Stats — Forge Master</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="styles.css?v=20260929193247">
-<link rel="stylesheet" href="ui-shell.css?v=20260929193247">
+<link rel="stylesheet" href="styles.css?v=20260929195128">
+<link rel="stylesheet" href="ui-shell.css?v=20260929195128">
 <link rel="stylesheet" href="i18n.css?v=1">
 <script src="locales/en.js?v=1790697475"></script>
 <script src="i18n.js?v=1"></script>
@@ -256,7 +256,7 @@
         <label><input type="checkbox" id="reviewSkipConceded" checked> Pomiń odpuszczone wojny</label>
         <input class="search" id="reviewSearch" placeholder="Szukaj gracza…">
       </div><div class="panel-desc" id="reviewCoverage"></div>
-      <details><summary>Jak liczona jest ocena?</summary><p>Domyślnie: 100% punkty wojenne. Po włączeniu fiolek: 50% punkty i 50% fiolki. Punkty to mediana wyniku względem średniej klanu w tych samych wojnach. Fiolki to wpłata względem średniej aktywnych graczy z wpisem w wybranym tygodniu. Ryzyko każdej kategorii to max(0, 1 − wynik / średnia), pomnożone przez jej wagę. Wyższa ocena oznacza słabszy wkład.</p><p>Minimum 3 zapisane wojny. Włączenie fiolek wymaga też wpisu z wybranego tygodnia. Brak wpisu nie jest zerem. Koniec sezonu nie jest porównywany z tygodniem. Trend wymaga 4 wpisów. Urlopy i role w klanie nie są uwzględnione.</p><p>Priorytet rozmowy: ryzyko ≥60, punkty poniżej 50% średniej, a przy włączonych fiolkach również fiolki poniżej 50%. Obserwacja: ryzyko ≥35.</p></details></div>
+      <details><summary>Jak liczona jest ocena?</summary><p>Domyślnie: 100% punkty wojenne. Po włączeniu fiolek: 50% punkty i 50% fiolki. Punkty to mediana wyniku względem średniej klanu w tych samych wojnach. Fiolki to wpłata względem średniej aktywnych graczy z wpisem w wybranym tygodniu. Ryzyko każdej kategorii to max(0, 1 − wynik / średnia), pomnożone przez jej wagę. Wyższa ocena oznacza słabszy wkład.</p><p>Minimum 3 zapisane wojny. Włączenie fiolek wymaga też wpisu z wybranego tygodnia. Brak wpisu nie jest zerem. Koniec sezonu nie jest porównywany z tygodniem. Trend wymaga 4 wpisów. Urlopy i role w klanie nie są uwzględnione.</p><p>👑 Wzorowy wkład: ryzyko dokładnie 0. 🌟 Bardzo dobry wkład: powyżej 0 i poniżej 15. ✅ Wkład w porządku: od 15 do poniżej 35. Priorytet rozmowy: ryzyko ≥60, punkty poniżej 50% średniej, a przy włączonych fiolkach również fiolki poniżej 50%. Obserwacja: ryzyko ≥35.</p></details></div>
       <div class="war-summary" id="reviewSummary"></div>
       <div class="panel"><div class="panel-head"><div><div class="panel-title">Ocena wkładu graczy</div><div class="panel-desc">Najpierw wyniki wymagające uwagi • zielony status oznacza wkład w porządku • brak danych to nie negatywna ocena</div></div></div>
       <div class="table-shell"><table><thead><tr><th>Gracz</th><th>Ocena</th><th class="num">Ryzyko / 100</th><th class="num">Punkty / średnia</th><th class="num review-donation-column">Fiolki / średnia</th><th class="num">Trend (p.p.)</th><th>Uzasadnienie</th></tr></thead><tbody id="reviewTable"></tbody></table></div></div>
