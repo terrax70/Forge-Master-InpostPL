@@ -372,3 +372,7 @@ body{
 .main :is(.weekbar,.snapshot-bar)>.week-btn b{font-size:11px;font-weight:700;margin:0}
 .main :is(.weekbar,.snapshot-bar)>.week-btn strong{font-size:10px;font-weight:950;margin:0}
 .main :is(.weekbar,.snapshot-bar)>.week-btn span{font-size:9px;margin:0}
+
+/* Keep the shared shell steady during navigation between documents. */
+@view-transition{navigation:auto}
+@media(prefers-reduced-motion:no-preference){::view-transition-old(root),::view-transition-new(root){animation-duration:.12s}}
