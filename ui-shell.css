@@ -1,0 +1,374 @@
+
+/* INPPL Stats 1.3.7 — shared shell / layout contract
+   Loaded LAST on every page. Keeps navigation, viewport geometry and responsive
+   breakpoints identical across Dashboard / Podsumowanie / Planner / Rozwój. */
+
+:root{
+  --inppl-sidebar:258px;
+  --inppl-content-max:1540px;
+  --inppl-pad-x:34px;
+  --inppl-pad-top:30px;
+  --inppl-pad-bottom:46px;
+}
+
+html{
+  background:#07090d;
+  scrollbar-gutter:stable;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+body{
+  min-width:320px;
+  overflow-x:hidden;
+  font-size:14px !important;
+}
+*{min-width:0}
+img,svg,canvas{max-width:100%}
+button,input,select,textarea{max-width:100%}
+
+/* Identical application frame */
+.app{
+  width:100%;
+  min-height:100vh;
+  display:grid !important;
+  grid-template-columns:var(--inppl-sidebar) minmax(0,1fr) !important;
+  align-items:start;
+}
+.sidebar{
+  width:var(--inppl-sidebar) !important;
+  height:100vh !important;
+  min-height:0;
+  position:sticky !important;
+  top:0;
+  display:flex !important;
+  flex-direction:column;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:26px 18px 20px !important;
+  border-right:1px solid rgba(255,255,255,.055) !important;
+  border-bottom:0 !important;
+  background:rgba(7,9,13,.90) !important;
+  scrollbar-width:thin;
+  scrollbar-color:#26313e transparent;
+}
+.sidebar .brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+  padding:0 8px 23px !important;
+  flex:none;
+}
+.sidebar .brand-mark{
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  border-radius:11px !important;
+  font-size:11px !important;
+}
+.sidebar .brand-name{
+  font-size:17px !important;
+  line-height:1.05 !important;
+  letter-spacing:-.35px !important;
+}
+.sidebar .brand-desc{
+  margin-top:3px !important;
+  font-size:10px !important;
+  line-height:1.25 !important;
+}
+.sidebar > .nav-label{
+  margin:0 10px 8px !important;
+  padding:0 !important;
+}
+.sidebar .nav-label{
+  color:#566377 !important;
+  font-size:9px !important;
+  line-height:1.2 !important;
+  font-weight:950 !important;
+  letter-spacing:.13em !important;
+  text-transform:uppercase;
+}
+.sidebar .nav{
+  display:grid !important;
+  gap:4px !important;
+  margin:0 !important;
+  overflow:visible !important;
+  flex:none;
+}
+.sidebar .nav-section-label{
+  margin:18px 10px 4px !important;
+  padding:0 !important;
+}
+.sidebar .nav-addon-label{
+  margin-top:22px !important;
+  color:#4f5d70 !important;
+}
+.sidebar .nav-btn{
+  width:100% !important;
+  min-height:38px;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  padding:10px 11px !important;
+  border-radius:9px !important;
+  font-size:12px !important;
+  line-height:1.2 !important;
+  font-weight:800 !important;
+  text-decoration:none !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere;
+}
+.sidebar .nav-ico{
+  width:19px !important;
+  min-width:19px !important;
+  text-align:center;
+  flex:none;
+}
+.sidebar .side-status{
+  position:static !important;
+  left:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  width:auto;
+  margin:20px 4px 0 !important;
+  flex:none;
+}
+.sidebar .side-status strong{font-size:10px !important}
+.sidebar .side-status div{font-size:9px !important}
+
+/* Same content width and same left/right edge on every desktop page */
+.main:not(.external-main){
+  min-width:0;
+  width:100% !important;
+  max-width:var(--inppl-content-max) !important;
+  margin:0 auto !important;
+  padding:var(--inppl-pad-top) var(--inppl-pad-x) var(--inppl-pad-bottom) !important;
+}
+.external-main{
+  min-width:0;
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+.external-main > .shell{
+  width:100% !important;
+  max-width:var(--inppl-content-max) !important;
+  margin:0 auto !important;
+  padding:var(--inppl-pad-top) var(--inppl-pad-x) var(--inppl-pad-bottom) !important;
+}
+
+/* General anti-overlap rules */
+.main :is(.hero,.page-head,.panel-head,.card-head,.view-head,.setup-title-row,
+         .timeline-title,.official-guide-head,.official-detail-top,.official-main-cost-head,
+         .tech-guide-head,.tech-ascension-callout,.target-head){
+  min-width:0;
+}
+.main :is(h1,h2,h3,h4,h5,p,small,strong,b,span,div){
+  overflow-wrap:break-word;
+}
+.main :is(.panel,.metric,.mini-stat,.share-card,.setup-card,.timeline-card,.instructions-card,
+         .details,.official-asc-guide,.tech-guide-card,.tech-stage,.asset-card,
+         .priority-card,.cost-card,.target-card,.asc-info-card,.check-card){
+  min-width:0;
+}
+.main :is(input,select,button){min-width:0}
+.main pre{max-width:100%;overflow:auto}
+
+/* One breakpoint. No page changes its whole frame earlier/later than another page. */
+@media(max-width:1050px){
+  .app{
+    grid-template-columns:1fr !important;
+  }
+  .sidebar{
+    width:100% !important;
+    height:auto !important;
+    min-height:0;
+    position:relative !important;
+    overflow:visible;
+    padding:14px 18px !important;
+    border-right:0 !important;
+    border-bottom:1px solid rgba(255,255,255,.055) !important;
+  }
+  .sidebar .brand{padding:0 !important}
+  .sidebar > .nav-label,
+  .sidebar .side-status{display:none !important}
+  .sidebar .nav{
+    display:flex !important;
+    gap:4px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    margin-top:12px !important;
+    padding-bottom:2px;
+    scrollbar-width:thin;
+  }
+  .sidebar .nav .nav-label{display:none !important}
+  .sidebar .nav-btn{
+    width:auto !important;
+    min-height:34px;
+    flex:0 0 auto;
+    white-space:nowrap !important;
+    padding:8px 10px !important;
+    font-size:11px !important;
+  }
+  .main:not(.external-main),
+  .external-main > .shell{
+    width:100% !important;
+    max-width:none !important;
+    padding:22px 18px 42px !important;
+  }
+}
+
+@media(max-width:600px){
+  .sidebar{padding:12px 10px !important}
+  .sidebar .nav{margin-top:10px !important}
+  .main:not(.external-main),
+  .external-main > .shell{
+    padding:17px 10px 32px !important;
+  }
+}
+
+
+/* =========================================================
+   INPPL 1.4.3 — SELF-CONTAINED SIDEBAR
+   The shell must not depend on page-specific styles.css.
+   ========================================================= */
+:root{
+  --inppl-amber:#f4b651;
+  --inppl-amber2:#ffd98b;
+  --inppl-text:#f5f7fb;
+  --inppl-muted:#8f9bad;
+  --inppl-dim:#5f6b7d;
+}
+body{
+  margin:0;
+  color:var(--inppl-text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif !important;
+}
+.sidebar{
+  color:var(--inppl-text) !important;
+  backdrop-filter:blur(18px);
+}
+.sidebar .brand-mark{
+  display:grid !important;
+  place-items:center !important;
+  background:
+    linear-gradient(145deg,rgba(244,182,81,.24),rgba(244,182,81,.055)) !important;
+  border:1px solid rgba(244,182,81,.27) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 24px rgba(0,0,0,.24) !important;
+  color:var(--inppl-amber2) !important;
+  font-weight:950 !important;
+}
+.sidebar .brand-name{
+  color:#fff !important;
+  font-weight:920 !important;
+}
+.sidebar .brand-name span{
+  color:var(--inppl-amber) !important;
+}
+.sidebar .brand-desc{
+  color:var(--inppl-dim) !important;
+}
+.sidebar .nav-btn,
+.sidebar .nav-btn:link,
+.sidebar .nav-btn:visited{
+  border:0 !important;
+  background:transparent !important;
+  color:#8f9aaa !important;
+  cursor:pointer;
+  text-align:left;
+  transition:background .16s,color .16s,box-shadow .16s;
+}
+.sidebar .nav-btn:hover{
+  background:rgba(255,255,255,.035) !important;
+  color:#dbe2ec !important;
+}
+.sidebar .nav-btn.active,
+.sidebar .nav-btn.active:visited{
+  background:linear-gradient(90deg,rgba(244,182,81,.13),rgba(244,182,81,.025)) !important;
+  color:#fff !important;
+  box-shadow:inset 2px 0 var(--inppl-amber) !important;
+}
+.sidebar .nav-ico{
+  color:#687587 !important;
+}
+.sidebar .nav-btn.active .nav-ico{
+  color:var(--inppl-amber) !important;
+}
+.sidebar .side-status{
+  border:1px solid rgba(255,255,255,.05) !important;
+  background:rgba(255,255,255,.018) !important;
+  border-radius:10px !important;
+  padding:11px !important;
+}
+.sidebar .side-status strong{
+  color:#94a1b4 !important;
+}
+.sidebar .side-status div{
+  margin-top:4px !important;
+  color:#4f5c6e !important;
+}
+
+/* Shared week picker: Wars, Power and Summary. */
+.main :is(.weekbar,.snapshot-bar){display:flex;flex-flow:row nowrap;width:100%;max-width:100%;min-width:0;box-sizing:border-box;gap:8px;overflow-x:auto;overflow-y:hidden;padding-bottom:8px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.main :is(.weekbar,.snapshot-bar)>:is(.week-btn,.snapshot-btn){flex:0 0 88px;min-width:88px;width:88px;box-sizing:border-box;white-space:nowrap;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:68px;padding:8px 6px}
+.main :is(.week-btn,.snapshot-btn) :is(b,strong,span,small){white-space:nowrap;overflow-wrap:normal;word-break:normal}
+
+.week-btn.war-week-win{
+  color:#9be7bb!important;
+  background:rgba(42,156,94,.075)!important;
+  border-color:rgba(72,201,128,.22)!important;
+}
+.week-btn.war-week-win strong{
+  color:#7fe1a8!important;
+}
+.week-btn.war-week-win:hover{
+  background:rgba(42,156,94,.105)!important;
+  border-color:rgba(72,201,128,.34)!important;
+}
+.week-btn.war-week-win.active{
+  color:#b8f3cf!important;
+  background:rgba(40,174,100,.145)!important;
+  border-color:rgba(79,222,143,.62)!important;
+  box-shadow:
+    0 0 0 1px rgba(79,222,143,.08) inset,
+    0 0 18px rgba(40,174,100,.13)!important;
+}
+
+.week-btn.war-week-loss{
+  color:#ff9ea5!important;
+  background:rgba(190,52,66,.075)!important;
+  border-color:rgba(233,76,89,.22)!important;
+}
+.week-btn.war-week-loss strong{
+  color:#ff7e88!important;
+}
+.week-btn.war-week-loss:hover{
+  background:rgba(190,52,66,.105)!important;
+  border-color:rgba(233,76,89,.34)!important;
+}
+.week-btn.war-week-loss.active{
+  color:#ffc0c5!important;
+  background:rgba(202,55,69,.145)!important;
+  border-color:rgba(244,84,98,.62)!important;
+  box-shadow:
+    0 0 0 1px rgba(244,84,98,.08) inset,
+    0 0 18px rgba(202,55,69,.13)!important;
+}
+
+.week-btn.war-week-unknown{
+  color:#aab4c2!important;
+  background:rgba(135,147,164,.045)!important;
+  border-color:rgba(158,171,189,.13)!important;
+}
+.week-btn.war-week-unknown strong{
+  color:#97a3b3!important;
+}
+.week-btn.war-week-unknown.active{
+  border-color:rgba(181,194,211,.34)!important;
+  background:rgba(135,147,164,.075)!important;
+  box-shadow:none!important;
+}
+.main :is(.weekbar,.snapshot-bar)>.week-btn{border-radius:8px;text-align:center;font-family:inherit;cursor:pointer}
+.main :is(.weekbar,.snapshot-bar)>.week-btn b{font-size:11px;font-weight:700;margin:0}
+.main :is(.weekbar,.snapshot-bar)>.week-btn strong{font-size:10px;font-weight:950;margin:0}
+.main :is(.weekbar,.snapshot-bar)>.week-btn span{font-size:9px;margin:0}

@@ -1,0 +1,737 @@
+Przegląd	Overview
+Wojny	Wars
+Wojna	War
+WOJNA	WAR
+Gracze	Players
+Gracz	Player
+Porównaj	Compare
+Porównaj graczy	Compare players
+Narzędzia	Tools
+Rozwój	Progression
+Podsumowanie	Summary
+Wyrzutki	Former members
+Dodatek	Extra
+Nawigacja	Navigation
+Dane	Data
+Aktualizacja	Updated
+Tydzień	Week
+Tygodnie	Weeks
+Data	Date
+Punkty	Points
+Punkty wojenne	War points
+Punkty vs średnia klanu	Points vs clan average
+średnia klanu	clan average
+Średnia	Average
+Średnia punktów	Average points
+Rekord	Record
+Ranga	Rank
+Pozycja źródłowa	Source position
+Pozycja	Position
+Ostatni	Latest
+Ostatni wynik	Latest score
+Ostatnia wojna	Latest war
+Ostatni tydzień	Latest week
+Ostatni snapshot	Latest snapshot
+Odśwież	Refresh
+Wróć	Back
+Zamknij	Close
+Wybierz	Select
+Wszyscy	All
+Wszystkie rangi	All ranks
+Brak danych	No data
+Brak wyników	No results
+Pokaż więcej	Show more
+Pokaż mniej	Show less
+Szukaj gracza…	Search players…
+Szukaj byłego gracza…	Search former members…
+Kliknij nagłówki, aby sortować	Click column headings to sort
+Kliknij nick na liście lub wybierz go powyżej	Click a player name in the list or select one above
+Kliknij nick, aby zobaczyć pełną zachowaną historię.	Click a player name to see their full saved history.
+Forma, rekordy, power i historia. Kliknij nick, aby przejść do pełnego profilu.	Performance, records, power and history. Click a player name to open their full profile.
+Punkty graczy w czasie	Player points over time
+Każda linia to jeden gracz	Each line represents one player
+1 w Excelu = 1 mln	1 in Excel = 1 million
+ostatni tydzień vs poprzedni	latest week vs previous week
+Ranking ostatniej wojny	Latest war ranking
+najlepsi punktujący	top scorers
+Power graczy w czasie	Player power over time
+Największy wzrost power	Largest power gain
+Szybkie insighty	Quick insights
+najważniejsze rekordy klanu	key clan records
+Wojny klanowe	Clan wars
+Wybierz tydzień i przeanalizuj ranking, rozkład punktów oraz zmianę formy.	Select a week to explore rankings, point distribution and performance changes.
+Rozkład punktów — Top 15	Point distribution — Top 15
+Byli gracze zachowani z arkusza	Former members saved from the spreadsheet
+Usunięci!	Removed!
+. Ich wyniki nadal są częścią historii wojen i Power.	. Their results remain part of the war and power history.
+Moc klanu	Clan power
+Historia snapshotów, udział graczy oraz największe wzrosty i spadki.	Snapshot history, player contributions and the largest gains and losses.
+Łączna moc klanu	Total clan power
+Wybierz tydzień. Domyślnie ranking jest liczony według procentowego wzrostu względem poprzedniego snapshotu.	Select a week. By default, players are ranked by percentage growth since the previous snapshot.
+SORTUJ KLIKNIĘCIEM W NAGŁÓWEK	CLICK A HEADING TO SORT
+Power wszystkich graczy	All players' power
+rozkład całego klanu	whole-clan distribution
+Najszybszy wzrost Power	Fastest power growth
+ranking według procentowego wzrostu	ranked by percentage growth
+Największe spadki	Largest drops
+jeśli wystąpiły	if any
+Power spikes i tempo wzrostu	Power spikes and growth rate
+Kto miał największy jednorazowy skok i kto rośnie najszybciej długoterminowo	Who had the largest single jump and who is growing fastest over time
+Największy spike %	Largest spike %
+Największy spike	Largest spike
+Największe wzrosty	Largest gains
+Największy wzrost mocy	Largest power gain
+Największy wzrost:	Largest gain:
+Najszybszy wzrost	Fastest growth
+Do trzech graczy na jednym wykresie, z odniesieniem do średniej klanu.	Compare up to three players on one chart against the clan average.
+gracze + średnia klanu	players + clan average
+graczy	players
+pełna historia dostępnych tygodni	full history of available weeks
+Pozycja w rankingu	Ranking position
+im wyżej na wykresie, tym lepiej	higher on the chart is better
+aktualny power	current power
+Porównaj z innym	Compare with another player
+INPPL Stats • pełny redesign • dane lokalne z INPPL_Ranking_source.xlsx	INPPL Stats • local data from INPPL_Ranking_source.xlsx
+Gracz do podglądu Power	Player to view power
+Historia mocy graczy	Player power history
+Lider punktów	Points leader
+Najmocniejszy tydzień	Strongest week
+Największa frekwencja	Highest participation
+Najwyższa średnia	Highest average
+Najwyższy rekord	Highest record
+Najwyższy zapisany Power	Highest recorded power
+Brak spadków w ostatnim snapshotcie	No drops in the latest snapshot
+WYGRANA	WIN
+PRZEGRANA	LOSS
+BRAK WYNIKU	NO RESULT
+Topka graczy:	Top players:
+Topka graczy (powyżej	Top players (above
+punktów):	points):
+Zaktualizowana moc graczy — Topka wzrostu:	Updated player power — Top growth:
+Zaktualizowana moc graczy — Topka wzrostu (powyżej	Updated player power — Top growth (above
+WOJNA NR	WAR NO.
+Brak graczy spełniających wybrany próg.	No players meet the selected threshold.
+wzrost względem poprzedniego dostępnego snapshotu	growth since the previous available snapshot
+WYBIERZ WOJNĘ	SELECT A WAR
+Top punktów	Top points
+Próg punktów	Points threshold
+Próg wzrostu	Growth threshold
+Ile osób	Number of players
+Kopiuj tekst	Copy text
+Skopiowano!	Copied!
+Kopiuj	Copy
+Zmiana wojny, progu lub liczby osób od razu przebudowuje listę i tekst.	Changing the war, threshold or player count immediately updates the list and text.
+Twój plan progresu	Your progression plan
+Ustaw kilka rzeczy. Timeline poniżej przelicza się automatycznie.	Set your preferences. The timeline below updates automatically.
+Ustawienia planu	Plan settings
+Zmiana ustawień od razu aktualizuje timeline.	Changing a setting immediately updates the timeline.
+Profil aktywności	Activity schedule
+Od tej godziny zakładamy mniejszą aktywność	Reduced activity is assumed from this time
+Od tej godziny znowu zakładamy normalną aktywność	Normal activity resumes from this time
+Śpię od	Bedtime
+Wstaję o	Wake-up time
+Reakcja	Response delay
+Orientacyjny czas, po którym gracz wraca do gry po zakończeniu akcji	Estimated delay before returning to the game after an action finishes
+Bonus do szybkości badań	Research speed bonus
+Bonus do szybkości kuźni	Forge speed bonus
+Aktualny poziom kuźni	Current forge level
+Np. 27 = następne ulepszenie 28	e.g. 27 = next upgrade to 28
+Strategia kuźni	Forge strategy
+Czeka tylko, gdy strata progresu jest mała.	Waits only when the loss of progress is small.
+Kuźnia już trwa	Forge upgrade in progress
+Włącz, jeśli aktualne ulepszenie jest w trakcie.	Enable if an upgrade is already running.
+Powtarzane badanie Tech	Repeated Tech research
+Wybierz jeden poziom — wszystkie kolejne badania będą takie same.	Select a level — all subsequent research tasks will use that level.
+Nie dodałeś jeszcze żadnego badania.	No research tasks added yet.
+Więcej ustawień	More settings
+Limit czekania HYBRYDY	HYBRID waiting limit
+Maksymalnie tyle planner pozwoli kuźni czekać na punktowany dzień.	Maximum time the planner will wait for a scoring day before starting a forge upgrade.
+Zakres timeline	Timeline range
+1 tydzień	1 week
+2 tygodnie	2 weeks
+4 tygodnie	4 weeks
+8 tygodni	8 weeks
+2 tygodnie są najbardziej czytelne. Możesz rozszerzyć widok.	Two weeks is easiest to read. You can extend the view.
+Plan aktualizuje się na żywo	Plan updates live
+Twój timeline	Your timeline
+To jest główny widok. Widać tu pracę, przerwy, sen i momenty, w których naprawdę trzeba wejść do gry.	This is the main view: active tasks, breaks, sleep and the moments when you need to open the game.
+ODBIÓR TECH = PUNKTY	COLLECT TECH = POINTS
+START KUŹNI = PUNKTY	START FORGE = POINTS
+Kuźnia w trakcie	Forge upgrade in progress
+Przerwa	Break
+Sen	Sleep
+NAJBLIŻSZE	UP NEXT
+Uzupełnij dane powyżej	Enter your details above
+Timeline aktualizuje się automatycznie.	The timeline updates automatically.
+Przewiń w bok, aby zobaczyć kolejne dni	Scroll sideways to see more days
+Co masz zrobić?	What should you do?
+Najważniejsze decyzje wynikające z timeline.	Key actions from your timeline.
+Instrukcje krok po kroku	Step-by-step instructions
+Nie musisz analizować osi czasu. Wykonuj te kroki po kolei.	Follow these steps in order — no need to analyse the timeline.
+Pokaż szczegółowe obliczenia	Show detailed calculations
+Badanie	Research
+Odbiór	Collection
+Wolne	Free time
+Kuźnia	Forge
+Co zmieści się w wolnych oknach Tech?	What fits into the free Tech slots?
+Czas reakcji w minutach	Response delay in minutes
+Dzień gry:	Game day:
+Sobota	Saturday
+Niedziela	Sunday
+Poniedziałek	Monday
+Wtorek	Tuesday
+Środa	Wednesday
+Czwartek	Thursday
+Piątek	Friday
+Następnie: poziom	Next: level
+Będzie gotowe	Ready at
+Odbierz je	Collect it at
+Odbierz	Collect at
+— wtedy dostaniesz punkty.	— to earn points.
+Za ten odbiór dostaniesz punkty.	This collection earns points.
+Badanie będzie gotowe	Research will be ready at
+PUNKTY • ODBIÓR TECH	POINTS • COLLECT TECH
+PUNKTY • START KUŹNI	POINTS • START FORGE
+Rozwój, który	Progression you can
+da się zrozumieć	understand
+Wybierz to, co rozwijasz. Wpisz swoje bonusy i sprawdź, ile zasobów potrzebujesz oraz jak rośnie moc po Ascension.	Choose a system, enter your bonuses and see the resources you need and how power grows after Ascension.
+ZACZNIJ PONIŻEJ	START BELOW
+Wybierz swój system	Choose your system
+Pety	Pets
+Mounty	Mounts
+Skille	Skills
+Itemy	Items
+Porównaj moc • oblicz koszty • przygotuj Ascension	Compare power • calculate costs • prepare for Ascension
+JEŚLI NIE WIESZ OD CZEGO ZACZĄĆ	NOT SURE WHERE TO START?
+Wybierz system. Zobaczysz	Choose a system to see
+co daje, jak rośnie i co robi Ascension.	what it offers, how it grows and what Ascension does.
+Nie musisz czytać poradnika od deski do deski. Kliknij to, co właśnie rozwijasz.	No need to read the entire guide. Select the system you are working on.
+Statystyki • koszt Eggshells • dodatkowy drop	Stats • Eggshell costs • extra drops
+Statystyki • koszt Clockwinders • bonusy	Stats • Clockwinder costs • bonuses
+Statystyki • koszt biletów • zniżka	Stats • ticket costs • discount
+Koszt i czas kuźni • etapy przedmiotów	Forge costs and time • item tiers
+co resetuje • co zostaje • ile przygotować	what resets • what stays • what to save
+co brać teraz • aktualne procenty	what to upgrade next • current percentages
+WERSJA DANYCH	DATA VERSION
+statystyki z konfiguracji gry	stats from the game configuration
+TWOJE BONUSY	YOUR BONUSES
+Wpisz raz	Enter once
+Zniżki i dodatkowy drop zapisują się na urządzeniu	Discounts and extra drop bonuses are saved on this device
+SZCZEGÓŁY	DETAILS
+Dotknij punktu	Tap a point
+Na wykresie zobaczysz statystyki i koszt rozwoju	See stats and progression costs on the chart
+ROZWÓJ POSTACI	CHARACTER PROGRESSION
+Itemy i kuźnia — moc oraz koszty	Items and forge — power and costs
+— moc oraz koszty	— power and costs
+DMG = obrażenia	DMG = damage
+HP = zdrowie. Rarity oznacza rzadkość; tier to kolejny etap rozwoju.	HP = health. Rarity is the quality category; a tier is the next stage of progression.
+TWÓJ ETAP • A0 = PRZED PIERWSZYM RESETEM	YOUR STAGE • A0 = BEFORE THE FIRST RESET
+WZROST MOCY	POWER GROWTH
+NAJWIĘKSZY SKOK	LARGEST JUMP
+moc bazowa × bonus etapu	base power × stage bonus
+PRÓG ASCENSION	ASCENSION REQUIREMENT
+od tego poziomu możesz zrobić reset	you can ascend from this level
+1 • WYGLĄD + STATY	1 • APPEARANCE + STATS
+Poznaj kolejne poziomy jakości	Explore the quality tiers
+Przesuń listę w bok, by zobaczyć więcej. Dotknij karty, aby zaznaczyć lub odznaczyć.	Swipe sideways to see more. Tap a card to select or deselect it.
+Ikony pokazują różne przykłady tej samej jakości. Statystyki dotyczą tieru.	Icons show examples of the same quality. Stats apply to the tier.
+Włącz zmianę ikon	Play icon rotation
+Zatrzymaj zmianę ikon	Pause icon rotation
+Animacje wyłączone zgodnie z ustawieniami urządzenia	Animations disabled by your device settings
+— przykładowy przedmiot	— example item
+— przykłady wyglądu	— appearance examples
+Podświetl	Highlight
+2 • WYKRES PROGRESJI	2 • PROGRESSION CHART
+O ile mocniejszy jest kolejny tier?	How much stronger is the next tier?
+×10 oznacza dziesięć razy większą moc bazową.	×10 means ten times the base power.
+Jak korzystać?	How to use this
+Wpisz bonusy z gry powyżej.	Enter your in-game bonuses above.
+Dotknij punktu na wykresie, żeby sprawdzić statystyki i koszt.	Tap a chart point to check stats and cost.
+Jeśli wykres jest za duży, wybierz mniejszy procent.	If the chart is too large, choose a smaller percentage.
+Rozmiar wykresu	Chart size
+AUTO na telefonie: 60%. Każdy wykres ma niezależną skalę.	AUTO on mobile: 60%. Each chart has its own zoom setting.
+3 • PEŁNA ŚCIEŻKA ASCENSION	3 • FULL ASCENSION PATH
+A0 → A1 → A2 → A3 na tej samej skali	A0 → A1 → A2 → A3 on the same scale
+A1 = po pierwszym resecie • A2 = po drugim • A3 = po trzecim	A1 = after the first reset • A2 = after the second • A3 = after the third
+Powrót do mocy sprzed resetu (recovery):	Returning to pre-reset power (recovery):
+poradnik wskazuje okolice	the guide suggests around
+. To orientacyjny cel — wykres porównuje bazowe statystyki.	. This is an approximate target — the chart compares base stats.
+Szary: odbudowujesz moc	Grey: rebuilding power
+Zielony: moc odzyskana (A0: start)	Green: power recovered (A0: starting progression)
+Skala logarytmiczna: równe odstępy oznaczają taki sam mnożnik.	Logarithmic scale: equal gaps represent the same multiplier.
+Na telefonie wybierz 10–40%, aby pomniejszyć wykres. Dotknij tieru, aby zobaczyć szczegóły.	On mobile, select 10–40% to zoom out. Tap a tier for details.
+Źródła tej zakładki:	Sources for this tab:
+Przygotuj kuźnię do Ascension	Prepare your forge for Ascension
+Koszt rozwoju skilli	Skill progression cost
+Koszt rozwoju petów	Pet progression cost
+Koszt rozwoju mountów	Mount progression cost
+Discount skilli — zniżka (%)	Skill discount (%)
+Discount mountów — zniżka (%)	Mount discount (%)
+Discount — zniżka (%)	Discount (%)
+Forge speed — szybkość kuźni (+%)	Forge speed (+%)
+Extra drop chance — dodatkowy drop (+%)	Extra drop chance (+%)
+Wpisz 25 dla 25%. Wyniki w podpowiedziach wykresów zmienią się automatycznie. Ustawienia zostają na tym urządzeniu.	Enter 25 for 25%. Chart tooltips update automatically. Your settings are saved on this device.
+Jak liczymy koszty i co oznaczają bonusy?	How do we calculate costs and apply bonuses?
+Koszty i czasy wszystkich 35 poziomów	Costs and times for all 35 levels
+Dane bazowe: przesłany arkusz Forge Data. Wiersz oznacza ulepszenie do wskazanego poziomu.	Base data: the supplied Forge Data sheet. Each row is the upgrade to that level.
+Koszt Gold	Gold cost
+Czas	Time
+Koszt × (1 − discount / 100). Czas ÷ (1 + speed / 100). +50% speed skraca czas do ⅔.	Cost × (1 − discount / 100). Time ÷ (1 + speed / 100). +50% speed reduces the time to ⅔.
+Sumy od Forge 1. Recovery według poradnika: Multiverse przy Forge 22 (4% szans); bezpieczniejszy cel: Quantum przy Forge 25. Do resetu dolicz osobno 3 000 000 Gold — bez discount. Czas obejmuje ulepszanie kuźni, bez przyspieszeń i zdobywania itemów.	Totals start at Forge 1. Guide recovery target: Multiverse at Forge 22 (4% chance); safer target: Quantum at Forge 25. Add 3,000,000 Gold separately for Ascension, without a discount. Time covers forge upgrades, excluding speed-ups and obtaining items.
+Koszt bazowy × (1 − discount / 100). Koszty z przesłanych tabel Skill Summon: Rare–Mythic przy 🍀 2% szans; Common od Lv1 przy 100%. Koszt dojścia od Lv1 w danym cyklu; osiągnięcie poziomu nie gwarantuje wylosowania skilla. Discount zapisuje się na tym urządzeniu.	Base cost × (1 − discount / 100). Costs from the supplied Skill Summon tables: Rare–Mythic at 🍀 2% chance; Common from Lv1 at 100%. Costs start at Lv1 in the current cycle; reaching a level does not guarantee a skill drop. Your discount is saved on this device.
+Koszt bazowy ÷ (1 + extra drop chance / 100). +50% daje koszt równy ⅔ bazowego. Koszty z tabel Pet Summon: Epic–Mythic przy 🍀 7,2% szans; Rare przy 10% (pierwszy próg powyżej 7%), Common od Lv1 przy 100%. Extra drop zwiększa liczbę dropów, nie szansę na konkretną rarity. Wartość zapisuje się na tym urządzeniu.	Base cost ÷ (1 + extra drop chance / 100). +50% reduces the cost to ⅔ of base. Pet Summon targets: Epic–Mythic at 🍀 7.2% chance; Rare at 10% (the first level above 7%); Common from Lv1 at 100%. Extra drops increase the number of drops, not the chance of a specific rarity. Saved on this device.
+Koszt bazowy × (1 − discount / 100) ÷ (1 + extra drop chance / 100). Wpisz oba bonusy niezależnie. Koszty z tabel Mount Summon: Epic–Mythic przy 🍀 7,2% szans; Rare przy 9,9% (pierwszy próg powyżej 7%), Common od Lv1 przy 100%. Extra drop zwiększa liczbę dropów, nie szansę na konkretną rarity. Ustawienia zapisują się na tym urządzeniu.	Base cost × (1 − discount / 100) ÷ (1 + extra drop chance / 100). Enter both bonuses independently. Mount Summon targets: Epic–Mythic at 🍀 7.2% chance; Rare at 9.9% (the first level above 7%); Common from Lv1 at 100%. Extra drops increase the number of drops, not the chance of a specific rarity. Saved on this device.
+Poziom przywoływania:	Summon level:
+Łączny koszt:	Total cost:
+Łączny czas:	Total time:
+szansa	chance
+Przesłany arkusz nie zawiera kosztu dla tego rarity.	The supplied sheet has no cost for this rarity.
+Od Forge 1 w tym cyklu do odblokowania tieru. Bez opłaty za Ascension i czasu zdobywania itemów.	From Forge 1 in this cycle to unlocking the tier. Excludes the Ascension fee and time spent obtaining items.
+Od Lv1 w tym cyklu, według tabel Skill Summon. Próg szansy, nie gwarancja dropu.	From Lv1 in this cycle, based on the Skill Summon tables. A chance threshold, not a guaranteed drop.
+Szacowany koszt od Lv1 w tym cyklu, według tabel Pet Summon; nie gwarancja dropu.	Estimated cost from Lv1 in this cycle, based on the Pet Summon tables; not a guaranteed drop.
+Szacowany koszt od Lv1 w tym cyklu, według tabel Mount Summon; nie gwarancja dropu.	Estimated cost from Lv1 in this cycle, based on the Mount Summon tables; not a guaranteed drop.
+Moc względem	Power relative to
+Moc vs	Power vs
+Zobacz przykładowe skille i ich działanie	Explore example skills and their effects
+Pasywne statystyki wzmacniają postać. Aktywne efekty działają przy użyciu skilla. Odnowienie to czas do kolejnego użycia. Wartości dla wybranego etapu Ascension.	Passive stats strengthen your character. Active effects apply when the skill is used. Cooldown is the time until it can be used again. Values reflect the selected Ascension stage.
+Odnowienie	Cooldown
+Czas działania	Duration
+Pasywne	Passive
+Aktywne	Active
+PROGRESJA MOCY • NAZWA PRZY KROPCE • KLIK = PODŚWIETLENIE	POWER PROGRESSION • TAP A POINT TO HIGHLIGHT
+Dotknij punktu: statystyki • mniejszy procent: szerszy widok • przesuń wykres w bok, aby zobaczyć dalsze etapy	Tap a point for stats • lower percentage: wider view • swipe to see later stages
+A0 → A3 • PEŁNA ŚCIEŻKA ASCENSION • A0 CAŁE ZIELONE • PO ASCENDZIE SZARY = DO RECOVERY • ZIELONY = PO RECOVERY	A0 → A3 • FULL ASCENSION PATH • A0 ALL GREEN • AFTER ASCENSION: GREY = BEFORE RECOVERY • GREEN = RECOVERED
+A0: cały odcinek jest zielony • po ascension: szary odcinek = jeszcze dochodzisz do recovery • zielony odcinek = już jesteś ponad recovery • zmiana koloru następuje dokładnie w miejscu przecięcia z linią recovery	A0 is all green • after Ascension: grey = rebuilding power; green = recovered • colour changes where the line crosses the recovery threshold
+KONIEC A3	END OF A3
+ASCENSION GUIDE • PROSTO → SZCZEGÓŁOWO	ASCENSION GUIDE • BASICS → DETAILS
+ASCENSION • OFICJALNE WYJAŚNIENIE PO POLSKU	ASCENSION • OFFICIAL GUIDE EXPLAINED
+Co naprawdę trzeba wiedzieć przed Ascension?	What do you need to know before Ascension?
+Najpierw proste wyjaśnienie. Potem przykład. Dopiero niżej konkretne liczby z aktualnego Source Packa i oficjalnego poradnika Discord.	Start with a simple explanation and an example. Detailed figures from the source data and official Discord guide are below.
+Co właściwie robi Ascension?	What does Ascension do?
+pozwala zresetować	lets you reset
+jedną część progresu	one part of your progression
+— jeden z 4 filarów:	— one of the four pillars:
+— żeby ten filar stał się	— to make that pillar
+trwale mocniejszy	permanently stronger
+Nie resetujesz całego konta.	You do not reset your whole account.
+Wybierasz tylko jeden filar, a pozostałe zostają bez zmian.	You choose one pillar; the others remain unchanged.
+Po Ascension tracisz rzeczy należące do wybranego filaru i zdobywasz je od nowa. Przykład: gear dla Forge, pety dla Pets, skille dla Skills albo mounty dla Mounts.	Ascension removes the items in the chosen pillar, and you earn them again: gear for Forge, pets for Pets, skills for Skills or mounts for Mounts.
+Nie tracisz podstawowych zasobów.	You keep your basic resources.
+Zostają m.in. Gold/Hammers, Eggshells, Skill Tickets oraz waluta Mountów.	You keep Gold/Hammers, Eggshells, Skill Tickets and mount currency.
+Po resecie Twoja moc na chwilę spadnie — to normalne. Odbudowujesz filar, odzyskujesz starą moc i potem rośniesz wyżej.	Your power drops temporarily after the reset. Rebuild the pillar to recover your previous power and then grow stronger.
+Jeśli nie chcesz długo być słabszy po Ascension, najpierw nazbieraj tyle zasobów, żeby po resecie szybko odbudować dany filar.	Save enough resources before Ascension to rebuild the chosen pillar quickly and reduce the time spent at lower power.
+ASCENSION • WERSJA PROSTA	ASCENSION • THE BASICS
+Ascension to NIE reset całej gry.	Ascension does NOT reset the whole game.
+Resetujesz	You reset
+tylko 1 wybrany filar	only one chosen pillar
+. Reszta postaci zostaje. Potem odbudowujesz ten filar w mocniejszej wersji.	. The rest of your character stays. Then you rebuild a stronger version of that pillar.
+1 FILAR SIĘ RESETUJE • 3 POZOSTAŁE ZOSTAJĄ	1 PILLAR RESETS • THE OTHER 3 STAY
+Dobij próg	Reach the requirement
+Kliknij Ascension	Select Ascension
+Wybierasz jeden filar.	You choose one pillar.
+Tylko on	Only that pillar
+wraca do poziomu 1.	returns to level 1.
+Odbuduj go	Rebuild it
+Zostaje Ci waluta tego filaru, więc szybciej wracasz do siły i lecisz wyżej.	You keep that pillar's currency, helping you regain power and progress further.
+CO SIĘ RESETUJE?	WHAT RESETS?
+Tylko to, co ascendujesz	Only the pillar you ascend
+CO ZOSTAJE?	WHAT STAYS?
+Cała reszta gry	Everything else
+Pozostałe 3 filary	The other 3 pillars
+Waluta filaru	Pillar currency
+Całe konto	Your whole account
+nie resetuje się	does not reset
+zostają	stay
+zostaje	stays
+PRZYKŁAD DLA PETÓW	PET EXAMPLE
+Ascendujesz PETY. Co dokładnie się dzieje?	You ascend PETS. What happens?
+PRZED	BEFORE
+Masz Pets Level 100	Your Pets are Level 100
+np. Mythic pety	e.g. Mythic pets
+Klikasz PET Ascension	You select PET Ascension
+wybierasz tylko ten filar	you choose only this pillar
+PO RESECIE	AFTER RESET
+Pety wracają do Level 1	Pets return to Level 1
+Pety wracają do Lv1	Pets return to Lv1
+Mounty wracają do Lv1	Mounts return to Lv1
+Skille wracają do Lv1	Skills return to Lv1
+ale tylko pety	only your pets
+więc szybko odbudowujesz pety	so you can rebuild your pets quickly
+Resetują się tylko Pets	Only Pets reset
+4 FILARY	4 PILLARS
+Który filar wybierasz — ten się resetuje	The pillar you select is the one that resets
+PRZYKŁAD	EXAMPLE
+Resetuje się:	Resets:
+Resetują się:	Reset:
+Przed resetem odkładasz głównie:	Before resetting, save mainly:
+walutę Mountów	mount currency
+KIEDY ZACZĄĆ OSZCZĘDZAĆ?	WHEN SHOULD YOU START SAVING?
+Prosta zasada	A simple rule
+Chcesz ascendować?	Planning to ascend?
+Przestań wydawać walutę tego filaru.	Stop spending that pillar's currency.
+Jesteś blisko progu?	Close to the requirement?
+Im bliżej Lv100 / Forge35, tym bardziej warto odkładać.	The closer you are to Lv100 / Forge35, the more useful saving becomes.
+Po co odkładać?	Why save?
+Żeby po resecie szybko wrócić do siły, a nie siedzieć na dnie.	To regain your power quickly after the reset.
+Zaawansowane: dokładne koszty i progi z obecnego Source Packa	Advanced: exact costs and thresholds from the source data
+Oficjalny poradnik z Discorda • wymagania i bazowe staty	Official Discord guide • requirements and base stats
+ODZYSKANIE MOCY	POWER RECOVERY
+Gear znika, Forge wraca do Lv1	Gear is removed; Forge returns to Lv1
+Gold i podstawowe resources zostają	Gold and basic resources stay
+Bezpieczniej:	Safer target:
+przy 25% discount	with 25% discount
+przy +50% Extra Drop	with +50% Extra Drop
+przy 25% discount + 50% Extra Drop	with 25% discount + 50% Extra Drop
++3 mln Gold za samo Ascension	+3 million Gold for Ascension itself
+Przepchnij dungeony tak daleko, jak możesz — poradnik wskazuje okolice 19-1 → 20-1.	Push dungeons as far as possible — the guide suggests around 19-1 → 20-1.
+Przed Ascension 1 miej co najmniej Tier 3 Tech wymaksowane w discount + drop chance. Tier 4 jest mocno rekomendowane.	Before Ascension 1, max discount and drop chance in at least Tier 3 Tech. Tier 4 is strongly recommended.
+Przed resetem uzbieraj podstawowe zasoby, żeby szybko odzyskać poprzednią moc.	Save basic resources before the reset to regain your previous power quickly.
+Co mam brać teraz?	What should I upgrade next?
+Kolejność poniżej pochodzi z przesłanego Tech Tree Guide.	The order below comes from the supplied Tech Tree Guide.
+Procenty i czasy są już z aktualnego configu 2026-09-02	Percentages and times use the 2026-09-02 configuration
+, więc nie powtarzam starych wartości z poradnika tam, gdzie gra je zmieniła.	, rather than outdated guide values where the game has changed.
+START • NAJWAŻNIEJSZE	START • PRIORITIES
+Najpierw zrób to	Do these first
+Wymaksuj Forge Cost Tier I	Max Forge Cost Tier I
+Wymaksuj Forge Speed Tier I	Max Forge Speed Tier I
+Wymaksuj Tech Speed Tier I	Max Tech Speed Tier I
+Wymaksuj Tech Cost Tier I	Max Tech Cost Tier I
+Potem weź 1/5 w pozostałych node'ach Tier I, żeby otwierać dalszą ścieżkę	Then take 1/5 in the remaining Tier I nodes to unlock the next path
+Extra Mount Chance później	Extra Mount Chance later
+Power Tree tylko lekko	Invest only lightly in the Power Tree
+Kolejność pochodzi z przesłanego Tech Tree Guide. Procenty na stronie pochodzą z aktualnego configu 2026-09-02 i mogą różnić się od starszego tekstu poradnika.	The order comes from the supplied Tech Tree Guide. Percentages use the 2026-09-02 configuration and may differ from the older guide.
+Układ i prerequisites pochodzą z PlayerTechTreePositionLibrary. Efekty poniżej są z aktualnego PlayerTechTreeNodeValuesLibrary.	Layout and prerequisites come from PlayerTechTreePositionLibrary. Effects use PlayerTechTreeNodeValuesLibrary.
+Wymaga node ID:	Requires node ID:
+Start ścieżki	Start of path
+1 poziom	1 level
+na 5/5	at 5/5
+Pełne klanowe Tech Tree	Full clan Tech Tree
+Całe klanowe drzewko technologii. Każdy node dostaje własny model opłacalności zgodny z mechaniką gry — Damage/Health, timery, stałe bonusy, poziomy ponad MAX (ignorowane) i ekonomia nie są już liczone jednym wzorem. Dane node'ów są pobierane z najnowszej konfiguracji gry z repo	The full clan technology tree. Each node uses an efficiency model suited to its game mechanic: Damage/Health, timers, fixed bonuses and economy. Levels above MAX are ignored. Node data is loaded from the latest game configuration in
+, a dane graczy z lokalnego	, and player data from the local
+Koszt node'a jest liczony tylko do jego	Node costs are calculated only up to its
+, bo właściwy Clan Tech Tree blokuje poziom na MaxLevel. Konwersja darowizn:	, because the Clan Tech Tree caps the level at MaxLevel. Donation conversion:
+1 pkt tech = 2 Green Potions albo 1 Gem	1 tech point = 2 Green Potions or 1 Gem
+Wersja 2.2.1 — każdy node kończy się dokładnie na swoim MaxLevel. Dla node'ów Damage + Health działających w tym samym kontekście można policzyć zmianę efektywnej Power z samego	Version 2.2.1 — every node stops at its MaxLevel. For Damage + Health nodes affecting the same area, effective power change can be calculated from
+, jeśli oba są rozwinięte do tego samego poziomu. Dla node'ów wpływających tylko na część buildu (np. WeaponBonus, PetBonusDamage) dokładna zmiana Power wymagałaby osobnych statystyk gracza, których data.js nie zawiera.	, if both are upgraded to the same level. For nodes affecting only part of a build (e.g. WeaponBonus or PetBonusDamage), an exact power change would require additional player stats not included in data.js.
+Połączono • konfiguracja	Connected • configuration
+definicji	definitions
+Gracze z data.js	Players from data.js
+Wpływ na efektywną Power	Impact on effective power
+Opłacalność poziomu docelowego	Target level efficiency
+Opłacalność vs 1. poziom	Efficiency vs level 1
+STAŁE ROI	FIXED ROI
+Poziom docelowy	Target level
+Aktualny poziom	Current level
+Max poziom	Max level
+Poziom	Level
+Bonus / poziom	Bonus / level
+Bonus na MAX	Bonus at MAX
+Bonus broni	Weapon bonus
+Bonus butów	Boots bonus
+Bonus hełmu	Helmet bonus
+Bonus naszyjnika	Necklace bonus
+Bonus pancerza	Armour bonus
+Bonus pasa	Belt bonus
+Bonus pierścienia	Ring bonus
+Bonus rękawic	Gloves bonus
+Efekt / 1000 pkt	Effect / 1,000 points
+Efekt aktualny → cel	Current → target effect
+Efekt łączny	Total effect
+Koszt / poziom	Cost / level
+Koszt aktualny → cel	Current → target cost
+Koszt do MAX	Cost to MAX
+Koszt wszystkich poziomów	Cost of all levels
+Koszt łączny	Total cost
+Ostatni wzrost	Latest growth
+Ranking wzrostu Power w snapshotach	Power growth ranking by snapshot
+Rekord punktów	Points record
+Suma punktów	Total points
+Łączna moc	Total power
+Łącznie %	Total %
+Łącznie wojen	Total wars
+Łączny wzrost	Total growth
+Śr. wzrost / snapshot	Avg. growth / snapshot
+Średnia na gracza	Average per player
+Największy spadek:	Largest drop:
+vs poprzedni tydzień	vs previous week
+aktywnych graczy	active players
+graczy w składzie	players in the roster
+byłych graczy	former members
+punktujących graczy	scoring players
+punktujących	scorers
+graczy	players
+wpisów graczy	player entries
+wybrany gracz	selected player
+punkty klanu	clan points
+łącznie	in total
+node’ów	nodes
+potek	potions
+potki	potions
+pkt	pts
+tys.	k
+mln	million
+mld	billion
+bln	trillion
+albo	or
+lub	or
+Wojna klanów	Clan war
+ZWYKŁY DZIEŃ	REGULAR DAY
+Opłaca się poczekać	Worth waiting
+. Planner ustawił badanie tak, żeby możliwie dużo robiło się w nocy i można je było odebrać w punktowanym dniu.	. The planner schedules as much research as possible overnight, with collection on a scoring day.
+Poczekaj do	Wait until
+— wtedy start będzie korzystniejszy.	— starting then is more beneficial.
+Sugestia tylko czasowa — bez sprawdzania wymagań drzewka.	Timing suggestion only — Tech Tree prerequisites are not checked.
+Ten odbiór jest punktowany.	This collection earns points.
+Uruchom kuźnię — poziom	Start forge — level
+Uruchom około	Start around
+. Skończy się około	. Finishes around
+— start daje punkty.	— starting earns points.
+PUNKTY: rozpocznij Kuźnię	POINTS: start Forge
+Zakładamy około	Allow around
+min na powrót gracza do gry.	min for the player to return to the game.
+Zawsze czeka na środę lub piątek.	Always waits for Wednesday or Friday.
+Łączne czekanie:	Total waiting:
+PUNKTY ZA ODBIÓR TECH	POINTS FOR COLLECTING TECH
+PUNKTY ZA START KUŹNI	POINTS FOR STARTING FORGE
+koniec	end
+gotowe	ready
+na wykresach	on the charts
+ŚR	WED
+PN	MON
+WT	TUE
+CZ	THU
+PT	FRI
+SB	SAT
+ND	SUN
+Nie udało się wczytać danych strony. Odśwież stronę lub spróbuj ponownie później.	Could not load page data. Refresh the page or try again later.
+Analyzer celowo ignoruje pola	The analyser deliberately ignores the fields
+Analiza specjalna	Special analysis
+Archiwum	Archive
+Bez progu	No threshold
+Bez zgadywanych danych	Based on recorded data
+CZEKAJ	WAIT
+CZW	THU
+Czekanie	Waiting
+Dni	Days
+Fiolki / Tech Race	Potions / Tech Race
+Forma	Performance
+Format gotowy do wklejenia	Ready to paste
+Godz.	Hours
+HYBRYDA — polecane	HYBRID — recommended
+Historia Power	Power history
+Ile razy?	How many times?
+Kategorie	Categories
+Konfiguracja gry	Game configuration
+Liczba wojen	Number of wars
+Lider tygodnia	Weekly leader
+Lochy	Dungeons
+Misje klanowe	Clan missions
+Moc	Power
+NA RAZIE NIE URUCHAMIAJ	DO NOT START YET
+Node'y	Nodes
+POCZEKAJ	WAIT
+POWER + PARA	POWER + PAIR
+POZA KLANEM	FORMER MEMBER
+PROGRES — zawsze od razu	PROGRESS — start immediately
+PUNKTOWANY START	SCORING START
+Skopiowano	Copied
+Spadki	Drops
+Specjalne	Special
+Szukaj node'a, np. Clan War, Pet, Race…	Search nodes, e.g. Clan War, Pet, Race…
+TECH TREE • NAJPIERW DECYZJA	TECH TREE • CHOOSE YOUR NEXT UPGRADE
+TERAZ	NOW
+Timery jaj	Egg timers
+Top wzrostu mocy	Top power growth
+Tylko realne snapshoty tego gracza	Only recorded snapshots for this player
+Wzrosty	Gains
+Zmiana klanu	Clan change
+Zmiana vs poprzedni snapshot	Change vs previous snapshot
+Zysk tego poziomu	Gain from this level
+brak	none
+punktowanych akcji w wybranym zakresie	scoring actions in the selected range
+zachowanych profili	saved profiles
+stabilnie	stable
+SOB	SAT
+Skończy się około	Finishes around
+Planner ustawił badanie tak, żeby możliwie dużo robiło się w nocy i można je było odebrać w punktowanym dniu.	The planner schedules as much research as possible overnight, with collection on a scoring day.
+Brak poprzedniego tygodnia do porównania.	No previous week available for comparison.
+na gracza	per player
+Brak snapshotów Power	No power snapshots
+Najlepszy tydzień	Best week
+poprzednio	previously
+pierwszy dostępny snapshot	first available snapshot
+Malejąca opłacalność realnej siły	Diminishing returns in effective power
+działa jako mnożnik	acts as a multiplier for
+. Gdy	. When
+mają ten sam poziom, Damage i Health rosną razem. Wykres pokazuje marginalny wzrost efektywnej siły kolejnego poziomu, znormalizowany tak, że 1. poziom = 100%.	are at the same level, Damage and Health grow together. The chart shows the marginal effective power gain per level, normalised so level 1 = 100%.
+Para	Pair
+1. poziom	Level 1
+Opłacalność MAX lvl	Efficiency at MAX level
+Rzeczywista oszczędność czasu — Divisor	Actual time savings — Divisor
+Gra liczy ten typ jako Divisor: czas = czas bazowy / (1 + bonus). Dlatego +5% speed nie oznacza −5% czasu. Każdy kolejny poziom oszczędza coraz mniej czasu bazowego, więc wykres opada.	The game treats this as a Divisor: time = base time / (1 + bonus). So +5% speed does not mean −5% time. Each level saves less base time than the previous one, producing a downward curve.
+Bonus speed na MAX	Speed bonus at MAX
+Czas na MAX	Time at MAX
+bazowego	of base
+Łącznie krócej	Total time saved
+Stała opłacalność — przyrost Additive	Constant efficiency — Additive increase
+Każdy poziom daje ten sam przyrost liczbowy i kosztuje tyle samo. Nie ma matematycznego spadku ROI: wykres powinien być płaski na 100%.	Every level adds the same amount at the same cost. There are no diminishing returns: the chart stays flat at 100%.
+Przyrost / lvl	Increase / level
+Koszt / lvl	Cost / level
+Wartość na MAX	Value at MAX
+ROI wszystkich lvl	ROI at all levels
+Stała efektywność źródłowej statystyki	Constant source-stat efficiency
+Stała efektywność bonusu kosztowego	Constant bonus-per-cost efficiency
+Ten node wzmacnia tylko konkretne źródło Damage/Health. Każdy level daje ten sam procent tego źródła za ten sam koszt, więc jego czysta efektywność bonus/punkt jest płaska. Dokładnego wzrostu całkowitego Power nie da się wyliczyć z samego powerM.	This node boosts a specific Damage/Health source. Each level adds the same percentage at the same cost, so bonus-per-point efficiency stays constant. Exact total power growth cannot be calculated from powerM alone.
+Ten efekt jest mnożnikiem bazowej nagrody / punktów / prędkości. Każdy poziom dodaje ten sam procent bazowej wartości za ten sam koszt, więc kosztowa opłacalność każdego poziomu jest taka sama.	This effect multiplies base rewards, points or speed. Each level adds the same percentage of the base value at the same cost, so efficiency is constant across levels.
+Czas pozostały	Remaining time
+Oszczędność tego poziomu	Time saved by this level
+STAŁA OPŁACALNOŚĆ KOSZTOWA	CONSTANT COST EFFICIENCY
+NAJWIĘCEJ CZASU OSZCZĘDZAJĄ PIERWSZE POZIOMY	EARLY LEVELS SAVE THE MOST TIME
+NAJLEPSZA WARTOŚĆ: PIERWSZE POZIOMY	BEST VALUE: EARLY LEVELS
+opłacalność kolejnych progów	efficiency of successive levels
+opłacalność oszczędności czasu	time-saving efficiency
+Ten node może być policzony jako efektywna Power razem z	This node can be evaluated as effective power together with
+, ale data.js nie zawiera teraz graczy.	, but data.js currently has no player data.
+Efektywna Power	Effective power
+Założenie: oba sparowane node’y mają ten sam poziom. Repo stosuje kontekstowy mnożnik osobno do całego Damage i Health; przy równym poziomie obu node’ów można policzyć efektywną Power z samego powerM.	Assumption: both paired nodes are at the same level. The configuration applies a context multiplier separately to total Damage and Health; equal levels let us calculate effective power from powerM alone.
+Bazowa Power	Base power
+Ten node wpływa na Power, ale wzmacnia tylko konkretne źródło statystyki (	This node affects power but boosts only one stat source (
+). Z samego powerM nie znamy udziału tego źródła w całkowitym Damage/Health, więc dokładna zmiana Power byłaby zgadywaniem.	). powerM alone does not show that source's share of total Damage/Health, so an exact power change cannot be calculated.
+Tech Race Rewards — zwrot w realnych fiolkach	Tech Race Rewards — return in actual potions
+Bazową nagrodę można zmienić. Domyślnie wpisuję 400 na gracza, a liczbę członków biorę z data.js (	You can change the base reward. The default is 400 per player; the member count comes from data.js (
+Liczba członków	Member count
+Bazowa nagroda / gracza	Base reward / player
+Bazowa nagroda klanu	Base clan reward
+Nagroda na celu	Reward at target
+Dodatkowo / Race	Extra / Race
+Koszt ulepszenia	Upgrade cost
+Zwrot kosztu	Payback
+wygranych	wins
+Tech Race Score — efekt na 100 bazowych punktów	Tech Race Score — effect on 100 base points
+100 bazowego score	100 base score
+Na aktualnym lvl	At current level
+Na docelowym lvl	At target level
+Przyrost	Increase
+Pozostały czas aktualny → cel	Remaining time: current → target
+Oszczędność czasu / 1000 pkt (1. lvl)	Time saved / 1,000 points (level 1)
+Bonus aktualny → cel	Bonus: current → target
+Bonus bazowy / 1000 pkt	Base bonus / 1,000 points
+Wartość / 1000 pkt	Value / 1,000 points
+Nie udało się pobrać pełnych danych Clan Tech Tree z repo 1vcian/fm.	Could not load the full Clan Tech Tree data from 1vcian/fm.
+POCZEKAJ DO KOŃCA SNU	WAIT UNTIL WAKE-UP TIME
+ODPAL OD RAZU	START NOW
+CZEKAJ NA PUNKTOWANY DZIEŃ	WAIT FOR A SCORING DAY
+ODPAL PO ŚNIE	START AFTER SLEEP
+Nie wybrano żadnego Tech	No Tech selected
+Badanie może ruszyć od razu. Odbierz je w punktowanym dniu.	Research can start now. Collect it on a scoring day.
+Dodaj przynajmniej jedno badanie do kolejki.	Add at least one research task to the queue.
+KUŹNIA JUŻ PRACUJE	FORGE IS ALREADY RUNNING
+URUCHOM KUŹNIĘ TERAZ	START FORGE NOW
+BRAK KOLEJNEGO POZIOMU	NO NEXT LEVEL
+Trwa poziom	Level in progress:
+Pozostało	Remaining:
+Po zakończeniu obecnej kuźni zakładamy około	After the current upgrade finishes, allow around
+min na wejście do gry.	min to return to the game.
+Jeśli wypadnie noc, następna akcja przechodzi na poranek.	If this falls during sleep, the next action moves to the morning.
+Następny poziom: około	Next level: around
+Obecna kuźnia trwa.	The current forge upgrade is running.
+Po zakończeniu kuźni doliczamy około	After the forge finishes, allow around
+Następny poziom zaplanuj około	Plan the next level around
+Nie ma sensu czekać — uruchom następny poziom.	No need to wait — start the next level.
+BADANIE TECH	TECH RESEARCH
+Badanie gotowe.	Research ready.
+, żeby dostać punkty.	, to earn points.
+Aktualnie wykonywana kuźnia.	Forge upgrade currently running.
+Plan gotowy	Plan ready
+Sprawdź pierwsze bloki na osi czasu.	Check the first blocks on the timeline.
+Kuźnia poziom	Forge level
+jest już w trakcie	is already running
+Nic z nią teraz nie rób. Zostało około	No action needed yet. Around
+. Koniec jest zaznaczony na osi czasu.	 remaining. The end is marked on the timeline.
+noc — uruchom o	sleep time — start at
+poczekaj do	wait until
+Uruchom kuźnię	Start Forge
+teraz	now
+Przewidywany koniec:	Estimated finish:
+Start będzie punktowany.	Starting will earn points.
+Uruchom badanie	Start research
+Odbierz badanie	Collect research
+Ten odbiór nie daje punktów wojennych.	This collection does not earn war points.
+Dodaj badania Tech lub sprawdź ustawienia Kuźni.	Add Tech research or check the Forge settings.
+Brak Kuźni	No forge upgrades
+Brak badania z tabeli, które się mieści.	No research from the table fits this slot.
+Brak większych wolnych okien	No large free slots
+Plan Tech wykorzystuje czas dość ciasno.	The Tech plan makes close use of the available time.
+Każdy poziom startuje natychmiast.	Every level starts immediately.
+bazowej wartości	base value
+efektywnej siły	effective strength
+POWER • ŹRÓDŁO	POWER • SOURCE
+STAŁY BONUS / KOSZT	FIXED BONUS / COST
+Ten node wpływa na Power, ale wzmacnia tylko konkretne źródło statystyki	This node affects Power, but boosts only one source of the stat
+Z samego powerM nie znamy udziału tego źródła w całkowitym Damage/Health, więc dokładna zmiana Power byłaby zgadywaniem.	The powerM value alone does not tell us this source’s share of total Damage/Health, so an exact Power change cannot be calculated.
+Bazową nagrodę można zmienić. Domyślnie wpisuję 400	You can change the base reward. The default is 400
+a liczbę członków biorę z	and the member count comes from
+PUNKTY — zawsze czekaj	POINTS — always wait
+Rankingi wojny i wzrostu Power w formacie gotowym do pokazania klanowiczom lub skopiowania.	War and Power growth rankings, ready to share with your clan or copy.
+Poprzednia grafika	Previous image
+Następna grafika	Next image
+grafik	images
+Wszystkie dostępne grafiki danego tieru. Strzałki zatrzymują rotację i pozwalają wybrać obraz. Statystyki dotyczą tieru.	All available artwork for this tier. Use the arrows to pause rotation and choose an image. Stats apply to the tier.
+Od Forge 1 w tym cyklu do pierwszego poziomu z co najmniej 4% szans na tier. Primitive: 100% od Forge 1. Bez opłaty za Ascension i czasu zdobywania itemów.	From Forge 1 in this cycle to the first level with at least a 4% tier chance. Primitive: 100% from Forge 1. Excludes the Ascension fee and time spent obtaining items.
+
+Punkty graczy — Top 10	Player points — Top 10
+Wybrana wojna i poprzedni wynik tych samych graczy	Selected war and the same players’ previous scores
+Porównanie punktów Top 10 graczy z poprzednią wojną	Top 10 player points compared with the previous war
+
+Udział w punktach klanu	Share of clan points
+Wszyscy gracze wybranej wojny • kliknij gracza, aby zobaczyć profil	All players in the selected war • click a player to view their profile
+Udział wszystkich graczy w punktach klanu	All players’ share of clan points
+SUMA PUNKTÓW	TOTAL POINTS
+Punkty / udział	Points / share
+Gracze z wynikiem 0 są na liście, ale nie tworzą wycinka koła.	Players with 0 points appear in the list but have no slice in the chart.
+
+Udział w mocy klanu	Share of clan power
+Wszyscy gracze z zapisaną mocą w wybranym tygodniu • kliknij gracza, aby zobaczyć profil	All players with recorded power in the selected week • click a player to view their profile
+Udział wszystkich graczy w mocy klanu	All players’ share of clan power
+Power / udział	Power / share
+Gracze z mocą 0 są na liście, ale nie tworzą wycinka koła.	Players with 0 power appear in the list but have no slice in the chart.
+
+Ostatni wynik na tle klanu	Last score compared with the clan
+0% = średnia klanu w tej samej wojnie. Każdy gracz jest porównany w swoim ostatnim zapisanym tygodniu.	0% = clan average in the same war. Each player is compared in their last recorded week.
+Historia byłego gracza	Former player history
+Były gracz do porównania	Former player to compare
+Power vs średnia klanu	Power vs clan average
+Ostatnie wyniki byłych graczy względem średniej klanu	Former players’ last scores relative to the clan average
+Wykresy pokazują zapisane wyniki, nie powód usunięcia z klanu. Brak wpisu nie oznacza wyniku 0.	Charts show recorded scores, not the reason for removal from the clan. A missing entry does not mean a score of 0.
+
+Historia byłych graczy	Former players’ history
+Były gracz do podświetlenia	Former player to highlight
+
+Ostatnie dostępne dane • wszyscy klanowicze	Latest available data • all clan members
+Jak wypadali byli gracze?	How did former players perform?
+Ostatni zapisany wynik każdego gracza względem średniej klanu z tej samej wojny. 100% oznacza wynik równy średniej.	Each player’s last recorded score relative to the clan average in the same war. 100% means a score equal to the average.
+
+Ocena składu	Roster review
+Ocena składu i fiolki	Roster review and donations
+Ranking do omówienia z kadrą klanu • 50% punkty wojenne, 50% fiolki	Ranking for discussion with clan leadership • 50% war points, 50% donations
+Okno wojen	War window
+3 wojny	3 wars
+5 wojen	5 wars
+8 wojen	8 wars
+Tydzień fiolek	Donation week
+Pomiń odpuszczone wojny	Exclude conceded wars
+Jak liczona jest ocena?	How is the score calculated?
+Kandydaci do omówienia	Players to discuss
+Najwyższe ryzyko na początku • kliknij nick, aby sprawdzić historię	Highest risk first • click a name to inspect the history
+Ocena	Assessment
+Ryzyko / 100	Risk / 100
+Punkty / średnia	Points / average
+Fiolki / średnia	Donations / average
+Trend (p.p.)	Trend (percentage points)
+Uzasadnienie	Reasons
+Historia wpłat fiolek	Donation history
+Aktywni gracze • tygodnie i koniec sezonu są osobnymi kolumnami • — oznacza brak wpisu	Active players • weeks and season end use separate columns • — means no entry
+Punkty: mediana wyniku gracza względem średniej klanu w tych samych wojnach. Fiolki: wpłata względem średniej aktywnych graczy z wpisem w wybranym tygodniu. Każda część daje do 50 punktów ryzyka: 50 × max(0, 1 − wynik / średnia). Łącznie 0–100; wyższa wartość oznacza słabszy wkład. Wynik powyżej średniej nie odejmuje ryzyka z drugiej kategorii.	Points: the median ratio of player score to clan average in the same wars. Donations: the ratio to the average of active players with an entry in the selected week. Each component contributes up to 50 risk points: 50 × max(0, 1 − result / average). Total: 0–100; higher means lower contribution. An above-average result does not cancel risk in the other category.
+Ocena wymaga co najmniej 3 zapisanych wojen i wpisu o fiolkach. Puste komórki to brak danych, a wpisane 0 to wynik zerowy. Trend i liczba słabych wojen są pokazane oddzielnie. Zestawienie nie uwzględnia uzgodnionych urlopów ani roli gracza w klanie. Okres „koniec sezonu” jest wyłączony z rekomendacji.	Scoring requires at least 3 recorded wars and a donation entry. Blank cells mean missing data; an entered 0 is a zero result. Trend and low-score war counts are shown separately. Agreed absences and clan roles are not included. Season-end donations are excluded from recommendations.
+
+Priorytet rozmowy: ryzyko ≥60 i obie kategorie poniżej 50% średniej. Obserwacja: ryzyko ≥35. Pozostałe oceny mają niższy priorytet. Trend porównuje medianę pierwszej i ostatniej połowy zapisanych wojen; wymaga 4 wpisów.	Discussion priority: risk ≥60 and both categories below 50% of average. Watch: risk ≥35. Other scores have lower priority. Trend compares the medians of the first and last halves of recorded wars; it requires 4 entries.

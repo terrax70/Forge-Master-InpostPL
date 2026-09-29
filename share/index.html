@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="inppl-build" content="20260929181007">
+<meta name="theme-color" content="#07090d">
+<title>INPPL Stats — Podsumowanie</title>
+<link rel="stylesheet" href="share.css?v=20260929181007">
+<link rel="stylesheet" href="../ui-shell.css?v=20260929181007">
+<link rel="stylesheet" href="../i18n.css?v=1">
+<script src="../locales/en.js?v=2"></script>
+<script src="../i18n.js?v=1"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">IP</div>
+      <div><div class="brand-name">INPPL <span>Stats</span></div><div class="brand-desc">Forge Master</div></div>
+    </div>
+    <div class="nav-label">Nawigacja</div>
+    <nav class="nav">
+      <a class="nav-btn nav-link-btn" href="../#overview"><span class="nav-ico">◈</span>Przegląd</a>
+      <a class="nav-btn nav-link-btn" href="../#warsView"><span class="nav-ico">⚔</span>Wojny</a>
+      <a class="nav-btn nav-link-btn" href="../#playersView"><span class="nav-ico">♟</span>Gracze</a>
+      <a class="nav-btn nav-link-btn" href="../#power"><span class="nav-ico">◆</span>Power</a>
+      <a class="nav-btn nav-link-btn" href="../#compare"><span class="nav-ico">⇄</span>Porównaj</a>
+
+      <div class="nav-label nav-section-label">Narzędzia</div>
+      <a class="nav-btn nav-link-btn active" href="./"><span class="nav-ico">☷</span>Podsumowanie</a>
+      <a class="nav-btn nav-link-btn" href="../planner/"><span class="nav-ico">⌁</span>Planner</a>
+      <a class="nav-btn nav-link-btn" href="../knowledge/"><span class="nav-ico">✦</span>Rozwój</a>
+
+      <div class="nav-label nav-section-label nav-addon-label">Dodatek</div>
+      <a class="nav-btn nav-link-btn nav-addon" href="../#outcastsView"><span class="nav-ico">↪</span>Wyrzutki</a>
+    </nav>
+    <div class="side-status">
+      <div class="release-row"><strong>InPost [INPPL]</strong><span class="release-badge">v1.4.17</span></div>
+      <div id="sideDataRange">Dane —</div>
+      <div class="data-updated" id="dataUpdated">Aktualizacja —</div>
+    </div>
+  </aside>
+  <main class="main external-main">
+    <div class="shell">
+  <section class="hero">
+    <div>
+      <div class="kicker">CLAN SHARE</div>
+      <h1>Podsumowanie</h1>
+      <p>Rankingi wojny i wzrostu Power w formacie gotowym do pokazania klanowiczom lub skopiowania.</p>
+    </div>
+  </section>
+
+  <section class="week-panel">
+    <div class="section-label">WYBIERZ WOJNĘ</div>
+    <div class="weekbar" id="weekbar"></div>
+  </section>
+
+  <div class="share-grid">
+    <section class="share-card">
+      <div class="card-head">
+        <div><span class="type war">WOJNA</span><h2>Top punktów</h2><p id="warSub">—</p></div>
+        <button class="copy-btn" id="copyWar">Kopiuj tekst</button>
+      </div>
+      <div class="filters">
+        <label><span>Próg punktów</span>
+          <select id="warThreshold">
+            <option value="0">Bez progu</option>
+            <option value="100">100k+</option>
+            <option value="250">250k+</option>
+            <option value="500">500k+</option>
+            <option value="800" selected>800k+</option>
+            <option value="1000">1,0m+</option>
+            <option value="1250">1,25m+</option>
+            <option value="1500">1,5m+</option>
+            <option value="2000">2,0m+</option>
+          </select>
+        </label>
+        <label><span>Ile osób</span>
+          <select id="warLimit">
+            <option value="10">Top 10</option>
+            <option value="15" selected>Top 15</option>
+            <option value="20">Top 20</option>
+            <option value="999">Wszyscy</option>
+          </select>
+        </label>
+      </div>
+      <div class="rank-list" id="warRank"></div>
+      <pre class="copy-preview" id="warPreview"></pre>
+    </section>
+
+    <section class="share-card">
+      <div class="card-head">
+        <div><span class="type power">POWER</span><h2>Top wzrostu mocy</h2><p id="powerSub">—</p></div>
+        <button class="copy-btn" id="copyPower">Kopiuj tekst</button>
+      </div>
+      <div class="filters">
+        <label><span>Próg wzrostu</span>
+          <select id="powerThreshold">
+            <option value="-999">Bez progu</option>
+            <option value="25">+25%+</option>
+            <option value="50">+50%+</option>
+            <option value="75">+75%+</option>
+            <option value="100" selected>+100%+</option>
+            <option value="125">+125%+</option>
+            <option value="150">+150%+</option>
+            <option value="200">+200%+</option>
+            <option value="300">+300%+</option>
+          </select>
+        </label>
+        <label><span>Ile osób</span>
+          <select id="powerLimit">
+            <option value="10">Top 10</option>
+            <option value="15" selected>Top 15</option>
+            <option value="20">Top 20</option>
+            <option value="999">Wszyscy</option>
+          </select>
+        </label>
+      </div>
+      <div class="rank-list" id="powerRank"></div>
+      <pre class="copy-preview" id="powerPreview"></pre>
+    </section>
+  </div>
+
+  <section class="help">
+    <b>Format gotowy do wklejenia</b>
+    <span>👑 #1 • 🥈 #2 • 🥉 #3 • ⭐ #4–9 • 🔥 #10+. Zmiana wojny, progu lub liczby osób od razu przebudowuje listę i tekst.</span>
+  </section>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast">Skopiowano ✓</div>
+<script src="../data-loader.js" data-scripts="../week-picker.js share.js"></script>
+
+</body>
+</html>

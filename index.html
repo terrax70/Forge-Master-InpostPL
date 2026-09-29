@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="inppl-build" content="20260929181007">
+<meta name="theme-color" content="#07090d">
+<title>INPPL Stats — Forge Master</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="styles.css?v=20260929181007">
+<link rel="stylesheet" href="ui-shell.css?v=20260929181007">
+<link rel="stylesheet" href="i18n.css?v=1">
+<script src="locales/en.js?v=1790697475"></script>
+<script src="i18n.js?v=1"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">IP</div>
+      <div><div class="brand-name">INPPL <span>Stats</span></div><div class="brand-desc">Forge Master</div></div>
+    </div>
+    <div class="nav-label">Nawigacja</div>
+    <nav class="nav">
+      <button class="nav-btn active" data-view="overview"><span class="nav-ico">◈</span>Przegląd</button>
+      <button class="nav-btn" data-view="warsView"><span class="nav-ico">⚔</span>Wojny</button>
+      <button class="nav-btn" data-view="playersView"><span class="nav-ico">♟</span>Gracze</button>
+      <button class="nav-btn" data-view="power"><span class="nav-ico">◆</span>Power</button>
+      <button class="nav-btn" data-view="donations"><span class="nav-ico">⚗</span>Fiolki</button>
+      <button class="nav-btn" data-view="rosterReview"><span class="nav-ico">◉</span>Ocena składu</button>
+      <button class="nav-btn" data-view="compare"><span class="nav-ico">⇄</span>Porównaj</button>
+
+      <div class="nav-label nav-section-label">Narzędzia</div>
+      <a class="nav-btn nav-link-btn" href="share/"><span class="nav-ico">☷</span>Podsumowanie</a>
+      <a class="nav-btn nav-link-btn" href="planner/"><span class="nav-ico">⌁</span>Planner</a>
+      <a class="nav-btn nav-link-btn" href="knowledge/"><span class="nav-ico">✦</span>Rozwój</a>
+
+      <div class="nav-label nav-section-label nav-addon-label">Dodatek</div>
+      <button class="nav-btn nav-addon" data-view="outcastsView"><span class="nav-ico">↪</span>Wyrzutki</button>
+    </nav>
+    <div class="side-status">
+      <div class="release-row"><strong>InPost [INPPL]</strong><span class="release-badge">v1.4.17</span></div>
+      <div id="sideDataRange">Dane —</div>
+      <div class="data-updated" id="dataUpdated">Aktualizacja —</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- OVERVIEW -->
+    <section class="view active" id="overview">
+      <div class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-label">FORGE MASTER</div>
+            <div class="hero-title">InPost <span>[INPPL]</span></div>
+            <div class="hero-meta">
+              <span class="chip">Tydzień <b id="heroWeek"></b></span>
+              <span class="chip" id="heroTier"></span>
+              <span class="chip" id="heroDate"></span>
+              <span class="chip" id="heroPlayerCount"></span>
+            </div>
+          </div>
+          <div class="hero-score"><div class="big" id="heroScore"></div><div class="caption">punkty klanu</div><div id="heroTrend"></div></div>
+        </div>
+      </div>
+
+<div class="overview-chart-grid"><div class="panel" style="margin-top:11px"><div class="panel-head"><div><div class="panel-title">Udział w punktach klanu</div><div class="panel-desc">Ostatnie dostępne dane • wszyscy klanowicze</div></div><span class="status-pill" id="overviewWarShareWeek"></span></div><div class="war-share-layout"><div class="war-donut-wrap"><canvas id="overviewWarDistribution" role="img" aria-label="Udział w punktach klanu"></canvas><div class="war-donut-center"><span>Punkty</span><strong id="overviewWarDonutTotal"></strong><span id="overviewWarDonutCount"></span></div></div><div><div class="war-share-heading"><span>Gracz</span><span>Punkty / %</span></div><div id="overviewWarDistributionLegend" class="war-share-list"></div></div></div></div>
+<div class="panel" style="margin-top:11px"><div class="panel-head"><div><div class="panel-title">Udział w mocy klanu</div><div class="panel-desc">Ostatnie dostępne dane • wszyscy klanowicze</div></div><span class="status-pill" id="overviewPowerShareWeek"></span></div><div class="war-share-layout"><div class="war-donut-wrap"><canvas id="overviewPowerDistribution" role="img" aria-label="Udział w mocy klanu"></canvas><div class="war-donut-center"><span>Power</span><strong id="overviewPowerDonutTotal"></strong><span id="overviewPowerDonutCount"></span></div></div><div><div class="war-share-heading"><span>Gracz</span><span>Power / %</span></div><div id="overviewPowerDistributionLegend" class="war-share-list"></div></div></div></div>
+<div class="panel">
+          <div class="panel-head">
+            <div><div class="panel-title">Punkty graczy w czasie</div><div class="panel-desc" id="warHistoryRange">Każda linia to jeden gracz</div></div>
+            <div class="chart-controls">
+              <select id="overviewPlayerSelect" class="select chart-select"></select>
+            </div>
+          </div>
+          <div class="chart-box"><canvas id="overviewWarChart"></canvas></div>
+          <div class="chart-legend">
+            <span><i class="legend-line everyone"></i>wszyscy gracze</span>
+            <span><i class="legend-line average"></i>średnia klanu</span>
+            <span><i class="legend-line selected"></i>wybrany gracz</span>
+            <span class="chart-note">Kliknij nick na liście lub wybierz go powyżej</span>
+          </div>
+        </div>
+<div class="panel">
+          <div class="panel-head">
+            <div><div class="panel-title">Power graczy w czasie</div><div class="panel-desc" id="overviewPowerRange">Każda linia to jeden gracz • 1 w Excelu = 1 mln</div></div>
+            <div class="chart-controls"><select id="overviewPowerPlayerSelect" class="select chart-select"></select></div>
+          </div>
+          <div class="chart-box"><canvas id="overviewPowerChart"></canvas></div>
+          <div class="chart-legend">
+            <span><i class="legend-line everyone"></i>wszyscy gracze</span>
+            <span><i class="legend-line average"></i>średnia klanu</span>
+            <span><i class="legend-line selected"></i>wybrany gracz</span>
+          </div>
+        </div><div class="panel"><div class="panel-head"><div class="panel-title">Suma punktów klanu</div></div><div class="chart-box"><canvas id="overviewTotalPointsChart"></canvas></div></div><div class="panel"><div class="panel-head"><div class="panel-title">Łączna moc klanu</div></div><div class="chart-box"><canvas id="overviewTotalPowerChart"></canvas></div></div></div>
+<div class="panel" style="margin-top:11px"><div class="panel-head"><div><div class="panel-title">Jak wypadali byli gracze?</div><div class="panel-desc">Ostatni zapisany wynik każdego gracza względem średniej klanu z tej samej wojny. 100% oznacza wynik równy średniej.</div></div><a class="btn" href="#outcastsView">Wyrzutki</a></div><div id="overviewOutcastSummary" class="outcast-comparison-list"></div></div>
+    </section>
+
+    <!-- WARS -->
+    <section class="view" id="warsView">
+      <div class="page-head war-page-head">
+        <div><div class="kicker">Wars analytics</div><h1>Wojny klanowe</h1><div class="page-sub">Wybierz tydzień i przeanalizuj ranking, rozkład punktów oraz zmianę formy.</div></div>
+        <div class="war-tier-focus" id="warTierFocus">
+          <div class="war-tier-caption">TIER WOJNY</div>
+          <div class="war-tier-value" id="warTierValue">—</div>
+          <div class="war-tier-week" id="warTierWeek">—</div>
+        </div>
+      </div>
+      <div class="weekbar" id="weekbar"></div>
+      <div class="war-summary" id="warSummary"></div>
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Udział w punktach klanu</div><div class="panel-desc">Wszyscy gracze wybranej wojny • kliknij gracza, aby zobaczyć profil</div><div class="panel-desc" id="warDeltaNote"></div></div></div>
+        <div class="war-share-layout">
+          <div class="war-donut-wrap"><canvas id="warDistribution" role="img" aria-label="Udział wszystkich graczy w punktach klanu"></canvas><div class="war-donut-center"><span>SUMA PUNKTÓW</span><strong id="warDonutTotal"></strong><span id="warDonutCount"></span></div></div>
+          <div><div class="war-share-heading"><span>Gracz</span><span>Punkty / udział</span></div><div id="warDistributionLegend" class="war-share-list"></div><div class="panel-desc war-share-note">Gracze z wynikiem 0 są na liście, ale nie tworzą wycinka koła.</div></div>
+        </div>
+      </div>
+      <div class="table-shell" style="margin-top:11px"><table><thead><tr><th class="sortable" data-sort="place">#</th><th class="sortable" data-sort="nick">Gracz</th><th class="sortable" data-sort="rank">Ranga</th><th class="sortable num" data-sort="points">Punkty</th><th class="sortable num" data-sort="position">Pozycja źródłowa</th></tr></thead><tbody id="warTable"></tbody></table></div>
+    </section>
+
+    <!-- PLAYERS -->
+    <section class="view" id="playersView">
+      <div class="page-head"><div><div class="kicker">Player database</div><h1>Gracze</h1><div class="page-sub">Forma, rekordy, power i historia. Kliknij nick, aby przejść do pełnego profilu.</div></div><div class="status-pill" id="playersCount"></div></div>
+      <div class="toolbar"><div style="display:flex;gap:7px"><input class="search" id="playerSearch" placeholder="Szukaj gracza…"><select class="select" id="rankFilter"></select></div><div style="font-size:9px;color:#5c6879">Kliknij nagłówki, aby sortować</div></div>
+      <div class="table-shell"><table><thead><tr>
+        <th class="sortable" data-sort="latestPlace">#</th><th class="sortable" data-sort="nick">Gracz</th><th class="sortable" data-sort="rank">Ranga</th>
+        <th class="sortable num" data-sort="latestPoints">Ostatni</th><th class="sortable num" data-sort="avg">Średnia</th><th class="sortable num" data-sort="best">Rekord</th>
+        <th class="sortable num" data-sort="powerM">Power</th><th class="sortable num" data-sort="powerChangeM">Δ Power</th><th class="sortable" data-sort="formDelta">Forma</th>
+      </tr></thead><tbody id="playersTable"></tbody></table></div>
+    </section>
+
+    <!-- WYRZUTKI -->
+    <section class="view" id="outcastsView">
+      <div class="page-head">
+        <div>
+          <div class="kicker">Clan archive</div>
+          <h1>Wyrzutki</h1>
+          <div class="page-sub">Byli gracze zachowani z arkusza <b>Usunięci!</b>. Ich wyniki nadal są częścią historii wojen i Power.</div>
+        </div>
+        <div class="status-pill" id="outcastsCount">—</div>
+      </div>
+      <div class="outcast-summary" id="outcastSummary"></div>
+      <div class="toolbar outcast-toolbar">
+        <div class="power-filter-row">
+          <input class="search" id="outcastSearch" placeholder="Szukaj byłego gracza…">
+          <select class="select" id="outcastSort">
+            <option value="lastWeek">Ostatnia wojna ↓</option>
+            <option value="avg">Średnia punktów ↓</option>
+            <option value="best">Rekord punktów ↓</option>
+            <option value="power">Power ↓</option>
+            <option value="wars">Liczba wojen ↓</option>
+            <option value="nick">Nick A–Z</option>
+          </select>
+        </div>
+        <div class="outcast-note">Kliknij nick, aby zobaczyć pełną zachowaną historię.</div>
+      </div>
+      <div class="panel" style="margin-bottom:11px">
+        <div class="panel-head"><div><div class="panel-title">Jak wypadali byli gracze?</div><div class="panel-desc">Ostatni zapisany wynik każdego gracza względem średniej klanu z tej samej wojny. 100% oznacza wynik równy średniej.</div></div></div>
+        <div id="outcastComparisonList" class="outcast-comparison-list" aria-label="Ostatnie wyniki byłych graczy względem średniej klanu"></div>
+      </div>
+      <div class="toolbar"><div><b>Historia byłych graczy</b><div class="panel-desc" id="outcastChartNote"></div></div><select class="select" id="outcastChartPlayer" aria-label="Były gracz do podświetlenia"></select></div>
+      <div class="grid-half">
+        <div class="panel"><div class="panel-head"><div class="panel-title">Punkty vs średnia klanu</div></div><div class="chart-box"><canvas id="outcastPointsChart"></canvas></div><div class="chart-legend"><span><i class="legend-line everyone"></i>wszyscy gracze</span><span><i class="legend-line average"></i>średnia klanu</span><span><i class="legend-line selected"></i>wybrany gracz</span></div></div>
+        <div class="panel"><div class="panel-head"><div class="panel-title">Power vs średnia klanu</div></div><div class="chart-box"><canvas id="outcastPowerChart"></canvas></div><div class="chart-legend"><span><i class="legend-line everyone"></i>wszyscy gracze</span><span><i class="legend-line average"></i>średnia klanu</span><span><i class="legend-line selected"></i>wybrany gracz</span></div></div>
+      </div>
+      <div class="panel-desc" style="margin:12px 0">Wykresy pokazują zapisane wyniki, nie powód usunięcia z klanu. Brak wpisu nie oznacza wyniku 0.</div>
+      <div class="table-shell">
+        <table>
+          <thead><tr>
+            <th class="sortable" data-sort="nick">Gracz</th><th class="sortable" data-sort="rank">Ostatnia ranga</th><th class="sortable" data-sort="lastWeek">Ostatnia wojna</th>
+            <th class="sortable num" data-sort="latestPoints">Ostatni wynik</th><th class="sortable num" data-sort="avg">Średnia</th><th class="sortable num" data-sort="best">Rekord</th>
+            <th class="sortable num" data-sort="warCount">Wojny</th><th class="sortable num" data-sort="powerM">Power</th><th class="sortable num" data-sort="powerChangeM">Ostatni wzrost</th>
+          </tr></thead>
+          <tbody id="outcastsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- POWER -->
+    <section class="view" id="power">
+      <div class="page-head"><div><div class="kicker">Power analytics</div><h1>Moc klanu</h1><div class="page-sub">Historia snapshotów, udział graczy oraz największe wzrosty i spadki.</div></div><div class="status-pill" id="powerStatus">—</div></div>
+      <div class="power-hero">
+        <div class="power-big"><div class="l">Łączna moc klanu</div><div class="v" id="powerTotal"></div><div class="sub" id="powerTotalSub"></div></div>
+        <div class="power-big"><div class="l">Zmiana vs poprzedni snapshot</div><div class="v" id="powerDelta"></div><div class="sub" id="powerDeltaSub"></div></div>
+      </div>
+
+      <div class="panel" style="margin-top:11px">
+        <div class="panel-head"><div><div class="panel-title">Udział w mocy klanu</div><div class="panel-desc">Wszyscy gracze z zapisaną mocą w wybranym tygodniu • kliknij gracza, aby zobaczyć profil</div></div><div class="status-pill" id="powerShareWeek"></div></div>
+        <div style="padding:12px 14px 0"><div class="snapshot-bar" id="powerSnapshotBar"></div></div>
+        <div class="war-summary" id="powerSnapshotSummary" style="padding:12px 14px 0;margin-bottom:0"></div>
+        <div class="war-share-layout">
+          <div class="war-donut-wrap"><canvas id="powerDistribution" role="img" aria-label="Udział wszystkich graczy w mocy klanu"></canvas><div class="war-donut-center"><span>ŁĄCZNA MOC</span><strong id="powerDonutTotal"></strong><span id="powerDonutCount"></span></div></div>
+          <div><div class="war-share-heading"><span>Gracz</span><span>Power / udział</span></div><div id="powerDistributionLegend" class="war-share-list"></div><div class="panel-desc war-share-note">Gracze z mocą 0 są na liście, ale nie tworzą wycinka koła.</div></div>
+        </div>
+      </div>
+      <div class="grid-main">
+        <div class="panel">
+          <div class="panel-head">
+            <div><div class="panel-title">Power wszystkich graczy</div><div class="panel-desc" id="powerHistoryRange">rozkład całego klanu</div></div>
+            <div class="chart-controls"><select id="powerPagePlayerSelect" class="select chart-select"></select></div>
+          </div>
+          <div class="chart-box"><canvas id="powerHistoryChart"></canvas></div>
+          <div class="chart-legend">
+            <span><i class="legend-line everyone"></i>wszyscy gracze</span>
+            <span><i class="legend-line average"></i>średnia klanu</span>
+            <span><i class="legend-line selected"></i>wybrany gracz</span>
+          </div>
+        </div>
+        <div class="panel"><div class="panel-head"><div><div class="panel-title">Najszybszy wzrost Power</div><div class="panel-desc">ranking według procentowego wzrostu</div></div></div><div class="list" id="powerGrowthList"></div><div class="panel-more"><button class="show-more-btn" id="powerGrowthMore"></button></div></div>
+      </div>
+      <div class="grid-half">
+        <div class="panel"><div class="panel-head"><div><div class="panel-title">Wzrost mocy % — Top 10</div></div></div><div class="chart-box small-chart"><canvas id="growthChart"></canvas></div></div>
+        <div class="panel"><div class="panel-head"><div><div class="panel-title">Największe spadki</div><div class="panel-desc">jeśli wystąpiły</div></div></div><div class="list" id="powerDropList"></div><div class="panel-more"><button class="show-more-btn" id="powerDropMore"></button></div></div>
+      </div>
+      <div class="panel" style="margin-top:11px">
+        <div class="panel-head power-snapshot-head">
+          <div>
+            <div class="panel-title">Ranking wzrostu Power w snapshotach</div>
+            <div class="panel-desc">Wybierz tydzień. Domyślnie ranking jest liczony według procentowego wzrostu względem poprzedniego snapshotu.</div>
+          </div>
+          <div class="power-default-pill">SORTUJ KLIKNIĘCIEM W NAGŁÓWEK</div>
+        </div>
+        <div class="toolbar power-toolbar power-snapshot-toolbar">
+          <div class="power-filter-row">
+            <input class="search" id="powerSearch" placeholder="Szukaj gracza…">
+            <select class="select" id="powerRankFilter"></select>
+          </div>
+          <div class="power-filter-note" id="powerFilterCount"></div>
+        </div>
+        <div class="table-shell" style="margin:12px 14px 14px"><table><thead><tr><th class="sortable" data-sort="growthRank"># wzrostu</th><th class="sortable" data-sort="nick">Gracz</th><th class="sortable" data-sort="rank">Ranga</th><th class="sortable num" data-sort="pct">Δ %</th><th class="sortable num" data-sort="deltaM">Δ Power</th><th class="sortable num" data-sort="powerM">Power</th></tr></thead><tbody id="powerSnapshotTable"></tbody></table></div>
+      </div>
+      <div class="panel" style="margin-top:11px">
+        <div class="panel-head">
+          <div><div class="panel-title">Power spikes i tempo wzrostu</div><div class="panel-desc">Kto miał największy jednorazowy skok i kto rośnie najszybciej długoterminowo</div></div>
+          <div class="analytics-tabs">
+            <button data-power-analytics="spikePct">Największy spike %</button>
+            <button data-power-analytics="spikeAbs">Największy spike</button>
+            <button class="active" data-power-analytics="growthPct">Najszybszy wzrost %</button>
+            <button data-power-analytics="growthAbs">Najszybszy wzrost</button>
+          </div>
+        </div>
+        <div class="table-shell" style="margin:12px 14px 8px"><table class="spike-table"><thead id="powerAnalyticsHead"></thead><tbody id="powerAnalyticsBody"></tbody></table></div><div class="panel-more"><button class="show-more-btn" id="powerAnalyticsMore"></button></div>
+      </div>
+
+          </section>
+
+    <section class="view" id="rosterReview">
+      <div class="page-head"><div><div class="kicker">Clan review</div><h1>Ocena składu</h1><div class="page-sub">Ranking do omówienia z kadrą klanu • domyślnie na podstawie punktów wojennych</div></div></div>
+      <div class="panel roster-controls"><div class="toolbar">
+        <label>Okno wojen <select class="select" id="reviewWindow"><option value="3">3 wojny</option><option value="5">5 wojen</option><option value="8">8 wojen</option><option value="12" selected>12 wojen</option><option value="20">20 wojen</option><option value="999999">Wszystkie wojny</option></select></label>
+        <label><input type="checkbox" id="reviewUseDonations"> Uwzględnij fiolki (50/50)</label>
+        <label>Tydzień fiolek <select class="select" id="reviewDonationWeek"></select></label>
+        <label><input type="checkbox" id="reviewSkipConceded" checked> Pomiń odpuszczone wojny</label>
+        <input class="search" id="reviewSearch" placeholder="Szukaj gracza…">
+      </div><div class="panel-desc" id="reviewCoverage"></div>
+      <details><summary>Jak liczona jest ocena?</summary><p>Domyślnie: 100% punkty wojenne. Po włączeniu fiolek: 50% punkty i 50% fiolki. Punkty to mediana wyniku względem średniej klanu w tych samych wojnach. Fiolki to wpłata względem średniej aktywnych graczy z wpisem w wybranym tygodniu. Ryzyko każdej kategorii to max(0, 1 − wynik / średnia), pomnożone przez jej wagę. Wyższa ocena oznacza słabszy wkład.</p><p>Minimum 3 zapisane wojny. Włączenie fiolek wymaga też wpisu z wybranego tygodnia. Brak wpisu nie jest zerem. Koniec sezonu nie jest porównywany z tygodniem. Trend wymaga 4 wpisów. Urlopy i role w klanie nie są uwzględnione.</p><p>Priorytet rozmowy: ryzyko ≥60, punkty poniżej 50% średniej, a przy włączonych fiolkach również fiolki poniżej 50%. Obserwacja: ryzyko ≥35.</p></details></div>
+      <div class="war-summary" id="reviewSummary"></div>
+      <div class="panel"><div class="panel-head"><div><div class="panel-title">Ocena wkładu graczy</div><div class="panel-desc">Najpierw wyniki wymagające uwagi • zielony status oznacza wkład w porządku • brak danych to nie negatywna ocena</div></div></div>
+      <div class="table-shell"><table><thead><tr><th>Gracz</th><th>Ocena</th><th class="num">Ryzyko / 100</th><th class="num">Punkty / średnia</th><th class="num review-donation-column">Fiolki / średnia</th><th class="num">Trend (p.p.)</th><th>Uzasadnienie</th></tr></thead><tbody id="reviewTable"></tbody></table></div></div>
+
+    </section>
+
+
+    <section class="view" id="donations">
+      <div class="page-head"><div><div class="kicker">Clan donations</div><h1>Fiolki</h1><div class="page-sub">Wpłaty klanu, udział graczy i historia tygodni.</div></div></div>
+      <div class="panel roster-controls"><div class="snapshot-bar" id="donationWeekbar"></div><div class="panel-desc" id="donationPeriodNote"></div></div>
+      <div class="war-summary" id="donationSummary"></div>
+      <div class="panel"><div class="panel-head"><div><div class="panel-title">Udział w fiolkach klanu</div><div class="panel-desc">Dotknij wycinka, aby zobaczyć wpłatę • lista obejmuje zapisane wyniki, także byłych graczy</div></div></div>
+        <div class="war-share-layout"><div class="war-donut-wrap"><canvas id="donationDistribution"></canvas><div class="war-donut-center"><span>ŁĄCZNE FIOLKI</span><strong id="donationDonutTotal"></strong><span id="donationDonutCount"></span></div></div><div><div class="war-share-heading"><span>Gracz</span><span>Fiolki / udział</span></div><div id="donationDistributionLegend" class="war-share-list"></div></div></div>
+      </div>
+      <div class="panel" style="margin-top:14px"><div class="panel-head"><div><div class="panel-title">Historia wpłat — tygodnie i koniec sezonu</div><div class="panel-desc">Złote słupki: wpłaty tygodniowe. Fioletowe: suma na koniec sezonu. Kliknij słupek, aby zobaczyć graczy.</div></div></div><div style="height:260px;padding:14px"><canvas id="donationHistoryChart"></canvas></div></div>
+      <div class="panel" style="margin-top:14px"><div class="panel-head"><div><div class="panel-title">Historia wpłat fiolek</div><div class="panel-desc">Wszyscy gracze z wpisem • tygodnie i koniec sezonu są osobnymi kolumnami • — oznacza brak wpisu</div></div></div><div class="table-shell"><table><thead id="donationTableHead"></thead><tbody id="donationTableBody"></tbody></table></div></div>
+    </section>
+
+    <!-- COMPARE -->
+    <section class="view" id="compare">
+      <div class="page-head"><div><div class="kicker">Player comparison</div><h1>Porównaj graczy</h1><div class="page-sub">Do trzech graczy na jednym wykresie, z odniesieniem do średniej klanu.</div></div></div>
+      <div class="compare-controls">
+        <div class="compare-slot"><label>Gracz 1</label><select class="select" id="compare1"></select></div>
+        <div class="compare-slot"><label>Gracz 2</label><select class="select" id="compare2"></select></div>
+        <div class="compare-slot"><label>Gracz 3</label><select class="select" id="compare3"></select></div>
+        <button class="btn primary" onclick="renderCompare()">Odśwież</button>
+      </div>
+      <div class="panel"><div class="panel-head"><div><div class="panel-title">Punkty wojenne</div><div class="panel-desc">gracze + średnia klanu</div></div></div><div class="chart-box"><canvas id="compareScoreChart"></canvas></div></div>
+      <div class="panel" style="margin-top:11px"><div class="panel-head"><div><div class="panel-title">Power</div><div class="panel-desc">Historia mocy graczy</div></div></div><div class="chart-box"><canvas id="comparePowerChart"></canvas></div></div>
+    </section>
+
+    <!-- FULL PROFILE VIEW -->
+    <section class="view" id="profile">
+      <div class="profile-header">
+        <div><button class="back-btn" id="profileBack">← Wróć</button><div class="profile-name" id="profileName"></div><div class="profile-rank" id="profileRank"></div></div>
+        <div class="profile-power"><div class="v" id="profilePower"></div><div class="l">aktualny power</div><div id="profilePowerDelta" style="font-size:9px;margin-top:6px"></div><button class="btn" id="profileCompare" style="margin-top:10px">Porównaj z innym</button></div>
+      </div>
+      <div class="profile-kpis" id="profileKpis"></div>
+      <div class="panel"><div class="panel-head"><div><div class="panel-title">Punkty vs średnia klanu</div><div class="panel-desc">pełna historia dostępnych tygodni</div></div></div><div class="chart-box"><canvas id="profileScoreChart"></canvas></div></div>
+      <div class="grid-half">
+        <div class="panel">
+          <div class="panel-head"><div><div class="panel-title">Historia Power</div><div class="panel-desc">Tylko realne snapshoty tego gracza</div></div></div>
+          <div class="chart-box small-chart"><canvas id="profilePowerChart"></canvas></div>
+          <div class="list" id="profilePowerHistory"></div>
+        </div>
+        <div class="panel"><div class="panel-head"><div><div class="panel-title">Pozycja w rankingu</div><div class="panel-desc">im wyżej na wykresie, tym lepiej</div></div></div><div class="chart-box small-chart"><canvas id="profilePositionChart"></canvas></div></div>
+      </div>
+      <div class="table-shell" style="margin-top:11px"><table><thead><tr><th class="sortable" data-sort="week">Tydzień</th><th class="sortable" data-sort="tier">Tier</th><th class="sortable" data-sort="date">Data</th><th class="sortable num" data-sort="points">Punkty</th><th class="sortable num" data-sort="position">Pozycja</th></tr></thead><tbody id="profileHistory"></tbody></table></div>
+    </section>
+
+    <div class="footer">INPPL Stats • pełny redesign • dane lokalne z INPPL_Ranking_source.xlsx</div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="data-loader.js" data-scripts="week-picker.js app.js"></script>
+
+</body>
+</html>

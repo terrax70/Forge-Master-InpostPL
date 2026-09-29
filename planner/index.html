@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="inppl-build" content="20260929181007">
+<meta name="theme-color" content="#080a0e">
+<title>Forge Master Planner</title>
+<link rel="stylesheet" href="planner.css?v=20260929181007">
+<link rel="stylesheet" href="../ui-shell.css?v=20260929181007">
+<link rel="stylesheet" href="../i18n.css?v=1">
+<script src="../locales/en.js?v=2"></script>
+<script src="../i18n.js?v=1"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">IP</div>
+      <div><div class="brand-name">INPPL <span>Stats</span></div><div class="brand-desc">Forge Master</div></div>
+    </div>
+    <div class="nav-label">Nawigacja</div>
+    <nav class="nav">
+      <a class="nav-btn nav-link-btn" href="../#overview"><span class="nav-ico">◈</span>Przegląd</a>
+      <a class="nav-btn nav-link-btn" href="../#warsView"><span class="nav-ico">⚔</span>Wojny</a>
+      <a class="nav-btn nav-link-btn" href="../#playersView"><span class="nav-ico">♟</span>Gracze</a>
+      <a class="nav-btn nav-link-btn" href="../#power"><span class="nav-ico">◆</span>Power</a>
+      <a class="nav-btn nav-link-btn" href="../#compare"><span class="nav-ico">⇄</span>Porównaj</a>
+
+      <div class="nav-label nav-section-label">Narzędzia</div>
+      <a class="nav-btn nav-link-btn" href="../share/"><span class="nav-ico">☷</span>Podsumowanie</a>
+      <a class="nav-btn nav-link-btn active" href="./"><span class="nav-ico">⌁</span>Planner</a>
+      <a class="nav-btn nav-link-btn" href="../knowledge/"><span class="nav-ico">✦</span>Rozwój</a>
+
+      <div class="nav-label nav-section-label nav-addon-label">Dodatek</div>
+      <a class="nav-btn nav-link-btn nav-addon" href="../#outcastsView"><span class="nav-ico">↪</span>Wyrzutki</a>
+    </nav>
+    <div class="side-status">
+      <div class="release-row"><strong>InPost [INPPL]</strong><span class="release-badge">v1.4.17</span></div>
+      <div id="sideDataRange">Dane —</div>
+      <div class="data-updated" id="dataUpdated">Aktualizacja —</div>
+    </div>
+  </aside>
+  <main class="main external-main">
+    <div class="shell">
+  <section class="hero compact-hero">
+    <div>
+      <div class="eyebrow">FORGE MASTER PLANNER</div>
+      <h1>Twój plan progresu</h1>
+      <p>Ustaw kilka rzeczy. Timeline poniżej przelicza się automatycznie.</p>
+    </div>
+    <div class="clock"><span>TERAZ</span><b id="nowText">—</b><small id="gameDayText">—</small></div>
+  </section>
+
+  <section class="setup-card" id="setup">
+    <div class="setup-title-row">
+      <div><h2>Ustawienia planu</h2><p>Zmiana ustawień od razu aktualizuje timeline.</p></div>
+      <div class="activity-profile">
+        <span class="activity-title">Profil aktywności</span>
+        <label class="sleep-select" title="Od tej godziny zakładamy mniejszą aktywność">
+          <span>☾ Śpię od</span><select id="sleepStart"></select>
+        </label>
+        <label class="sleep-select" title="Od tej godziny znowu zakładamy normalną aktywność">
+          <span>Wstaję o</span><select id="sleepEnd"></select>
+        </label>
+        <label class="reaction-compact" title="Orientacyjny czas, po którym gracz wraca do gry po zakończeniu akcji"><span>◷ Reakcja</span><input id="reactionMinutesQuick" type="number" min="0" max="180" step="5" value="30"><em>min</em></label>
+      </div>
+    </div>
+
+    <div class="setup-grid">
+      <label class="field">
+        <span>Research Speed <i>%</i></span>
+        <input id="researchSpeed" type="number" min="0" step="1" value="60">
+        <small>Bonus do szybkości badań</small>
+      </label>
+
+      <label class="field">
+        <span>Forge Speed <i>%</i></span>
+        <input id="forgeSpeed" type="number" min="0" step="1" value="26">
+        <small>Bonus do szybkości kuźni</small>
+      </label>
+
+      <label class="field">
+        <span>Aktualny poziom kuźni</span>
+        <input id="forgeLevel" type="number" min="1" max="34" step="1" value="27">
+        <small>Np. 27 = następne ulepszenie 28</small>
+      </label>
+
+      <label class="field">
+        <span>Strategia kuźni</span>
+        <select id="forgeMode">
+          <option value="hybrid">HYBRYDA — polecane</option>
+          <option value="progress">PROGRES — zawsze od razu</option>
+          <option value="points">PUNKTY — zawsze czekaj</option>
+        </select>
+        <small id="strategyHint">Czeka tylko, gdy strata progresu jest mała.</small>
+      </label>
+    </div>
+
+    <div class="ongoing-row">
+      <label class="switch-row">
+        <input type="checkbox" id="forgeOngoing">
+        <span class="switch"></span>
+        <span><b>Kuźnia już trwa</b><small>Włącz, jeśli aktualne ulepszenie jest w trakcie.</small></span>
+      </label>
+      <div class="remaining" id="remainingInputs">
+        <label><span>Dni</span><input id="remainingDays" type="number" min="0" value="0"></label>
+        <label><span>Godz.</span><input id="remainingHours" type="number" min="0" max="23" value="0"></label>
+        <label><span>Min.</span><input id="remainingMinutes" type="number" min="0" max="59" value="0"></label>
+      </div>
+    </div>
+    <div class="tech-choice">
+      <div class="tech-choice-head">
+        <div><b>Powtarzane badanie Tech</b><small>Wybierz jeden poziom — wszystkie kolejne badania będą takie same.</small></div>
+        <span class="auto-repeat-badge">AUTO × <b id="techCountBadge">10</b></span>
+      </div>
+      <div class="tech-add tech-repeat">
+        <label class="tech-select-wrap">
+          <span>Badanie</span>
+          <select id="techSelect"></select>
+        </label>
+        <label class="tech-count-wrap">
+          <span>Ile razy?</span>
+          <input id="techCount" type="number" min="1" max="100" step="1" value="10">
+        </label>
+      </div>
+      <div id="techQueue" class="chips"></div>
+      <div id="queueEmpty" class="empty-state">Nie dodałeś jeszcze żadnego badania.</div>
+    </div>
+
+    <div class="advanced-toggle">
+      <button type="button" id="advancedBtn">Więcej ustawień <span>⌄</span></button>
+      <div class="advanced" id="advanced">
+        <label class="field compact"><span>Limit czekania HYBRYDY <i>h</i></span><input id="waitLimit" type="number" min="0" value="30"><small>Maksymalnie tyle planner pozwoli kuźni czekać na punktowany dzień.</small></label>
+        <label class="field compact"><span>Zakres timeline</span><select id="horizon"><option value="7">1 tydzień</option><option value="14">2 tygodnie</option><option value="28">4 tygodnie</option><option value="56" selected>8 tygodni</option></select><small>2 tygodnie są najbardziej czytelne. Możesz rozszerzyć widok.</small></label>
+      </div>
+    </div>
+
+    <div class="live-note"><span class="live-dot"></span><b>Plan aktualizuje się na żywo</b></div>
+  </section>
+
+  <section class="results" id="results">
+
+    <section class="timeline-card">
+      <div class="timeline-title">
+        <div>
+          <span class="step-no done">2</span>
+          <div><h2>Twój timeline</h2><p>To jest główny widok. Widać tu pracę, przerwy, sen i momenty, w których naprawdę trzeba wejść do gry.</p></div>
+        </div>
+        <div class="legend">
+          <span><i class="dot tech"></i>Tech</span>
+          <span><i class="dot forge"></i>Kuźnia</span>
+          <span class="legend-score tech-score-legend"><i class="dot techday"></i><b>ODBIÓR TECH = PUNKTY</b></span>
+          <span class="legend-score forge-score-legend"><i class="dot forgeday"></i><b>START KUŹNI = PUNKTY</b></span><span><i class="dot ongoing"></i>Kuźnia w trakcie</span><span><i class="dot waiting"></i>Przerwa</span><span><i class="dot sleep"></i>Sen 23–08</span>
+        </div>
+        <div class="zoom-tabs" aria-label="Zakres timeline">
+          <button type="button" data-days="7">7 dni</button>
+          <button type="button" data-days="14" class="active">14 dni</button>
+          <button type="button" data-days="28">4 tyg.</button>
+          <button type="button" data-days="56">8 tyg.</button>
+        </div>
+      </div>
+      <div class="timeline-focus">
+        <span>NAJBLIŻSZE</span>
+        <b id="timelineFocusTitle">Uzupełnij dane powyżej</b>
+        <p id="timelineFocusText">Timeline aktualizuje się automatycznie.</p>
+      </div>
+      <div class="timeline-scroll"><div id="timeline"></div></div>
+      <div class="timeline-help">← Przewiń w bok, aby zobaczyć kolejne dni →</div>
+    </section>
+
+    <div class="result-head compact-result-head">
+      <div class="step-head">
+        <span class="step-no done">3</span>
+        <div><h2>Co masz zrobić?</h2><p>Najważniejsze decyzje wynikające z timeline.</p></div>
+      </div>
+    </div>
+
+    <div class="decision-strip">
+      <article class="decision tech">
+        <span class="decision-kind">TECH</span>
+        <div class="decision-action" id="nextTechAction">—</div>
+        <b id="nextTechName">—</b>
+        <p id="nextTechTime">—</p>
+        <small id="nextTechNote">—</small>
+      </article>
+      <article class="decision forge">
+        <span class="decision-kind">KUŹNIA</span>
+        <div class="decision-action" id="nextForgeAction">—</div>
+        <b id="nextForgeName">—</b>
+        <p id="nextForgeTime">—</p>
+        <small id="nextForgeNote">—</small>
+      </article>
+      <article class="decision score">
+        <span class="decision-kind">PODSUMOWANIE</span>
+        <div class="score-big"><b id="techHits">0</b><span>Tech</span><b id="forgeHits">0</b><span>Kuźnia</span></div>
+        <p>punktowanych akcji w wybranym zakresie</p>
+        <small id="waitSummary">—</small>
+      </article>
+    </div>
+
+    <section class="instructions-card">
+      <div class="section-title"><h2>Instrukcje krok po kroku</h2><p>Nie musisz analizować osi czasu. Wykonuj te kroki po kolei.</p></div>
+      <div id="actionList" class="action-list"></div>
+    </section>
+
+    <details class="details">
+      <summary>Pokaż szczegółowe obliczenia</summary>
+      <div class="detail-grid">
+        <div class="detail-box">
+          <h3>Tech</h3>
+          <div class="table-scroll"><table><thead><tr><th>#</th><th>Badanie</th><th>Start</th><th>Odbiór</th><th>Wolne</th></tr></thead><tbody id="techTable"></tbody></table></div>
+        </div>
+        <div class="detail-box">
+          <h3>Kuźnia</h3>
+          <div class="table-scroll"><table><thead><tr><th>Lvl</th><th>Start</th><th>Koniec</th><th>Czekanie</th></tr></thead><tbody id="forgeTable"></tbody></table></div>
+        </div>
+      </div>
+      <div class="gap-box">
+        <h3>Co zmieści się w wolnych oknach Tech?</h3>
+        <div id="gapSuggestions" class="gap-list"></div>
+      </div>
+    </details>
+  </section>
+    </div>
+  </main>
+</div>
+
+<script src="../data-loader.js" data-scripts="game-data.js planner.js"></script>
+
+</body>
+</html>
