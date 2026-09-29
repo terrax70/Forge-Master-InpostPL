@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="inppl-build" content="20260929181007">
+<meta name="theme-color" content="#07090d">
+<title>INPPL • Rozwój Forge Master</title>
+<link rel="stylesheet" href="knowledge.css?v=2700-196">
+<link rel="stylesheet" href="../ui-shell.css?v=20260929181007">
+<link rel="stylesheet" href="../i18n.css?v=1">
+<script src="../locales/en.js?v=3"></script>
+<script src="../i18n.js?v=1"></script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+    <div class="brand"><div class="brand-mark">IP</div><div><div class="brand-name">INPPL <span>Stats</span></div><div class="brand-desc">Forge Master</div></div></div>
+    <div class="nav-label">Nawigacja</div>
+    <nav class="nav">
+      <a class="nav-btn nav-link-btn" href="../#overview"><span class="nav-ico">◈</span>Przegląd</a>
+      <a class="nav-btn nav-link-btn" href="../#warsView"><span class="nav-ico">⚔</span>Wojny</a>
+      <a class="nav-btn nav-link-btn" href="../#playersView"><span class="nav-ico">♟</span>Gracze</a>
+      <a class="nav-btn nav-link-btn" href="../#power"><span class="nav-ico">◆</span>Power</a>
+      <a class="nav-btn nav-link-btn" href="../#compare"><span class="nav-ico">⇄</span>Porównaj</a>
+      <div class="nav-label nav-section-label">Narzędzia</div>
+      <a class="nav-btn nav-link-btn" href="../share/"><span class="nav-ico">☷</span>Podsumowanie</a>
+      <a class="nav-btn nav-link-btn" href="../planner/"><span class="nav-ico">⌁</span>Planner</a>
+      <a class="nav-btn nav-link-btn active" href="./"><span class="nav-ico">✦</span>Rozwój</a>
+      <div class="nav-label nav-section-label nav-addon-label">Dodatek</div>
+      <a class="nav-btn nav-link-btn nav-addon" href="../#outcastsView"><span class="nav-ico">↪</span>Wyrzutki</a>
+    </nav>
+    <div class="side-status"><div class="release-row"><strong>INPPL • Rozwój</strong><span class="release-badge">v1.3</span></div><div>Source Pack • config 2026-09-02</div><div>Bez zgadywanych danych</div></div>
+  </aside>
+<main class="main">
+  <section class="hero hero-v1">
+    <div>
+      <div class="eyebrow">FORGE MASTER • SOURCE PACK 2026-09-02</div>
+      <h1>Rozwój, który <span>da się zrozumieć</span></h1>
+      <p>Wybierz to, co rozwijasz. Wpisz swoje bonusy i sprawdź, ile zasobów potrzebujesz oraz jak rośnie moc po Ascension.</p>
+    </div>
+    <div class="source-card">
+      <span>ZACZNIJ PONIŻEJ</span>
+      <b>Wybierz swój system</b>
+      <small>Pety • Mounty • Skille • Itemy</small>
+      <small>Porównaj moc • oblicz koszty • przygotuj Ascension</small>
+    </div>
+  </section>
+
+  <nav class="tabs tabs-v1" id="topTabs">
+    <button class="tab active" data-tab="start">✨ Start</button>
+    <button class="tab" data-tab="pets">🐾 Pety</button>
+    <button class="tab" data-tab="mounts">🐎 Mounty</button>
+    <button class="tab" data-tab="skills">🌀 Skille</button>
+    <button class="tab" data-tab="items">🛡️ Itemy</button>
+    <button class="tab" data-tab="ascension">↗ Ascension</button>
+    <button class="tab" data-tab="tech">🧪 Tech Tree</button>
+  </nav>
+
+  <section class="view active" id="start">
+    <div class="start-hero">
+      <div class="eyebrow">JEŚLI NIE WIESZ OD CZEGO ZACZĄĆ</div>
+      <h2>Wybierz system. Zobaczysz <span>co daje, jak rośnie i co robi Ascension.</span></h2>
+      <p>Nie musisz czytać poradnika od deski do deski. Kliknij to, co właśnie rozwijasz.</p>
+    </div>
+    <div class="system-picker">
+      <button data-jump="pets"><strong>🐾 Pety</strong><span>Statystyki • koszt Eggshells • dodatkowy drop</span></button>
+      <button data-jump="mounts"><strong>🐎 Mounty</strong><span>Statystyki • koszt Clockwinders • bonusy</span></button>
+      <button data-jump="skills"><strong>🌀 Skille</strong><span>Statystyki • koszt biletów • zniżka</span></button>
+      <button data-jump="items"><strong>🛡️ Itemy</strong><span>Koszt i czas kuźni • etapy przedmiotów</span></button>
+      <button data-jump="ascension"><strong>↗ Ascension</strong><span>co resetuje • co zostaje • ile przygotować</span></button>
+      <button data-jump="tech"><strong>🧪 Tech Tree</strong><span>co brać teraz • aktualne procenty</span></button>
+    </div>
+    <div class="truth-grid">
+      <article><span>WERSJA DANYCH</span><b>2026-09-02</b><small>statystyki z konfiguracji gry</small></article>
+      <article><span>ASCENSION</span><b>×50 / poziom</b><small>A1 ×50 • A2 ×2 500 • A3 ×125 000</small></article>
+      <article><span>TWOJE BONUSY</span><b>Wpisz raz</b><small>Zniżki i dodatkowy drop zapisują się na urządzeniu</small></article>
+      <article><span>SZCZEGÓŁY</span><b>Dotknij punktu</b><small>Na wykresie zobaczysz statystyki i koszt rozwoju</small></article>
+    </div>
+  </section>
+
+  <section class="view" id="pets"><div class="system-root" data-system="pets"></div></section>
+  <section class="view" id="mounts"><div class="system-root" data-system="mounts"></div></section>
+  <section class="view" id="skills"><div class="system-root" data-system="skills"></div></section>
+  <section class="view" id="items"><div class="system-root" data-system="items"></div></section>
+
+  
+<section class="view" id="ascension">
+  <div class="view-head asc-restore-head">
+    <div>
+      <div class="eyebrow">ASCENSION GUIDE • PROSTO → SZCZEGÓŁOWO</div>
+      <h2>Co naprawdę trzeba wiedzieć przed Ascension?</h2>
+      <p>Najpierw proste wyjaśnienie. Potem przykład. Dopiero niżej konkretne liczby z aktualnego Source Packa i oficjalnego poradnika Discord.</p>
+    </div>
+  </div>
+
+  <section class="asc-official-pl-intro">
+    <div class="asc-official-pl-head">
+      <span>ASCENSION • OFICJALNE WYJAŚNIENIE PO POLSKU</span>
+      <h3>Co właściwie robi Ascension?</h3>
+    </div>
+    <div class="asc-official-pl-copy">
+      <p><b>Ascension</b> pozwala zresetować <b>jedną część progresu</b> — jeden z 4 filarów: <b>Forge / Skills / Pets / Mounts</b> — żeby ten filar stał się <b>trwale mocniejszy</b>.</p>
+      <p><b>Nie resetujesz całego konta.</b> Wybierasz tylko jeden filar, a pozostałe zostają bez zmian.</p>
+      <p>Po Ascension tracisz rzeczy należące do wybranego filaru i zdobywasz je od nowa. Przykład: gear dla Forge, pety dla Pets, skille dla Skills albo mounty dla Mounts.</p>
+      <p><b>Nie tracisz podstawowych zasobów.</b> Zostają m.in. Gold/Hammers, Eggshells, Skill Tickets oraz waluta Mountów.</p>
+      <p>Po resecie Twoja moc na chwilę spadnie — to normalne. Odbudowujesz filar, odzyskujesz starą moc i potem rośniesz wyżej.</p>
+    </div>
+    <div class="asc-official-pl-tip">
+      <b>TIP:</b>
+      <span>Jeśli nie chcesz długo być słabszy po Ascension, najpierw nazbieraj tyle zasobów, żeby po resecie szybko odbudować dany filar.</span>
+    </div>
+  </section>
+
+  <div class="asc-beginner-first">
+    <div class="asc-zero-hero">
+      <div class="asc-zero-kicker">ASCENSION • WERSJA PROSTA</div>
+      <h3>Ascension to NIE reset całej gry.</h3>
+      <p>Resetujesz <b>tylko 1 wybrany filar</b>. Reszta postaci zostaje. Potem odbudowujesz ten filar w mocniejszej wersji.</p>
+      <div class="asc-zero-banner">1 FILAR SIĘ RESETUJE • 3 POZOSTAŁE ZOSTAJĄ</div>
+    </div>
+
+    <div class="asc-zero-steps">
+      <article>
+        <span>1</span>
+        <b>Dobij próg</b>
+        <p>Pets / Skills / Mounts = <strong>Level 100</strong><br>Forge = <strong>Level 35</strong></p>
+      </article>
+      <article>
+        <span>2</span>
+        <b>Kliknij Ascension</b>
+        <p>Wybierasz jeden filar. <strong>Tylko on</strong> wraca do poziomu 1.</p>
+      </article>
+      <article>
+        <span>3</span>
+        <b>Odbuduj go</b>
+        <p>Zostaje Ci waluta tego filaru, więc szybciej wracasz do siły i lecisz wyżej.</p>
+      </article>
+    </div>
+
+    <div class="asc-super-simple-grid">
+      <article class="asc-simple-card reset">
+        <div class="label">CO SIĘ RESETUJE?</div>
+        <h4>Tylko to, co ascendujesz</h4>
+        <ul>
+          <li><b>Forge</b> → Forge + gear</li>
+          <li><b>Skills</b> → skille</li>
+          <li><b>Pets</b> → pety</li>
+          <li><b>Mounts</b> → mounty</li>
+        </ul>
+      </article>
+      <article class="asc-simple-card keep">
+        <div class="label">CO ZOSTAJE?</div>
+        <h4>Cała reszta gry</h4>
+        <ul>
+          <li><b>Tech Tree</b> zostaje</li>
+          <li><b>Pozostałe 3 filary</b> zostają</li>
+          <li><b>Waluta filaru</b> zostaje</li>
+          <li><b>Całe konto</b> nie resetuje się</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="asc-idiot-proof">
+      <div class="idiot-head">
+        <div class="eyebrow">PRZYKŁAD DLA PETÓW</div>
+        <h4>Ascendujesz PETY. Co dokładnie się dzieje?</h4>
+      </div>
+      <div class="idiot-flow">
+        <div class="idiot-box before"><small>PRZED</small><b>Masz Pets Level 100</b><span>np. Mythic pety</span></div>
+        <div class="idiot-arrow">→</div>
+        <div class="idiot-box action"><small>ASCENSION</small><b>Klikasz PET Ascension</b><span>wybierasz tylko ten filar</span></div>
+        <div class="idiot-arrow">→</div>
+        <div class="idiot-box after"><small>PO RESECIE</small><b>Pety wracają do Level 1</b><span>ale tylko pety</span></div>
+        <div class="idiot-arrow">→</div>
+        <div class="idiot-box result"><small>ZOSTAJE</small><b>Eggshells zostają</b><span>więc szybko odbudowujesz pety</span></div>
+      </div>
+      <div class="idiot-checks">
+        <div class="yes">✅ Skills zostają</div>
+        <div class="yes">✅ Mounts zostają</div>
+        <div class="yes">✅ Forge zostaje</div>
+        <div class="yes">✅ Tech Tree zostaje</div>
+        <div class="no">❌ Resetują się tylko Pets</div>
+      </div>
+    </div>
+
+    <div class="asc-pillars-visual">
+      <div class="pillars-title">
+        <div class="eyebrow">4 FILARY</div>
+        <h4>Który filar wybierasz — ten się resetuje</h4>
+      </div>
+      <div class="pillars-visual-grid">
+        <article class="pillar-visual-card forge">
+          <div class="icon">🔨</div>
+          <b>FORGE</b>
+          <p>Resetuje się: <strong>Forge + gear</strong></p>
+          <small>Przed resetem odkładasz głównie: Gold</small>
+        </article>
+        <article class="pillar-visual-card skills">
+          <div class="icon">🌀</div>
+          <b>SKILLS</b>
+          <p>Resetują się: <strong>Skille</strong></p>
+          <small>Przed resetem odkładasz głównie: Skill Tickets</small>
+        </article>
+        <article class="pillar-visual-card pets selected">
+          <div class="selected-tag">PRZYKŁAD</div>
+          <div class="icon">🐾</div>
+          <b>PETS</b>
+          <p>Resetują się: <strong>Pety</strong></p>
+          <small>Przed resetem odkładasz głównie: Eggshells</small>
+        </article>
+        <article class="pillar-visual-card mounts">
+          <div class="icon">🐎</div>
+          <b>MOUNTS</b>
+          <p>Resetują się: <strong>Mounty</strong></p>
+          <small>Przed resetem odkładasz głównie: Clockwinders / walutę Mountów</small>
+        </article>
+      </div>
+    </div>
+
+    <div class="asc-when-save">
+      <div class="save-head">
+        <div class="eyebrow">KIEDY ZACZĄĆ OSZCZĘDZAĆ?</div>
+        <h4>Prosta zasada</h4>
+      </div>
+      <div class="save-rules">
+        <article><span>1</span><b>Chcesz ascendować?</b><p>Przestań wydawać walutę tego filaru.</p></article>
+        <article><span>2</span><b>Jesteś blisko progu?</b><p>Im bliżej Lv100 / Forge35, tym bardziej warto odkładać.</p></article>
+        <article><span>3</span><b>Po co odkładać?</b><p>Żeby po resecie szybko wrócić do siły, a nie siedzieć na dnie.</p></article>
+      </div>
+    </div>
+
+    <details class="asc-advanced-toggle">
+      <summary>Zaawansowane: dokładne koszty i progi z obecnego Source Packa</summary>
+      <div class="asc-advanced-content">
+        <div id="ascGuideCards"></div>
+      </div>
+    </details>
+
+    <details class="asc-advanced-toggle">
+      <summary>Oficjalny poradnik z Discorda • wymagania i bazowe staty</summary>
+      <div class="asc-advanced-content">
+        <div id="officialGuide"></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="view" id="tech">
+    <div class="tech-hero">
+      <div class="eyebrow">TECH TREE • NAJPIERW DECYZJA</div>
+      <h2>Co mam brać teraz?</h2>
+      <p>Kolejność poniżej pochodzi z przesłanego Tech Tree Guide. <b>Procenty i czasy są już z aktualnego configu 2026-09-02</b>, więc nie powtarzam starych wartości z poradnika tam, gdzie gra je zmieniła.</p>
+    </div>
+    <div id="techRecommendations"></div>
+    <div class="tier-strip" id="techTierStrip"></div>
+    <div class="tech-tabs" id="techTabs">
+      <button class="active" data-tech="Forge">🔨 Forge</button>
+      <button data-tech="SkillsPetTech">🧬 Skills / Pets / Tech</button>
+      <button data-tech="Power">⚔️ Power / Mounts</button>
+    </div>
+    <div id="techBranch"></div>
+  </section>
+
+  <footer class="footer-v1">INPPL • Rozwój v2.7 • source pack 2026-09-02 • 1vcian/fm</footer>
+</main>
+</div>
+<script src="knowledge-data.js?v=2700-165"></script>
+<script src="item-variants.js?v=2700-193"></script>
+<script src="visual-variants.js?v=2700-191"></script>
+<script src="knowledge.js?v=2700-197"></script>
+<script>
+(()=>{const m=document.querySelector('meta[name="inppl-build"]');const b=m?.content||"";fetch("../version.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():null).then(v=>{if(!v?.build||String(v.build)===b)return;const k="inppl_last_reloaded_build";if(sessionStorage.getItem(k)===String(v.build))return;sessionStorage.setItem(k,String(v.build));const u=new URL(location.href);u.searchParams.set("_v",String(v.build));location.replace(u)}).catch(()=>{})})();
+</script>
+</body>
+</html>
