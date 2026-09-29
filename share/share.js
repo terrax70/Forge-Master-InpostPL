@@ -27,8 +27,13 @@ function powerRows(){
    return{nick:p.nick,pct,powerM:cur.powerM};
  }).filter(Boolean).filter(x=>x.pct>=threshold).sort((a,b)=>b.pct-a.pct).slice(0,limit('powerLimit'));
 }
+function donationRecords(){return D.players.flatMap(p=>(p.donationHistory||[]).filter(h=>h.week===selectedWeek&&Number.isFinite(h.amount)).map(h=>({...h,nick:p.nick})));}
+function donationRows(){return donationRecords().filter(h=>h.amount>=Number($('#donationThreshold').value)).sort((a,b)=>b.amount-a.amount||a.nick.localeCompare(b.nick)).slice(0,limit('donationLimit'));}
+const donationPeriod=()=>donationRecords().some(h=>h.kind==='season')?'Koniec sezonu — suma sezonowa':'Wpłaty tygodniowe';
+const fmtDonation=n=>Number(n).toLocaleString(window.INPPL_I18N?.locale||'pl-PL');
+function donationText(){const rows=donationRows();return ['⚗ TOP FIOLEK — '+selectedWeek,donationPeriod(),'',...rows.map((x,i)=>`${medal(i)} ${i+1}. ${x.nick} — ${fmtDonation(x.amount)} fiolek`),...(rows.length?[]:['Brak danych lub wpłat spełniających wybrany próg.'])].join('\n');}
 function rankHtml(rows,type){
- return rows.map((x,i)=>`<div class="rank-row"><div class="rank-place">${medal(i)}</div><div class="rank-name">${i+1}. ${esc(x.nick)}</div><div class="rank-value ${type}-value">${type==='war'?fmtK(x.points):fmtPct(x.pct)}</div></div>`).join('')||'<div class="empty">Brak graczy spełniających wybrany próg.</div>';
+ return rows.map((x,i)=>`<div class="rank-row"><div class="rank-place">${medal(i)}</div><div class="rank-name">${i+1}. ${esc(x.nick)}</div><div class="rank-value ${type}-value">${type==='war'?fmtK(x.points):type==='donation'?fmtDonation(x.amount):fmtPct(x.pct)}</div></div>`).join('')||'<div class="empty">Brak graczy spełniających wybrany próg.</div>';
 }
 function warText(){
  const w=currentWeek(),rows=warRows(),threshold=Number($('#warThreshold').value);
@@ -55,6 +60,9 @@ function render(){
  const wr=warRows(),pr=powerRows();
  $('#warRank').innerHTML=rankHtml(wr,'war');
  $('#powerRank').innerHTML=rankHtml(pr,'power');
+ $('#donationSub').textContent=selectedWeek+' • '+donationPeriod();
+ $('#donationRank').innerHTML=donationRecords().length?rankHtml(donationRows(),'donation'):'<div class="empty">Brak wpisów o fiolkach w tym okresie.</div>';
+ $('#donationPreview').textContent=donationText();
  $('#warPreview').textContent=warText();
  $('#powerPreview').textContent=powerText();
 }
@@ -68,11 +76,12 @@ function init(){
  const powerRange=D.powerWeeks?.length?`${D.powerWeeks[0].week}–${D.powerWeeks.at(-1).week}`:'—';
  if($('#sideDataRange'))$('#sideDataRange').textContent=`Wojny ${warRange} • Power ${powerRange}`;
  if($('#dataUpdated'))$('#dataUpdated').textContent=formatGeneratedAt(D.generatedAt);
- ['warThreshold','warLimit','powerThreshold','powerLimit'].forEach(id=>{
+ ['warThreshold','warLimit','powerThreshold','powerLimit','donationThreshold','donationLimit'].forEach(id=>{
    $('#'+id).addEventListener('change',render);
    $('#'+id).addEventListener('input',render);
  });
  $('#copyWar').onclick=()=>copy(warText());
+ $('#copyDonation').onclick=()=>copy(donationText());
  $('#copyPower').onclick=()=>copy(powerText());
  render();
 }

@@ -36,3 +36,5 @@
 .filters select{width:100%}
 .help{flex-wrap:wrap}
 .copy-preview{overflow-wrap:anywhere;word-break:break-word}
+
+.type.donation{color:#9be7bb;background:#22c55e18}.donation-value{color:#9be7bb}

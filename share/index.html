@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="inppl-build" content="20260929192623">
+<meta name="inppl-build" content="20260929193247">
 <meta name="theme-color" content="#07090d">
 <title>INPPL Stats — Podsumowanie</title>
-<link rel="stylesheet" href="share.css?v=20260929192623">
-<link rel="stylesheet" href="../ui-shell.css?v=20260929192623">
+<link rel="stylesheet" href="share.css?v=20260929193247">
+<link rel="stylesheet" href="../ui-shell.css?v=20260929193247">
 <link rel="stylesheet" href="../i18n.css?v=1">
 <script src="../locales/en.js?v=2"></script>
 <script src="../i18n.js?v=1"></script>
@@ -49,7 +49,7 @@
     <div>
       <div class="kicker">CLAN SHARE</div>
       <h1>Podsumowanie</h1>
-      <p>Rankingi wojny i wzrostu Power w formacie gotowym do pokazania klanowiczom lub skopiowania.</p>
+      <p>Rankingi punktów, wzrostu Power i fiolek w formacie gotowym do pokazania klanowiczom lub skopiowania.</p>
     </div>
   </section>
 
@@ -121,6 +121,11 @@
       </div>
       <div class="rank-list" id="powerRank"></div>
       <pre class="copy-preview" id="powerPreview"></pre>
+    </section>
+    <section class="share-card">
+      <div class="card-head"><div><span class="type donation">FIOLKI</span><h2>Top fiolek</h2><p id="donationSub">—</p></div><button class="copy-btn" id="copyDonation">Kopiuj tekst</button></div>
+      <div class="filters"><label><span>Próg fiolek</span><select id="donationThreshold"><option value="0">Bez progu</option><option value="100">100+</option><option value="250">250+</option><option value="500">500+</option><option value="1000">1000+</option></select></label><label><span>Ile osób</span><select id="donationLimit"><option value="10">Top 10</option><option value="15" selected>Top 15</option><option value="20">Top 20</option><option value="999">Wszyscy</option></select></label></div>
+      <div class="rank-list" id="donationRank"></div><pre class="copy-preview" id="donationPreview"></pre>
     </section>
   </div>
 
