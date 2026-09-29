@@ -599,6 +599,30 @@ function renderCompare(){
 }
 ['compare1','compare2','compare3'].forEach(id=>$('#'+id).onchange=renderCompare);
 
+function profileMetrics(player,data){
+ const mean=values=>values.length?values.reduce((a,b)=>a+b,0)/values.length:null;
+ const wars=(player.history||[]).filter(h=>Number.isFinite(h.points)).map(h=>({...h,clan:data.weeks.find(w=>w.week===h.week)?.avg}));
+ const matched=wars.filter(h=>h.clan>0),weekly=(player.donationHistory||[]).filter(h=>h.kind==='week'&&Number.isFinite(h.amount));
+ const donations=(player.donationHistory||[]).filter(h=>Number.isFinite(h.amount)).map(h=>{const values=data.players.flatMap(p=>(p.donationHistory||[]).filter(x=>x.week===h.week&&x.kind===h.kind&&Number.isFinite(x.amount)).map(x=>x.amount));return {...h,clan:mean(values)};}).sort((a,b)=>weekNumber(a.week)-weekNumber(b.week));
+ const powers=(player.powers||[]).filter(h=>Number.isFinite(h.powerM));
+ return {wars,matched,donations,average:mean(wars.map(h=>h.points)),clanAverage:mean(matched.map(h=>h.clan)),relative:mean(matched.map(h=>h.points/h.clan*100)),weeklyAverage:mean(weekly.map(h=>h.amount)),weeklyTotal:weekly.reduce((a,h)=>a+h.amount,0),weeklyCount:weekly.length,powerAverage:mean(powers.map(h=>h.powerM))};
+}
+function renderProfileDetails(p){
+ const m=profileMetrics(p,D),percent=n=>n===null?'—':new Intl.NumberFormat('pl-PL',{maximumFractionDigits:1}).format(n)+'%',value=n=>n===null?'—':fmt(n);
+ const active=p.active!==false,assessment=rosterAssessment(D,Number($('#reviewWindow').value),$('#reviewDonationWeek').value,$('#reviewSkipConceded').checked,$('#reviewUseDonations').checked),r=assessment.rows.find(x=>x.p.nick===p.nick);
+ const category=r?(r.score===0?'excellent':r.status==='ok'&&r.score<15?'strong':r.status):'insufficient';
+ const labels={excellent:'👑 Wzorowy wkład',strong:'🌟 Bardzo dobry wkład',ok:'✅ Wkład w porządku',watch:'🔎 Warto poprawić wyniki',high:'⚠️ Potrzebna rozmowa',insufficient:'⏳ Jeszcze bez oceny'};
+ $('#profileAssessment').className='panel roster-controls review-category '+category;
+ $('#profileAssessment').innerHTML='<div class="panel-title">'+(active?labels[category]:'Były gracz — historia wkładu')+'</div><p class="panel-desc">'+(r?'Ryzyko: '+(r.score===null?'brak oceny':r.score.toFixed(1).replace('.',',')+' / 100')+' • '+r.count+'/'+assessment.weeks.length+' zapisanych wojen • '+($('#reviewUseDonations').checked?'50% punkty, 50% fiolki':'100% punkty wojenne')+'<br>Mediana wyniku względem klanu: '+percent(r.ratio===null?null:r.ratio*100)+' • Trend: '+(r.trend===null?'—':r.trend.toFixed(1).replace('.',',')+' p.p.')+'<br>Zakres: '+assessment.weeks.map(w=>w.week).join(', '):'Nie jest uwzględniany w rekomendacjach dla obecnego składu.')+'</p><div class="panel-desc">Ocena korzysta z aktualnych ustawień zakładki Ocena składu. Średnie poniżej obejmują całą zapisaną historię gracza.</div>';
+ $('#profileAverages').innerHTML=[['Średnia klanu — wojny z wpisem gracza',value(m.clanAverage)],['Średni wynik względem klanu',percent(m.relative)],['Średnia mocy — zapisane pomiary',m.powerAverage===null?'—':power(m.powerAverage)],['Średnia fiolek / tydzień',value(m.weeklyAverage)],['Suma wpłat tygodniowych',m.weeklyCount?fmt(m.weeklyTotal):'—'],['Tygodnie z wpisem fiolek',m.weeklyCount]].map(([label,val])=>'<div class="mini-stat"><div class="l">'+label+'</div><div class="v">'+val+'</div></div>').join('');
+ $('#profileDonationHistory').innerHTML=m.donations.slice().reverse().map(h=>'<div class="list-row"><div><div class="list-name">'+escapeHtml(h.week)+(h.kind==='season'?' · Koniec sezonu':'')+'</div><div class="list-meta">Średnia klanu: '+value(h.clan)+'</div></div><div class="list-value">'+fmt(h.amount)+'<small style="display:block">'+(h.clan>0?percent(h.amount/h.clan*100):'—')+' średniej</small></div></div>').join('')||'<div class="empty">Brak zapisanych wpłat fiolek</div>';
+ requestAnimationFrame(()=>{
+ const labs=D.weeks.map(w=>w.week);
+ lineChart('profileRelativeChart',labs,[{label:p.nick,data:labs.map(w=>{const h=m.matched.find(h=>h.week===w);return h?h.points/h.clan*100:null;}),color:'#63d8cb',spanGaps:false},{label:'Średnia klanu = 100%',data:labs.map(()=>100),color:'#8d9bad'}],n=>Math.round(n)+'%');
+ lineChart('profileDonationChart',m.donations.map(h=>h.week+(h.kind==='season'?' · Koniec sezonu':'')),[{label:p.nick,data:m.donations.map(h=>h.amount),color:'#ffd166',spanGaps:false},{label:'Średnia klanu w tym okresie',data:m.donations.map(h=>h.clan),color:'#6ea8ff'}],fmt);
+ });
+}
+
 let lastView='playersView';
 let profileSort={key:'week',dir:-1};
 let currentProfileNick=null;
@@ -611,7 +635,7 @@ window.openProfile=function(nick){
  $('#profilePowerDelta').textContent=p.powerChangeM==null?'brak poprzedniego snapshotu':`${sign(p.powerChangeM)}${power(p.powerChangeM)} (${fmtPct1(profPct)}) vs poprzedni`;
  $('#profilePowerDelta').className=p.powerChangeM>=0?'positive':'negative';
  $('#profileKpis').innerHTML=[
-   ['Ostatni wynik',fmt(p.latestPoints)],['Średnia',fmt(p.avg)],['Rekord',fmt(p.best)],['Najlepszy tydzień',p.bestWeek||'—'],['Wojny',p.warCount]
+   ['Ostatni wynik',fmt(p.latestPoints)],['Średnia punktów — cała historia',fmt(p.avg)],['Rekord',fmt(p.best)],['Najlepszy tydzień',p.bestWeek||'—'],['Wojny',p.warCount]
  ].map(x=>`<div class="mini-stat"><div class="l">${x[0]}</div><div class="v">${x[1]}</div></div>`).join('');
  currentProfileNick=nick;
  const profileRows=p.history.slice().sort((a,b)=>{
@@ -620,14 +644,15 @@ window.openProfile=function(nick){
    return cmpVal(va,vb,profileSort.dir);
  });
  paintSortHeaders('#profile',{key:profileSort.key,dir:profileSort.dir});
- $('#profileHistory').innerHTML=profileRows.map(h=>`<tr><td>${h.week}</td><td>${escapeHtml(tierLabel(h.tier))}</td><td>${h.date}</td><td class="num">${fmt(h.points)}</td><td class="num">${h.position??'—'}</td></tr>`).join('');
+ $('#profileHistory').innerHTML=profileRows.map(h=>`<tr><td>${h.week}</td><td>${escapeHtml(tierLabel(h.tier))}</td><td>${h.date}</td><td class="num">${fmt(h.points)}</td><td class="num">${D.weeks.find(w=>w.week===h.week)?.avg>0?fmt(D.weeks.find(w=>w.week===h.week).avg):'—'}</td><td class="num">${D.weeks.find(w=>w.week===h.week)?.avg>0?(h.points/D.weeks.find(w=>w.week===h.week).avg*100).toFixed(1).replace('.',',')+'%':'—'}</td><td class="num">${h.position??'—'}</td></tr>`).join('');
  setView('profile',false);
+ renderProfileDetails(p);
  requestAnimationFrame(()=>{
    const labs=D.weeks.map(w=>w.week);
    lineChart('profileScoreChart',labs,[{label:p.nick,data:labs.map(w=>p.history.find(h=>h.week===w)?.points??null),fill:true},{label:'Średnia klanu',data:D.weeks.map(w=>w.avg),color:'#6ea8ff'}],compact);
    const powerLabs=p.powers.map(h=>h.week);
    const powerVals=p.powers.map(h=>h.powerM);
-   lineChart('profilePowerChart',powerLabs,[{label:p.nick,data:powerVals,color:'#6ea8ff',fill:true,spanGaps:false}],power);
+   lineChart('profilePowerChart',powerLabs,[{label:p.nick,data:powerVals,color:'#6ea8ff',fill:true,spanGaps:false},{label:'Średnia klanu',data:powerLabs.map(w=>{const vals=D.players.flatMap(x=>(x.powers||[]).filter(h=>h.week===w&&Number.isFinite(h.powerM)).map(h=>h.powerM));return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;}),color:'#ffd166'}],power);
    const powerRows=p.powers.map((h,i)=>{
      const prev=i>0?p.powers[i-1]:null;
      const delta=prev?h.powerM-prev.powerM:null;
