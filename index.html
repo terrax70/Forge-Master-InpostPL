@@ -6,12 +6,12 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="inppl-build" content="20261001210108">
+<meta name="inppl-build" content="20261001210902">
 <meta name="theme-color" content="#07090d">
 <title>INPPL Stats — Forge Master</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="styles.css?v=20261001210108">
-<link rel="stylesheet" href="ui-shell.css?v=20261001210108">
+<link rel="stylesheet" href="styles.css?v=20261001210902">
+<link rel="stylesheet" href="ui-shell.css?v=20261001210902">
 <link rel="stylesheet" href="i18n.css?v=1">
 <script src="locales/en.js?v=1790697475"></script>
 <script src="i18n.js?v=1"></script>
@@ -257,7 +257,7 @@
         <label><input type="checkbox" id="reviewSkipConceded" checked> Pomiń odpuszczone wojny</label>
         <input class="search" id="reviewSearch" placeholder="Szukaj gracza…">
       </div><div class="panel-desc" id="reviewCoverage"></div>
-      <details><summary>Jak liczona jest ocena?</summary><p>Punkty są zawsze uwzględnione. Fiolki i progresję mocy można włączyć osobno. Kategorie mają równe wagi: jedna 100%, dwie po 50%, trzy po ⅓. Ryzyko to średnia deficytów max(0, 1 − wynik względem klanu) × 100.</p><p>Punkty: mediana proporcji wyniku gracza do średniej tej samej wojny, minimum 3 wpisy. Fiolki: proporcja do średniej wpisanych wpłat aktywnych graczy w wybranym tygodniu, bez sum sezonowych.</p><p>Progresja: na początku okresu wybieramy do 7 graczy z najbliższą mocą w granicach ±25% mocy ocenianego gracza. Grupę dobieramy wyłącznie na podstawie początku i nie zmieniamy jej w trakcie. Porównujemy rozwój tych samych osób między pierwszym i ostatnim dostępnym pomiarem ocenianego gracza w wybranym zakresie. Brak końcowego pomiaru wyklucza osobę z obliczeń, bez zastępowania innym graczem. Potrzeba minimum 3 porównań z pełnymi danymi. Przyrost w milionach i procentach porównujemy z medianami grupy i uśredniamy oba stosunki. Wynik 100% oznacza tempo grupy. Gdy grupa nie rośnie lub brakuje danych, progresja pozostaje bez oceny. Stagnację ≤1% na tydzień pokazujemy osobno od 2 kolejnych ostatnich tygodni z kompletem pomiarów. Jest to pomocnicza heurystyka.</p><p>👑 Ryzyko 0: wzorowy wkład; 🌟 poniżej 15: bardzo dobry; ✅ poniżej 35: w porządku; 🔎 od 35: warto poprawić; ⚠️ od 60: potrzebna rozmowa. Puste wpisy nie są zerami. Ocena nie uwzględnia urlopów ani ról w klanie.</p></details></div>
+      <details><summary>Jak liczona jest ocena?</summary><p>Punkty są zawsze uwzględnione. Fiolki i progresję mocy można włączyć osobno. Kategorie mają równe wagi: jedna 100%, dwie po 50%, trzy po ⅓. Ryzyko to średnia deficytów max(0, 1 − wynik względem klanu) × 100.</p><p>Punkty: mediana proporcji wyniku gracza do średniej tej samej wojny, minimum 3 wpisy. Fiolki: proporcja do średniej wpisanych wpłat aktywnych graczy w wybranym tygodniu, bez sum sezonowych.</p><p>Progresja: na początku okresu wybieramy do 7 graczy z najbliższą mocą w granicach ±25% mocy ocenianego gracza. Grupę dobieramy wyłącznie na podstawie początku i nie zmieniamy jej w trakcie. Porównujemy rozwój tych samych osób między pierwszym i ostatnim dostępnym pomiarem ocenianego gracza w wybranym zakresie. Brak końcowego pomiaru wyklucza osobę z obliczeń, bez zastępowania innym graczem. Potrzeba minimum 3 porównań z pełnymi danymi. Przyrost w milionach i procentach porównujemy z medianami grupy i uśredniamy oba stosunki. Wynik 100% oznacza tempo grupy. Gdy grupa nie rośnie lub brakuje danych, progresja pozostaje bez oceny i nie wchodzi do wyniku. Ocena z punktów (oraz fiolek, jeśli włączone) jest wtedy oznaczona jako częściowa, a wagi rozdzielamy równo między pozostałe kategorie. Minimum 3 zapisane wojny nadal obowiązuje. Stagnację ≤1% na tydzień pokazujemy osobno od 2 kolejnych ostatnich tygodni z kompletem pomiarów. Jest to pomocnicza heurystyka.</p><p>👑 Ryzyko 0: wzorowy wkład; 🌟 poniżej 15: bardzo dobry; ✅ poniżej 35: w porządku; 🔎 od 35: warto poprawić; ⚠️ od 60: potrzebna rozmowa. Puste wpisy nie są zerami. Ocena nie uwzględnia urlopów ani ról w klanie.</p></details></div>
       <div class="war-summary" id="reviewSummary"></div>
       <div class="panel"><div class="panel-head"><div><div class="panel-title">Ocena wkładu graczy</div><div class="panel-desc">Najpierw wyniki wymagające uwagi • zielony status oznacza wkład w porządku • brak danych to nie negatywna ocena</div></div></div>
       <div class="table-shell"><table><thead><tr><th>Gracz</th><th>Ocena</th><th class="num">Ryzyko / 100</th><th class="num">Punkty / średnia</th><th class="num review-donation-column">Fiolki / średnia</th><th class="num review-progress-column">Tempo progresji</th><th class="num">Trend (p.p.)</th><th>Uzasadnienie</th></tr></thead><tbody id="reviewTable"></tbody></table></div></div>
