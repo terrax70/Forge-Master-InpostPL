@@ -609,11 +609,11 @@ function profileMetrics(player,data){
 }
 function renderProfileDetails(p){
  const m=profileMetrics(p,D),percent=n=>n===null?'—':new Intl.NumberFormat('pl-PL',{maximumFractionDigits:1}).format(n)+'%',value=n=>n===null?'—':fmt(n);
- const active=p.active!==false,assessment=rosterAssessment(D,Number($('#reviewWindow').value),$('#reviewDonationWeek').value,$('#reviewSkipConceded').checked,$('#reviewUseDonations').checked),r=assessment.rows.find(x=>x.p.nick===p.nick);
+ const active=p.active!==false,assessment=rosterAssessment(D,Number($('#reviewWindow').value),$('#reviewDonationWeek').value,$('#reviewSkipConceded').checked,$('#reviewUseDonations').checked,$('#reviewUseProgress').checked),r=assessment.rows.find(x=>x.p.nick===p.nick);
  const category=r?(r.score===0?'excellent':r.status==='ok'&&r.score<15?'strong':r.status):'insufficient';
  const labels={excellent:'👑 Wzorowy wkład',strong:'🌟 Bardzo dobry wkład',ok:'✅ Wkład w porządku',watch:'🔎 Warto poprawić wyniki',high:'⚠️ Potrzebna rozmowa',insufficient:'⏳ Jeszcze bez oceny'};
  $('#profileAssessment').className='panel roster-controls review-category '+category;
- $('#profileAssessment').innerHTML='<div class="panel-title">'+(active?labels[category]:'Były gracz — historia wkładu')+'</div><p class="panel-desc">'+(r?'Ryzyko: '+(r.score===null?'brak oceny':r.score.toFixed(1).replace('.',',')+' / 100')+' • '+r.count+'/'+assessment.weeks.length+' zapisanych wojen • '+($('#reviewUseDonations').checked?'50% punkty, 50% fiolki':'100% punkty wojenne')+'<br>Mediana wyniku względem klanu: '+percent(r.ratio===null?null:r.ratio*100)+' • Trend: '+(r.trend===null?'—':r.trend.toFixed(1).replace('.',',')+' p.p.')+'<br>Zakres: '+assessment.weeks.map(w=>w.week).join(', '):'Nie jest uwzględniany w rekomendacjach dla obecnego składu.')+'</p><div class="panel-desc">Ocena korzysta z aktualnych ustawień zakładki Ocena składu. Średnie poniżej obejmują całą zapisaną historię gracza.</div>';
+ $('#profileAssessment').innerHTML='<div class="panel-title">'+(active?labels[category]:'Były gracz — historia wkładu')+'</div><p class="panel-desc">'+(r?'Ryzyko: '+(r.score===null?'brak oceny':r.score.toFixed(1).replace('.',',')+' / 100')+' • '+r.count+'/'+assessment.weeks.length+' zapisanych wojen • '+(['punkty wojenne',...($('#reviewUseDonations').checked?['fiolki']:[]),...($('#reviewUseProgress').checked?['progresja mocy']:[])].join(' + ')+' • równe wagi')+'<br>Mediana wyniku względem klanu: '+percent(r.ratio===null?null:r.ratio*100)+' • Trend: '+(r.trend===null?'—':r.trend.toFixed(1).replace('.',',')+' p.p.')+'<br>Zakres: '+assessment.weeks.map(w=>w.week).join(', '):'Nie jest uwzględniany w rekomendacjach dla obecnego składu.')+'</p><div class="panel-desc">Ocena korzysta z aktualnych ustawień zakładki Ocena składu. Średnie poniżej obejmują całą zapisaną historię gracza.</div>';
  $('#profileAverages').innerHTML=[['Średnia klanu — wojny z wpisem gracza',value(m.clanAverage)],['Średni wynik względem klanu',percent(m.relative)],['Średnia mocy — zapisane pomiary',m.powerAverage===null?'—':power(m.powerAverage)],['Średnia fiolek / tydzień',value(m.weeklyAverage)],['Suma wpłat tygodniowych',m.weeklyCount?fmt(m.weeklyTotal):'—'],['Tygodnie z wpisem fiolek',m.weeklyCount]].map(([label,val])=>'<div class="mini-stat"><div class="l">'+label+'</div><div class="v">'+val+'</div></div>').join('');
  $('#profileDonationHistory').innerHTML=m.donations.slice().reverse().map(h=>'<div class="list-row"><div><div class="list-name">'+escapeHtml(h.week)+(h.kind==='season'?' · Koniec sezonu':'')+'</div><div class="list-meta">Średnia klanu: '+value(h.clan)+'</div></div><div class="list-value">'+fmt(h.amount)+'<small style="display:block">'+(h.clan>0?percent(h.amount/h.clan*100):'—')+' średniej</small></div></div>').join('')||'<div class="empty">Brak zapisanych wpłat fiolek</div>';
  requestAnimationFrame(()=>{
@@ -692,7 +692,7 @@ function scrollPageTop(){
 }
 
 
-function rosterAssessment(data,size,week,skip,useDonations=false){
+function rosterAssessment(data,size,week,skip,useDonations=false,useProgress=false){
  const players=data.players.filter(p=>p.active!==false),weeks=data.weeks.filter(w=>!skip||!String(w.resultType||'').toLowerCase().includes('odpuszcz')).slice(-size);
  const amounts=players.map(p=>p.donationHistory?.find(h=>h.week===week&&h.kind==='week')?.amount).filter(Number.isFinite);
  const average=amounts.length?amounts.reduce((a,b)=>a+b,0)/amounts.length:null;
@@ -700,9 +700,14 @@ function rosterAssessment(data,size,week,skip,useDonations=false){
  const rows=players.map(p=>{
  const samples=weeks.flatMap(w=>{const value=p.history?.find(h=>h.week===w.week)?.points;return Number.isFinite(value)&&w.avg>0?[{value,ratio:value/w.avg}]:[];});
  const ratio=median(samples.map(h=>h.ratio)),donation=p.donationHistory?.find(h=>h.week===week&&h.kind==='week')?.amount??null,donationRatio=donation!==null&&average>0?donation/average:null;
- const score=samples.length>=3&&(!useDonations||donationRatio!==null)?(useDonations?50:100)*Math.max(0,1-ratio)+(useDonations?50*Math.max(0,1-donationRatio):0):null,half=Math.floor(samples.length/2);
+ const timeline=(p.powers||[]).filter(h=>Number.isFinite(h.powerM)&&weeks.length&&weekNumber(h.week)>=weekNumber(weeks[0].week)&&weekNumber(h.week)<=weekNumber(weeks.at(-1).week)).sort((a,b)=>weekNumber(a.week)-weekNumber(b.week));
+ const first=timeline[0],last=timeline.at(-1),growth=timeline.length>=2&&first.powerM>0?(last.powerM-first.powerM)/first.powerM:null;
+ const peers=growth===null?[]:data.players.filter(x=>x.nick!==p.nick).flatMap(x=>{const a=x.powers?.find(h=>h.week===first.week)?.powerM,b=x.powers?.find(h=>h.week===last.week)?.powerM;return Number.isFinite(a)&&a>0&&Number.isFinite(b)?[(b-a)/a]:[];});
+ const clanGrowth=peers.length>=3?median(peers):null,progressRatio=growth!==null&&clanGrowth>0?Math.max(0,growth)/clanGrowth:null;
+ const components=[ratio,...(useDonations?[donationRatio]:[]),...(useProgress?[progressRatio]:[])];
+ const score=samples.length>=3&&components.every(x=>x!==null)?components.reduce((sum,x)=>sum+Math.max(0,1-x),0)*100/components.length:null,half=Math.floor(samples.length/2);
  const trend=samples.length>=4?(median(samples.slice(-half).map(h=>h.ratio))-median(samples.slice(0,half).map(h=>h.ratio)))*100:null;
- return {p,ratio,donation,donationRatio,score,trend,count:samples.length,missing:weeks.length-samples.length,low:samples.filter(h=>h.ratio<.5).length,zeros:samples.filter(h=>h.value===0).length,status:score===null?'insufficient':score>=60&&ratio<.5&&(!useDonations||donationRatio<.5)?'high':score>=35?'watch':'ok'};
+ return {p,ratio,donation,donationRatio,score,trend,growth,clanGrowth,progressRatio,progressFrom:first?.week,progressTo:last?.week,count:samples.length,missing:weeks.length-samples.length,low:samples.filter(h=>h.ratio<.5).length,zeros:samples.filter(h=>h.value===0).length,status:score===null?'insufficient':score>=60?'high':score>=35?'watch':'ok'};
  }).sort((a,b)=>(b.score??-1)-(a.score??-1)||a.p.nick.localeCompare(b.p.nick));
  return {rows,weeks,average,donated:amounts.length};
 }
@@ -731,14 +736,15 @@ function renderDonations(){
 function initRosterReview(){
  const weeks=[...new Set(D.players.filter(p=>p.active!==false).flatMap(p=>(p.donationHistory||[]).filter(h=>h.kind==='week').map(h=>h.week)))].sort((a,b)=>weekNumber(b)-weekNumber(a));
  $('#reviewDonationWeek').innerHTML=weeks.length?weeks.map(w=>'<option value="'+escapeHtml(w)+'">'+escapeHtml(w)+'</option>').join(''):'<option value="">—</option>';
- for(const id of ['reviewWindow','reviewDonationWeek','reviewSkipConceded','reviewUseDonations'])$('#'+id).onchange=renderRosterReview;
+ for(const id of ['reviewWindow','reviewDonationWeek','reviewSkipConceded','reviewUseDonations','reviewUseProgress'])$('#'+id).onchange=renderRosterReview;
  $('#reviewSearch').oninput=renderRosterReview;renderRosterReview();
 }
 function renderRosterReview(){
  const en=window.INPPL_I18N?.language==='en',t=(pl,eng)=>en?eng:pl,week=$('#reviewDonationWeek').value;
  const useDonations=$('#reviewUseDonations').checked;$('#reviewDonationWeek').disabled=!useDonations;
+ $$('.review-progress-column').forEach(el=>el.hidden=!$('#reviewUseProgress').checked);
  $$('.review-donation-column').forEach(el=>el.hidden=!useDonations);
- const result=rosterAssessment(D,Number($('#reviewWindow').value),week,$('#reviewSkipConceded').checked,useDonations),q=$('#reviewSearch').value.trim().toLowerCase(),rows=result.rows.filter(r=>r.p.nick.toLowerCase().includes(q));
+ const result=rosterAssessment(D,Number($('#reviewWindow').value),week,$('#reviewSkipConceded').checked,useDonations,$('#reviewUseProgress').checked),q=$('#reviewSearch').value.trim().toLowerCase(),rows=result.rows.filter(r=>r.p.nick.toLowerCase().includes(q));
  const percentage=n=>n===null?'—':new Intl.NumberFormat(en?'en-GB':'pl-PL',{maximumFractionDigits:1}).format(n*100)+'%';
  $('#reviewCoverage').textContent=t('Wojny: ','Wars: ')+result.weeks.map(w=>w.week).join(', ')+(useDonations?t(' • Fiolki: ',' • Donations: '):t(' • Fiolki wyłączone • dostępny tydzień: ',' • Donations excluded • available week: '))+(week||'—')+' • '+result.donated+'/'+result.rows.length+t(' graczy z wpisem • Średnia fiolek: ',' players with an entry • Average donations: ')+(result.average===null?'—':fmt(result.average));
  const category=r=>r.score===0?'excellent':r.status==='ok'&&r.score<15?'strong':r.status;
@@ -748,10 +754,11 @@ function renderRosterReview(){
  $('#reviewTable').innerHTML=rows.map(r=>{
  const reasons=[...(r.status==='ok'?[t('Brak sygnałów do rozmowy o usunięciu w tej ocenie','No removal discussion flags in this assessment')]:r.status==='insufficient'?[t('Brak danych nie oznacza słabego wkładu','Missing data does not mean poor contribution')]:[]),r.count+'/'+result.weeks.length+t(' zapisanych wojen',' recorded wars'),r.low+t(' wojen poniżej 50% średniej',' wars below 50% of average')];
  if(r.zeros)reasons.push(r.zeros+t(' wyników zerowych',' zero scores'));if(r.missing)reasons.push(r.missing+t(' brakujących wpisów',' missing entries'));
+ if($('#reviewUseProgress').checked)reasons.push(r.progressRatio===null?'Moc: za mało danych lub brak wzrostu grupy porównawczej':'Moc '+r.progressFrom+' → '+r.progressTo+': '+percentage(r.growth)+'; mediana progresji klanu: '+percentage(r.clanGrowth));
  if(useDonations)reasons.push(r.donation===null?t('brak wpisu o fiolkach','no donation entry'):t('fiolki: ','donations: ')+fmt(r.donation));
  if(useDonations&&result.average===0)reasons.push(t('średnia fiolek wynosi 0 — brak podstawy porównania','donation average is zero — no comparison baseline'));
- return '<tr class="review-category '+category(r)+'"><td>'+playerLink(r.p)+'</td><td><span class="review-status '+category(r)+'">'+labels[category(r)]+'</span></td><td class="num"><b>'+(r.score===null?'—':r.score.toFixed(1).replace('.',en?'.':','))+'</b></td><td class="num">'+percentage(r.ratio)+'</td><td class="num review-donation-column" '+(!useDonations?'hidden':'')+'>'+percentage(r.donationRatio)+'</td><td class="num">'+(r.trend===null?'—':(r.trend>=0?'+':'')+r.trend.toFixed(1).replace('.',en?'.':','))+'</td><td class="review-reasons">'+reasons.join(' • ')+'</td></tr>';
- }).join('')||'<tr><td colspan="7" class="empty">'+t('Brak wyników','No results')+'</td></tr>';
+ return '<tr class="review-category '+category(r)+'"><td>'+playerLink(r.p)+'</td><td><span class="review-status '+category(r)+'">'+labels[category(r)]+'</span></td><td class="num"><b>'+(r.score===null?'—':r.score.toFixed(1).replace('.',en?'.':','))+'</b></td><td class="num">'+percentage(r.ratio)+'</td><td class="num review-donation-column" '+(!useDonations?'hidden':'')+'>'+percentage(r.donationRatio)+'</td><td class="num review-progress-column" '+(!$('#reviewUseProgress').checked?'hidden':'')+'>'+percentage(r.progressRatio)+'</td><td class="num">'+(r.trend===null?'—':(r.trend>=0?'+':'')+r.trend.toFixed(1).replace('.',en?'.':','))+'</td><td class="review-reasons">'+reasons.join(' • ')+'</td></tr>';
+ }).join('')||'<tr><td colspan="8" class="empty">'+t('Brak wyników','No results')+'</td></tr>';
 
 }
 
