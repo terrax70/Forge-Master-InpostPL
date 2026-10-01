@@ -602,9 +602,9 @@ function renderCompare(){
 function assessmentBadges(r){
  const badge=(text,kind)=>'<span class="review-status '+kind+'">'+text+'</span>';
  const war=r.warRisk===null?badge('⏳ Wojny: za mało danych','insufficient'):r.warRisk>=35?badge('⚠️ Wojny: wymagają uwagi','watch'):badge(r.warRisk===0?'👑 Wojny: wzorowy wkład':'✅ Wojny: dobry wkład','ok');
- const progress=!r.useProgress?'':r.developmentRisk===null?badge('⏳ Rozwój: brak porównania','insufficient'):r.lagWeeks>=3?badge('⚠️ Rozwój wymaga uwagi · '+r.lagWeeks+' tyg.','watch'):r.progressRatio<.75?badge('🔎 Rozwój: odstęp do potwierdzenia','watch'):badge('✅ Rozwój: tempo grupy lub blisko','ok');
+ const progress=!r.useProgress?'':badge(({new:'🆕 Rozwój: za krótka historia',missing:'⏳ Rozwój: za mało porównań',warning:'⚠️ Utrzymujący się słabszy rozwój',watch:'🔎 Rozwój: jeden słabszy sygnał',good:'✅ Rozwój bez wyraźnych zastrzeżeń'})[r.development.state],r.development.state==='warning'?'high':r.development.state==='watch'?'watch':r.development.state==='good'?'ok':'insufficient');
  const donation=!r.useDonations?'':r.donationRisk===null?badge('⏳ Fiolki: brak danych','insufficient'):r.donationRisk>=35?badge('⚠️ Fiolki: wymagają uwagi','watch'):badge('✅ Fiolki: dobry wkład','ok');
- return '<div class="assessment-badges">'+war+progress+donation+'</div>';
+ return '<div class="assessment-badges">'+(r.development.state==='new'?badge('🆕 Za krótka historia do oceny','insufficient'):'')+war+progress+donation+'</div>';
 }
 function profileMetrics(player,data){
  const mean=values=>values.length?values.reduce((a,b)=>a+b,0)/values.length:null;
@@ -699,6 +699,28 @@ function scrollPageTop(){
 }
 
 
+function developmentAssessment(player,data){
+ const number=w=>Number(String(w).replace(/\D/g,'')),med=v=>{const a=[...v].sort((a,b)=>a-b),i=Math.floor(a.length/2);return a.length?(a.length%2?a[i]:(a[i-1]+a[i])/2):null;};
+ const endWeek=data.powerWeeks?.at(-1)?.week||data.weeks.at(-1)?.week,endN=number(endWeek);
+ const history=(player.powers||[]).filter(h=>Number.isFinite(h.powerM)&&h.powerM>0).sort((a,b)=>number(a.week)-number(b.week));
+ const tooNew=history.length<4||!history.length||endN-number(history[0].week)<4||(player.history||[]).filter(h=>Number.isFinite(h.points)).length<3;
+ const windowStats=span=>{
+ const start=history.find(h=>number(h.week)===endN-span),end=history.find(h=>h.week===endWeek);
+ if(!start||!end)return null;
+ const cohort=data.players.filter(p=>p.nick!==player.nick).flatMap(p=>{const a=p.powers?.find(h=>h.week===start.week)?.powerM;return Number.isFinite(a)&&a>0?[{nick:p.nick,start:a,end:p.powers?.find(h=>h.week===endWeek)?.powerM,distance:Math.abs(Math.log(a/start.powerM))}]:[];}).sort((a,b)=>a.distance-b.distance||a.nick.localeCompare(b.nick)).slice(0,7);
+ const peers=cohort.filter(p=>Number.isFinite(p.end)&&p.end>=0);if(peers.length<3)return null;
+ const dm=med(peers.map(p=>p.end-p.start)),pm=med(peers.map(p=>(p.end-p.start)/p.start)),delta=end.powerM-start.powerM;
+ const pace=dm>0&&pm>0?(Math.max(0,delta)/dm+Math.max(0,delta/start.powerM)/pm)/2:null;
+ const relative=med(peers.filter(p=>p.end>0).map(p=>(end.powerM/p.end)/(start.powerM/p.start)));
+ const reliable=peers.filter(p=>p.start>=start.powerM/2&&p.start<=start.powerM*2).length>=3;
+ return {span,from:start.week,to:endWeek,start:start.powerM,end:end.powerM,delta,groupDelta:dm,pace,relative,reliable,peers:peers.map(p=>p.nick)};
+ };
+ const recent=windowStats(4),long=windowStats(8),position=long||recent;
+ const signals=[recent?.reliable&&recent.pace!==null&&recent.pace<.75,long?.reliable&&long.pace!==null&&long.pace<.75,position?.reliable&&position.relative!==null&&position.relative<.8].filter(Boolean).length;
+ const available=[recent,long].filter(x=>x?.reliable&&x.pace!==null);
+ const state=tooNew?'new':!available.length?'missing':signals>=2?'warning':signals===1?'watch':'good';
+ return {recent,long,signals,state,risk:state==='warning'?60:state==='watch'?25:state==='good'?0:null};
+}
 function rosterAssessment(data,size,week,skip,useDonations=false,useProgress=false){
  const players=data.players.filter(p=>p.active!==false),weeks=data.weeks.filter(w=>!skip||!String(w.resultType||'').toLowerCase().includes('odpuszcz')).slice(-size);
  const amounts=players.map(p=>p.donationHistory?.find(h=>h.week===week&&h.kind==='week')?.amount).filter(Number.isFinite);
@@ -716,14 +738,14 @@ function rosterAssessment(data,size,week,skip,useDonations=false,useProgress=fal
  }).sort((a,b)=>a.distance-b.distance||a.nick.localeCompare(b.nick)).slice(0,7):[];
  const complete=cohort.filter(x=>Number.isFinite(x.end)&&x.end>=0),baselineM=complete.length>=3?median(complete.map(x=>x.end-x.start)):null,clanGrowth=complete.length>=3?median(complete.map(x=>(x.end-x.start)/x.start)):null;
  const delta=growth===null?null:last.powerM-first.powerM;
- const progressRatio=growth!==null&&baselineM>0&&clanGrowth>0?(Math.max(0,delta)/baselineM+Math.max(0,growth)/clanGrowth)/2:null;
+ let progressRatio=growth!==null&&baselineM>0&&clanGrowth>0?(Math.max(0,delta)/baselineM+Math.max(0,growth)/clanGrowth)/2:null;
  const intervals=timeline.slice(1).flatMap((end,i)=>{const start=timeline[i];return start.powerM>0&&weekNumber(end.week)-weekNumber(start.week)===1?[{from:start.week,to:end.week,pct:(end.powerM-start.powerM)/start.powerM}]:[];});
  const latestWeek=weeks.at(-1)?.week;
  let stagnantWeeks=0;
  if(last?.week===latestWeek)for(let i=intervals.length-1;i>=0;i--){const h=intervals[i];if(h.to!==(i===intervals.length-1?latestWeek:intervals[i+1].from)||h.pct>.01)break;stagnantWeeks++;}
  const displayM=n=>new Intl.NumberFormat('pl-PL',{maximumFractionDigits:1}).format(n)+'m';
- const progressNote=(first&&last?first.week+' → '+last.week+': '+displayM(first.powerM)+' → '+displayM(last.powerM):'Brak pomiarów')+' • stała grupa: '+complete.length+'/'+cohort.length+' z kompletem danych'+(baselineM!==null?' • mediana przyrostu grupy: '+displayM(baselineM):'')+(cohort.length?' • porównywani: '+cohort.map(x=>x.nick+(Number.isFinite(x.end)?'':' (brak końca)')).join(', '):'')+(stagnantWeeks>=2?' • stagnacja ≤1%/tydzień: '+stagnantWeeks+' ostatnich tygodni':'');
- const partialProgress=useProgress&&progressRatio===null;
+ let progressNote=(first&&last?first.week+' → '+last.week+': '+displayM(first.powerM)+' → '+displayM(last.powerM):'Brak pomiarów')+' • stała grupa: '+complete.length+'/'+cohort.length+' z kompletem danych'+(baselineM!==null?' • mediana przyrostu grupy: '+displayM(baselineM):'')+(cohort.length?' • porównywani: '+cohort.map(x=>x.nick+(Number.isFinite(x.end)?'':' (brak końca)')).join(', '):'')+(stagnantWeeks>=2?' • stagnacja ≤1%/tydzień: '+stagnantWeeks+' ostatnich tygodni':'');
+ let partialProgress=useProgress&&progressRatio===null;
  const components=[ratio,...(useDonations?[donationRatio]:[]),...(useProgress&&progressRatio!==null?[progressRatio]:[])];
  const scoreBasis=['punkty wojenne',...(useDonations?['fiolki']:[]),...(useProgress&&progressRatio!==null?['progresja mocy']:[])].join(' + ');
  const warRisk=samples.length>=3?100*Math.max(0,1-ratio):null;
@@ -736,11 +758,17 @@ function rosterAssessment(data,size,week,skip,useDonations=false,useProgress=fal
  });
  let lagWeeks=0;
  if(last?.week===latestWeek)for(let i=checkpoints.length-1;i>=0;i--){const h=checkpoints[i];if(h.week!==(i===checkpoints.length-1?latestWeek:'W'+(weekNumber(checkpoints[i+1].week)-1))||h.ratio===null||h.ratio>=.75)break;lagWeeks++;}
- const developmentRisk=useProgress&&progressRatio!==null?(lagWeeks>=3?Math.max(35,100*Math.max(0,1-progressRatio)):0):null;
+ const development=developmentAssessment(p,data);
+ const developmentRisk=useProgress?development.risk:null;
+ if(useProgress){
+ progressRatio=development.recent?.pace??development.long?.pace??null;
+ partialProgress=developmentRisk===null;
+ progressNote=[development.recent,development.long].filter(Boolean).map(w=>w.from+' → '+w.to+': '+displayM(w.start)+' → '+displayM(w.end)+'; przyrost grupy '+displayM(w.groupDelta)+'; tempo '+(w.pace===null?'—':Math.round(w.pace*100)+'%')+'; zmiana przewagi '+(w.relative===null?'—':Math.round((w.relative-1)*100)+'%')+'; '+(w.reliable?'porównanie wiarygodne':'niska pewność: różna moc startowa')+'; grupa: '+w.peers.join(', ')).join(' | ')||'Brak pełnych pomiarów dla okien 4 / 8 tygodni';
+ }
  const risks=[warRisk,...(useDonations?[donationRisk]:[]),...(useProgress?[developmentRisk]:[])].filter(x=>x!==null);
- const score=risks.length?Math.max(...risks):null,half=Math.floor(samples.length/2);
+ const score=development.state==='new'?null:risks.length?Math.max(...risks):null,half=Math.floor(samples.length/2);
  const trend=samples.length>=4?(median(samples.slice(-half).map(h=>h.ratio))-median(samples.slice(0,half).map(h=>h.ratio)))*100:null;
- return {p,ratio,donation,donationRatio,score,trend,warRisk,donationRisk,developmentRisk,lagWeeks,useDonations,useProgress,partialProgress,scoreBasis,growth,clanGrowth,progressRatio,progressNote,stagnantWeeks,progressIntervals:intervals,progressCohort:cohort,progressBaselineM:baselineM,progressFrom:first?.week,progressTo:last?.week,count:samples.length,missing:weeks.length-samples.length,low:samples.filter(h=>h.ratio<.5).length,zeros:samples.filter(h=>h.value===0).length,status:score===null?'insufficient':score>=60?'high':score>=35?'watch':'ok'};
+ return {p,ratio,donation,donationRatio,score,trend,development,warRisk,donationRisk,developmentRisk,lagWeeks,useDonations,useProgress,partialProgress,scoreBasis,growth,clanGrowth,progressRatio,progressNote,stagnantWeeks,progressIntervals:intervals,progressCohort:cohort,progressBaselineM:baselineM,progressFrom:first?.week,progressTo:last?.week,count:samples.length,missing:weeks.length-samples.length,low:samples.filter(h=>h.ratio<.5).length,zeros:samples.filter(h=>h.value===0).length,status:score===null?'insufficient':score>=60?'high':score>=35?'watch':'ok'};
  }).sort((a,b)=>(b.score??-1)-(a.score??-1)||a.p.nick.localeCompare(b.p.nick));
  return {rows,weeks,average,donated:amounts.length};
 }
@@ -785,7 +813,7 @@ function renderRosterReview(){
  $('#reviewSummary').innerHTML=Object.entries(labels).map(([key,label])=>'<div class="mini-stat review-category '+key+'"><div class="l">'+label+'</div><div class="v">'+result.rows.filter(r=>category(r)===key).length+'</div></div>').join('');
  const playerLink=p=>'<button class="player-link" data-profile="'+escapeHtml(p.nick)+'">'+escapeHtml(p.nick)+'</button>';
  $('#reviewTable').innerHTML=rows.map(r=>{
- const reasons=[...(r.useProgress&&r.lagWeeks>=3?['Rozwój poniżej 75% tempa stałej grupy w '+r.lagWeeks+' kolejnych pomiarach tygodniowych']:[]),...(r.partialProgress&&r.score!==null?['Ocena częściowa: '+r.scoreBasis+'; moc nie wpływa na wynik']:[]),...(r.status==='ok'?[t('Sprawdź osobne oceny wojen i rozwoju','No removal discussion flags in this assessment')]:r.status==='insufficient'?[t('Brak danych nie oznacza słabego wkładu','Missing data does not mean poor contribution')]:[]),r.count+'/'+result.weeks.length+t(' zapisanych wojen',' recorded wars'),r.low+t(' wojen poniżej 50% średniej',' wars below 50% of average')];
+ const reasons=[...(r.useProgress?['Rozwój: '+r.development.signals+'/3 słabszych sygnałów']:[]),...(r.partialProgress&&r.score!==null?['Ocena częściowa: '+r.scoreBasis+'; moc nie wpływa na wynik']:[]),...(r.status==='ok'?[t('Sprawdź osobne oceny wojen i rozwoju','No removal discussion flags in this assessment')]:r.status==='insufficient'?[t('Brak danych nie oznacza słabego wkładu','Missing data does not mean poor contribution')]:[]),r.count+'/'+result.weeks.length+t(' zapisanych wojen',' recorded wars'),r.low+t(' wojen poniżej 50% średniej',' wars below 50% of average')];
  if(r.zeros)reasons.push(r.zeros+t(' wyników zerowych',' zero scores'));if(r.missing)reasons.push(r.missing+t(' brakujących wpisów',' missing entries'));
  if($('#reviewUseProgress').checked)reasons.push(r.progressRatio===null?'Moc: za mało porównań • '+escapeHtml(r.progressNote):'Progresja: '+percentage(r.progressRatio)+' tempa grupy • '+escapeHtml(r.progressNote));
  if(useDonations)reasons.push(r.donation===null?t('brak wpisu o fiolkach','no donation entry'):t('fiolki: ','donations: ')+fmt(r.donation));
