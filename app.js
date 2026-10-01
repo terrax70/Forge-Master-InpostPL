@@ -699,9 +699,11 @@ function scrollPageTop(){
 }
 
 
-function developmentAssessment(player,data){
+function developmentAssessment(player,data,selectedWeeks=data.weeks){
  const number=w=>Number(String(w).replace(/\D/g,'')),med=v=>{const a=[...v].sort((a,b)=>a-b),i=Math.floor(a.length/2);return a.length?(a.length%2?a[i]:(a[i-1]+a[i])/2):null;};
- const endWeek=data.powerWeeks?.at(-1)?.week||data.weeks.at(-1)?.week,endN=number(endWeek);
+ const eligible=selectedWeeks.filter(w=>data.players.some(p=>p.powers?.some(h=>h.week===w.week&&Number.isFinite(h.powerM))));
+ const endWeek=eligible.at(-1)?.week,endN=number(endWeek);
+ const startWeek=eligible[0]?.week,recentStart=eligible[Math.max(0,eligible.length-5)]?.week;
  const history=(player.powers||[]).filter(h=>Number.isFinite(h.powerM)&&h.powerM>0).sort((a,b)=>number(a.week)-number(b.week));
  const tooNew=history.length<4||!history.length||endN-number(history[0].week)<4||(player.history||[]).filter(h=>Number.isFinite(h.points)).length<3;
  const windowStats=span=>{
@@ -715,7 +717,8 @@ function developmentAssessment(player,data){
  const reliable=peers.filter(p=>p.start>=start.powerM/2&&p.start<=start.powerM*2).length>=3;
  return {span,from:start.week,to:endWeek,start:start.powerM,end:end.powerM,delta,groupDelta:dm,pace,relative,reliable,peers:peers.map(p=>p.nick)};
  };
- const recent=windowStats(4),long=windowStats(8),position=long||recent;
+ const recent=endWeek&&recentStart&&recentStart!==endWeek?windowStats(endN-number(recentStart)):null;
+ const long=startWeek&&startWeek!==recentStart&&startWeek!==endWeek?windowStats(endN-number(startWeek)):null,position=long||recent;
  const signals=[recent?.reliable&&recent.pace!==null&&recent.pace<.75,long?.reliable&&long.pace!==null&&long.pace<.75,position?.reliable&&position.relative!==null&&position.relative<.8].filter(Boolean).length;
  const available=[recent,long].filter(x=>x?.reliable&&x.pace!==null);
  const state=tooNew?'new':!available.length?'missing':signals>=2?'warning':signals===1?'watch':'good';
@@ -758,12 +761,12 @@ function rosterAssessment(data,size,week,skip,useDonations=false,useProgress=fal
  });
  let lagWeeks=0;
  if(last?.week===latestWeek)for(let i=checkpoints.length-1;i>=0;i--){const h=checkpoints[i];if(h.week!==(i===checkpoints.length-1?latestWeek:'W'+(weekNumber(checkpoints[i+1].week)-1))||h.ratio===null||h.ratio>=.75)break;lagWeeks++;}
- const development=developmentAssessment(p,data);
+ const development=developmentAssessment(p,data,weeks);
  const developmentRisk=useProgress?development.risk:null;
  if(useProgress){
  progressRatio=development.recent?.pace??development.long?.pace??null;
  partialProgress=developmentRisk===null;
- progressNote=[development.recent,development.long].filter(Boolean).map(w=>w.from+' → '+w.to+': '+displayM(w.start)+' → '+displayM(w.end)+'; przyrost grupy '+displayM(w.groupDelta)+'; tempo '+(w.pace===null?'—':Math.round(w.pace*100)+'%')+'; zmiana przewagi '+(w.relative===null?'—':Math.round((w.relative-1)*100)+'%')+'; '+(w.reliable?'porównanie wiarygodne':'niska pewność: różna moc startowa')+'; grupa: '+w.peers.join(', ')).join(' | ')||'Brak pełnych pomiarów dla okien 4 / 8 tygodni';
+ progressNote=[development.recent,development.long].filter(Boolean).map(w=>w.from+' → '+w.to+': '+displayM(w.start)+' → '+displayM(w.end)+'; przyrost grupy '+displayM(w.groupDelta)+'; tempo '+(w.pace===null?'—':Math.round(w.pace*100)+'%')+'; zmiana przewagi '+(w.relative===null?'—':Math.round((w.relative-1)*100)+'%')+'; '+(w.reliable?'porównanie wiarygodne':'niska pewność: różna moc startowa')+'; grupa: '+w.peers.join(', ')).join(' | ')||'Brak pełnych pomiarów dla wybranego zakresu wojen';
  }
  const risks=[warRisk,...(useDonations?[donationRisk]:[]),...(useProgress?[developmentRisk]:[])].filter(x=>x!==null);
  const score=development.state==='new'?null:risks.length?Math.max(...risks):null,half=Math.floor(samples.length/2);
