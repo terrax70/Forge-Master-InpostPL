@@ -654,3 +654,6 @@ th.sortable:hover{color:#dce5ef;background:#101823}
 @media(max-width:850px){.profile-analysis-grid{grid-template-columns:1fr}}
 
 .assessment-badges{display:flex;flex-direction:column;align-items:flex-start;gap:5px;margin:7px 0}.assessment-badges .review-status{white-space:normal}
+
+/* Outstanding contribution stays distinct from an ordinary good result. */
+.review-status.exemplary{--badge-color:#ffd166;--badge-bg:#ffd16618;color:var(--badge-color);border-color:var(--badge-color);background:var(--badge-bg);font-weight:700;box-shadow:inset 3px 0 0 var(--badge-color)}

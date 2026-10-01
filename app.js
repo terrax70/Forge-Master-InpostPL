@@ -601,7 +601,7 @@ function renderCompare(){
 
 function assessmentBadges(r){
  const badge=(text,kind)=>'<span class="review-status '+kind+'">'+text+'</span>';
- const war=r.warRisk===null?badge('⏳ Wojny: za mało danych','insufficient'):r.warRisk>=35?badge('⚠️ Wojny: wymagają uwagi',r.warRisk>=60?'high':'watch'):badge(r.warRisk===0?'👑 Wojny: wzorowy wkład':'✅ Wojny: dobry wkład','ok');
+ const war=r.warRisk===null?badge('⏳ Wojny: za mało danych','insufficient'):r.warRisk>=35?badge('⚠️ Wojny: wymagają uwagi',r.warRisk>=60?'high':'watch'):badge(r.warRisk===0?'👑 Wojny: wzorowy wkład':'✅ Wojny: dobry wkład',r.warRisk===0?'exemplary':'ok');
  const progress=!r.useProgress?'':badge(({new:'🆕 Rozwój: za krótka historia',missing:'⏳ Rozwój: za mało porównań',warning:'⚠️ Utrzymujący się słabszy rozwój',watch:'🔎 Rozwój: jeden słabszy sygnał',good:'✅ Rozwój bez wyraźnych zastrzeżeń'})[r.development.state],r.development.state==='warning'?'high':r.development.state==='watch'?'watch':r.development.state==='good'?'ok':'insufficient');
  const donation=!r.useDonations?'':r.donationRisk===null?badge('⏳ Fiolki: brak danych','insufficient'):r.donationRisk>=35?badge('⚠️ Fiolki: wymagają uwagi',r.donationRisk>=60?'high':'watch'):badge('✅ Fiolki: dobry wkład','ok');
  return '<div class="assessment-badges">'+(r.development.state==='new'?badge('🆕 Za krótka historia do oceny','insufficient'):'')+war+progress+donation+'</div>';
