@@ -624,8 +624,8 @@ th.sortable:hover{color:#dce5ef;background:#101823}
 }
 
 .review-category{--review-color:#8d9bad;--review-bg:#8d9bad08}
-.review-category.excellent{--review-color:#ffd166;--review-bg:#ffd16612}
-.review-category.strong{--review-color:#63d8cb;--review-bg:#63d8cb0b}
+.review-category.excellent{--review-color:#76e6a0;--review-bg:#76e6a012}
+.review-category.strong{--review-color:#76d89b;--review-bg:#76d89b0b}
 .review-category.ok{--review-color:#76d89b;--review-bg:#76d89b08}
 .review-category.watch{--review-color:#f4b651;--review-bg:#f4b6510b}
 .review-category.high{--review-color:#ff8791;--review-bg:#ff879112}
@@ -634,8 +634,12 @@ th.sortable:hover{color:#dce5ef;background:#101823}
 #reviewSummary .l{color:var(--review-color)}
 #reviewTable .review-category td{background:var(--review-bg);border-bottom:1px solid color-mix(in srgb,var(--review-color) 30%,transparent)}
 #reviewTable .review-category td:first-child{border-left:3px solid var(--review-color)}
-#reviewTable .review-status{color:var(--review-color);border:1px solid var(--review-color);background:var(--review-bg)}
-#reviewTable .excellent .player-link,#reviewTable .excellent td.num b{color:#ffd166;font-weight:800}
+/* Each badge owns its colors independently of the overall row assessment. */
+.review-status{--badge-color:#8d9bad;--badge-bg:#8d9bad12;color:var(--badge-color);border:1px solid var(--badge-color);background:var(--badge-bg)}
+.review-status.excellent,.review-status.strong,.review-status.ok{--badge-color:#76d89b;--badge-bg:#22c55e18;color:var(--badge-color);border-color:var(--badge-color);background:var(--badge-bg)}
+.review-status.watch{--badge-color:#f4a641;--badge-bg:#f4a64118;color:var(--badge-color);background:var(--badge-bg)}
+.review-status.high{--badge-color:#ff8791;--badge-bg:#e6656520;color:var(--badge-color);background:var(--badge-bg)}
+#reviewTable .excellent .player-link,#reviewTable .excellent td.num b{color:#76e6a0;font-weight:800}
 
 #profileAssessment{border:1px solid var(--review-color);background:var(--review-bg)}#profileAssessment .panel-title{color:var(--review-color)}#profileAverages{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}#profileDonationHistory{max-height:260px;overflow:auto}
 
