@@ -613,7 +613,7 @@ function renderProfileDetails(p){
  const category=r?(r.score===0?'excellent':r.status==='ok'&&r.score<15?'strong':r.status):'insufficient';
  const labels={excellent:'👑 Wzorowy wkład',strong:'🌟 Bardzo dobry wkład',ok:'✅ Wkład w porządku',watch:'🔎 Warto poprawić wyniki',high:'⚠️ Potrzebna rozmowa',insufficient:'⏳ Jeszcze bez oceny'};
  $('#profileAssessment').className='panel roster-controls review-category '+category;
- $('#profileAssessment').innerHTML='<div class="panel-title">'+(active?labels[category]:'Były gracz — historia wkładu')+'</div><p class="panel-desc">'+(r?'Ryzyko: '+(r.score===null?'brak oceny':r.score.toFixed(1).replace('.',',')+' / 100')+' • '+r.count+'/'+assessment.weeks.length+' zapisanych wojen • '+(['punkty wojenne',...($('#reviewUseDonations').checked?['fiolki']:[]),...($('#reviewUseProgress').checked?['progresja mocy']:[])].join(' + ')+' • równe wagi')+'<br>Mediana wyniku względem klanu: '+percent(r.ratio===null?null:r.ratio*100)+' • Trend: '+(r.trend===null?'—':r.trend.toFixed(1).replace('.',',')+' p.p.')+($('#reviewUseProgress').checked?'<br>Progresja: '+percent(r.progressRatio===null?null:r.progressRatio*100)+' • '+r.progressNote:'')+'<br>Zakres: '+assessment.weeks.map(w=>w.week).join(', '):'Nie jest uwzględniany w rekomendacjach dla obecnego składu.')+'</p><div class="panel-desc">Ocena korzysta z aktualnych ustawień zakładki Ocena składu. Średnie poniżej obejmują całą zapisaną historię gracza.</div>';
+ $('#profileAssessment').innerHTML='<div class="panel-title">'+(active?labels[category]:'Były gracz — historia wkładu')+'</div><p class="panel-desc">'+(r?'Ryzyko: '+(r.score===null?'brak oceny':r.score.toFixed(1).replace('.',',')+' / 100')+' • '+r.count+'/'+assessment.weeks.length+' zapisanych wojen • '+(['punkty wojenne',...($('#reviewUseDonations').checked?['fiolki']:[]),...($('#reviewUseProgress').checked?['progresja mocy']:[])].join(' + ')+' • równe wagi')+'<br>Mediana wyniku względem klanu: '+percent(r.ratio===null?null:r.ratio*100)+' • Trend: '+(r.trend===null?'—':r.trend.toFixed(1).replace('.',',')+' p.p.')+($('#reviewUseProgress').checked?'<br>Progresja: '+percent(r.progressRatio===null?null:r.progressRatio*100)+' • '+escapeHtml(r.progressNote):'')+'<br>Zakres: '+assessment.weeks.map(w=>w.week).join(', '):'Nie jest uwzględniany w rekomendacjach dla obecnego składu.')+'</p><div class="panel-desc">Ocena korzysta z aktualnych ustawień zakładki Ocena składu. Średnie poniżej obejmują całą zapisaną historię gracza.</div>';
  $('#profileAverages').innerHTML=[['Średnia klanu — wojny z wpisem gracza',value(m.clanAverage)],['Średni wynik względem klanu',percent(m.relative)],['Średnia mocy — zapisane pomiary',m.powerAverage===null?'—':power(m.powerAverage)],['Średnia fiolek / tydzień',value(m.weeklyAverage)],['Suma wpłat tygodniowych',m.weeklyCount?fmt(m.weeklyTotal):'—'],['Tygodnie z wpisem fiolek',m.weeklyCount]].map(([label,val])=>'<div class="mini-stat"><div class="l">'+label+'</div><div class="v">'+val+'</div></div>').join('');
  $('#profileDonationHistory').innerHTML=m.donations.slice().reverse().map(h=>'<div class="list-row"><div><div class="list-name">'+escapeHtml(h.week)+(h.kind==='season'?' · Koniec sezonu':'')+'</div><div class="list-meta">Średnia klanu: '+value(h.clan)+'</div></div><div class="list-value">'+fmt(h.amount)+'<small style="display:block">'+(h.clan>0?percent(h.amount/h.clan*100):'—')+' średniej</small></div></div>').join('')||'<div class="empty">Brak zapisanych wpłat fiolek</div>';
  requestAnimationFrame(()=>{
@@ -702,30 +702,24 @@ function rosterAssessment(data,size,week,skip,useDonations=false,useProgress=fal
  const ratio=median(samples.map(h=>h.ratio)),donation=p.donationHistory?.find(h=>h.week===week&&h.kind==='week')?.amount??null,donationRatio=donation!==null&&average>0?donation/average:null;
  const timeline=(p.powers||[]).filter(h=>Number.isFinite(h.powerM)&&weeks.length&&weekNumber(h.week)>=weekNumber(weeks[0].week)&&weekNumber(h.week)<=weekNumber(weeks.at(-1).week)).sort((a,b)=>weekNumber(a.week)-weekNumber(b.week));
  const first=timeline[0],last=timeline.at(-1),growth=timeline.length>=2&&first.powerM>0?(last.powerM-first.powerM)/first.powerM:null;
- const intervals=[];
- for(let i=1;i<timeline.length;i++){
- const start=timeline[i-1],end=timeline[i];
- if(start.powerM<=0||weekNumber(end.week)-weekNumber(start.week)!==1)continue;
- const peers=data.players.filter(x=>x.nick!==p.nick).flatMap(x=>{
- const a=x.powers?.find(h=>h.week===start.week)?.powerM,b=x.powers?.find(h=>h.week===end.week)?.powerM;
- return Number.isFinite(a)&&a>0&&Number.isFinite(b)&&b>=0&&a>=start.powerM/2&&a<=start.powerM*2?[{distance:Math.abs(Math.log(a/start.powerM)),delta:b-a,pct:(b-a)/a}]:[];
- }).sort((a,b)=>a.distance-b.distance).slice(0,7);
- const delta=end.powerM-start.powerM,pct=delta/start.powerM,baselineM=peers.length>=3?median(peers.map(x=>x.delta)):null,baselinePct=peers.length>=3?median(peers.map(x=>x.pct)):null;
- const relative=baselineM>0&&baselinePct>0?(Math.min(1,Math.max(0,delta)/baselineM)+Math.min(1,Math.max(0,pct)/baselinePct))/2:null;
- intervals.push({from:start.week,to:end.week,delta,pct,baselineM,baselinePct,peers:peers.length,relative});
- }
- const valid=intervals.filter(x=>x.relative!==null),latestWeek=weeks.at(-1)?.week;
- // Recent weeks carry more weight; a strong old interval cannot erase a weak recent one.
- const weight=h=>1/(1+weekNumber(latestWeek)-weekNumber(h.to));
- const progressRatio=valid.length>=2?valid.reduce((sum,h)=>sum+h.relative*weight(h),0)/valid.reduce((sum,h)=>sum+weight(h),0):null;
- const clanGrowth=null;
+ // Select the cohort from starting power only, before checking end measurements.
+ const cohort=first?.powerM>0?data.players.filter(x=>x.nick!==p.nick).flatMap(x=>{
+ const start=x.powers?.find(h=>h.week===first.week)?.powerM;
+ return Number.isFinite(start)&&start>=first.powerM*.75&&start<=first.powerM*1.25?[{nick:x.nick,start,distance:Math.abs(start-first.powerM),end:x.powers?.find(h=>h.week===last.week)?.powerM}]:[];
+ }).sort((a,b)=>a.distance-b.distance||a.nick.localeCompare(b.nick)).slice(0,7):[];
+ const complete=cohort.filter(x=>Number.isFinite(x.end)&&x.end>=0),baselineM=complete.length>=3?median(complete.map(x=>x.end-x.start)):null,clanGrowth=complete.length>=3?median(complete.map(x=>(x.end-x.start)/x.start)):null;
+ const delta=growth===null?null:last.powerM-first.powerM;
+ const progressRatio=growth!==null&&baselineM>0&&clanGrowth>0?(Math.max(0,delta)/baselineM+Math.max(0,growth)/clanGrowth)/2:null;
+ const intervals=timeline.slice(1).flatMap((end,i)=>{const start=timeline[i];return start.powerM>0&&weekNumber(end.week)-weekNumber(start.week)===1?[{from:start.week,to:end.week,pct:(end.powerM-start.powerM)/start.powerM}]:[];});
+ const latestWeek=weeks.at(-1)?.week;
  let stagnantWeeks=0;
  if(last?.week===latestWeek)for(let i=intervals.length-1;i>=0;i--){const h=intervals[i];if(h.to!==(i===intervals.length-1?latestWeek:intervals[i+1].from)||h.pct>.01)break;stagnantWeeks++;}
- const progressNote=valid.length+' porównanych tygodni • '+(valid.length?'grupa: '+Math.min(...valid.map(h=>h.peers))+'–'+Math.max(...valid.map(h=>h.peers))+' graczy o podobnej mocy':'brak wystarczającej grupy')+(stagnantWeeks>=2?' • stagnacja ≤1%/tydzień: '+stagnantWeeks+' ostatnich tygodni':'');
+ const displayM=n=>new Intl.NumberFormat('pl-PL',{maximumFractionDigits:1}).format(n)+'m';
+ const progressNote=(first&&last?first.week+' → '+last.week+': '+displayM(first.powerM)+' → '+displayM(last.powerM):'Brak pomiarów')+' • stała grupa: '+complete.length+'/'+cohort.length+' z kompletem danych'+(baselineM!==null?' • mediana przyrostu grupy: '+displayM(baselineM):'')+(cohort.length?' • porównywani: '+cohort.map(x=>x.nick+(Number.isFinite(x.end)?'':' (brak końca)')).join(', '):'')+(stagnantWeeks>=2?' • stagnacja ≤1%/tydzień: '+stagnantWeeks+' ostatnich tygodni':'');
  const components=[ratio,...(useDonations?[donationRatio]:[]),...(useProgress?[progressRatio]:[])];
  const score=samples.length>=3&&components.every(x=>x!==null)?components.reduce((sum,x)=>sum+Math.max(0,1-x),0)*100/components.length:null,half=Math.floor(samples.length/2);
  const trend=samples.length>=4?(median(samples.slice(-half).map(h=>h.ratio))-median(samples.slice(0,half).map(h=>h.ratio)))*100:null;
- return {p,ratio,donation,donationRatio,score,trend,growth,clanGrowth,progressRatio,progressNote,stagnantWeeks,progressIntervals:intervals,progressFrom:first?.week,progressTo:last?.week,count:samples.length,missing:weeks.length-samples.length,low:samples.filter(h=>h.ratio<.5).length,zeros:samples.filter(h=>h.value===0).length,status:score===null?'insufficient':score>=60?'high':score>=35?'watch':'ok'};
+ return {p,ratio,donation,donationRatio,score,trend,growth,clanGrowth,progressRatio,progressNote,stagnantWeeks,progressIntervals:intervals,progressCohort:cohort,progressBaselineM:baselineM,progressFrom:first?.week,progressTo:last?.week,count:samples.length,missing:weeks.length-samples.length,low:samples.filter(h=>h.ratio<.5).length,zeros:samples.filter(h=>h.value===0).length,status:score===null?'insufficient':score>=60?'high':score>=35?'watch':'ok'};
  }).sort((a,b)=>(b.score??-1)-(a.score??-1)||a.p.nick.localeCompare(b.p.nick));
  return {rows,weeks,average,donated:amounts.length};
 }
@@ -772,7 +766,7 @@ function renderRosterReview(){
  $('#reviewTable').innerHTML=rows.map(r=>{
  const reasons=[...(r.status==='ok'?[t('Brak sygnałów do rozmowy o usunięciu w tej ocenie','No removal discussion flags in this assessment')]:r.status==='insufficient'?[t('Brak danych nie oznacza słabego wkładu','Missing data does not mean poor contribution')]:[]),r.count+'/'+result.weeks.length+t(' zapisanych wojen',' recorded wars'),r.low+t(' wojen poniżej 50% średniej',' wars below 50% of average')];
  if(r.zeros)reasons.push(r.zeros+t(' wyników zerowych',' zero scores'));if(r.missing)reasons.push(r.missing+t(' brakujących wpisów',' missing entries'));
- if($('#reviewUseProgress').checked)reasons.push(r.progressRatio===null?'Moc: za mało porównań • '+r.progressNote:'Progresja: '+percentage(r.progressRatio)+' tempa grupy • '+r.progressNote);
+ if($('#reviewUseProgress').checked)reasons.push(r.progressRatio===null?'Moc: za mało porównań • '+escapeHtml(r.progressNote):'Progresja: '+percentage(r.progressRatio)+' tempa grupy • '+escapeHtml(r.progressNote));
  if(useDonations)reasons.push(r.donation===null?t('brak wpisu o fiolkach','no donation entry'):t('fiolki: ','donations: ')+fmt(r.donation));
  if(useDonations&&result.average===0)reasons.push(t('średnia fiolek wynosi 0 — brak podstawy porównania','donation average is zero — no comparison baseline'));
  return '<tr class="review-category '+category(r)+'"><td>'+playerLink(r.p)+'</td><td><span class="review-status '+category(r)+'">'+labels[category(r)]+'</span></td><td class="num"><b>'+(r.score===null?'—':r.score.toFixed(1).replace('.',en?'.':','))+'</b></td><td class="num">'+percentage(r.ratio)+'</td><td class="num review-donation-column" '+(!useDonations?'hidden':'')+'>'+percentage(r.donationRatio)+'</td><td class="num review-progress-column" '+(!$('#reviewUseProgress').checked?'hidden':'')+'>'+percentage(r.progressRatio)+'</td><td class="num">'+(r.trend===null?'—':(r.trend>=0?'+':'')+r.trend.toFixed(1).replace('.',en?'.':','))+'</td><td class="review-reasons">'+reasons.join(' • ')+'</td></tr>';
