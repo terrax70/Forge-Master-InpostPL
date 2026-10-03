@@ -3,14 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="inppl-build" content="20261001222033">
+<meta name="inppl-build" content="20261003150605598">
 <meta name="theme-color" content="#07090d">
 <title>INPPL • Rozwój Forge Master</title>
-<link rel="stylesheet" href="knowledge.css?v=2700-196">
-<link rel="stylesheet" href="../ui-shell.css?v=20261001222033">
-<link rel="stylesheet" href="../i18n.css?v=1">
-<script src="../locales/en.js?v=3"></script>
-<script src="../i18n.js?v=1"></script>
+<link rel="stylesheet" href="knowledge.css?v=20261003150605598">
+<link rel="stylesheet" href="../ui-shell.css?v=20261003150605598">
+<link rel="stylesheet" href="../i18n.css?v=20261003150605598">
+<script src="../locales/en.js?v=20261003150605598"></script>
+<script src="../i18n.js?v=20261003150605598"></script>
+<!-- inppl-version-check -->
+<script>
+(() => {
+  const versionUrl = new URL('../version.json', location.href);
+  const loadedBuild = document.querySelector('meta[name="inppl-build"]')?.content;
+  let checking = false;
+  async function checkVersion() {
+    if (checking || document.hidden || !/^https?:$/.test(location.protocol)) return;
+    checking = true;
+    try {
+      versionUrl.searchParams.set('t', Date.now());
+      const response = await fetch(versionUrl, {cache: 'no-store'});
+      if (!response.ok) return;
+      const data = await response.json();
+      if (data.build == null) return;
+      const next = String(data.build), current = new URL(location.href);
+      if (next !== loadedBuild && current.searchParams.get('v') !== next) {
+        current.searchParams.set('v', next);
+        location.replace(current.href);
+      }
+    } catch (_) {} finally { checking = false; }
+  }
+  checkVersion();
+  addEventListener('pageshow', checkVersion);
+  document.addEventListener('visibilitychange', checkVersion);
+})();
+</script>
+<!-- /inppl-version-check -->
 </head>
 <body>
 <div class="app">
@@ -267,10 +295,10 @@
   <footer class="footer-v1">INPPL • Rozwój v2.7 • source pack 2026-09-02 • 1vcian/fm</footer>
 </main>
 </div>
-<script src="knowledge-data.js?v=2700-165"></script>
-<script src="item-variants.js?v=2700-193"></script>
-<script src="visual-variants.js?v=2700-191"></script>
-<script src="knowledge.js?v=2700-197"></script>
+<script src="knowledge-data.js?v=20261003150605598"></script>
+<script src="item-variants.js?v=20261003150605598"></script>
+<script src="visual-variants.js?v=20261003150605598"></script>
+<script src="knowledge.js?v=20261003150605598"></script>
 <script>
 (()=>{const m=document.querySelector('meta[name="inppl-build"]');const b=m?.content||"";fetch("../version.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():null).then(v=>{if(!v?.build||String(v.build)===b)return;const k="inppl_last_reloaded_build";if(sessionStorage.getItem(k)===String(v.build))return;sessionStorage.setItem(k,String(v.build));const u=new URL(location.href);u.searchParams.set("_v",String(v.build));location.replace(u)}).catch(()=>{})})();
 </script>

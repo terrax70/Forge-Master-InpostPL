@@ -3,14 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="inppl-build" content="20261001222033">
+<meta name="inppl-build" content="20261003150605598">
 <meta name="theme-color" content="#07090d">
 <title>INPPL Stats — Podsumowanie</title>
-<link rel="stylesheet" href="share.css?v=20261001222033">
-<link rel="stylesheet" href="../ui-shell.css?v=20261001222033">
-<link rel="stylesheet" href="../i18n.css?v=1">
-<script src="../locales/en.js?v=2"></script>
-<script src="../i18n.js?v=1"></script>
+<link rel="stylesheet" href="share.css?v=20261003150605598">
+<link rel="stylesheet" href="../ui-shell.css?v=20261003150605598">
+<link rel="stylesheet" href="../i18n.css?v=20261003150605598">
+<script src="../locales/en.js?v=20261003150605598"></script>
+<script src="../i18n.js?v=20261003150605598"></script>
+<!-- inppl-version-check -->
+<script>
+(() => {
+  const versionUrl = new URL('../version.json', location.href);
+  const loadedBuild = document.querySelector('meta[name="inppl-build"]')?.content;
+  let checking = false;
+  async function checkVersion() {
+    if (checking || document.hidden || !/^https?:$/.test(location.protocol)) return;
+    checking = true;
+    try {
+      versionUrl.searchParams.set('t', Date.now());
+      const response = await fetch(versionUrl, {cache: 'no-store'});
+      if (!response.ok) return;
+      const data = await response.json();
+      if (data.build == null) return;
+      const next = String(data.build), current = new URL(location.href);
+      if (next !== loadedBuild && current.searchParams.get('v') !== next) {
+        current.searchParams.set('v', next);
+        location.replace(current.href);
+      }
+    } catch (_) {} finally { checking = false; }
+  }
+  checkVersion();
+  addEventListener('pageshow', checkVersion);
+  document.addEventListener('visibilitychange', checkVersion);
+})();
+</script>
+<!-- /inppl-version-check -->
 </head>
 <body>
 <div class="app">
@@ -138,7 +166,7 @@
 </div>
 
 <div class="toast" id="toast">Skopiowano ✓</div>
-<script src="../data-loader.js" data-scripts="../week-picker.js share.js"></script>
+<script src="../data-loader.js?v=20261003150605598" data-scripts="../week-picker.js share.js"></script>
 
 </body>
 </html>
