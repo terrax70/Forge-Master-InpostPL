@@ -1,0 +1,272 @@
+{
+  "revision": 11,
+  "version": "2026_09_08_08_08",
+  "backend": "cuda",
+  "stages": {
+    "0-0": {
+      "score": 0.914398193359375,
+      "fights": 2193654,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 13.663438,
+        "gpuDuels": 2192630,
+        "cpuSpotChecks": 840
+      }
+    },
+    "0-1": {
+      "score": 0.914398193359375,
+      "fights": 3465480,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 13.853724,
+        "gpuDuels": 3460360,
+        "cpuSpotChecks": 840
+      }
+    },
+    "0-2": {
+      "score": 0.9062787224264706,
+      "fights": 8475662,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 21.388554700000004,
+        "gpuDuels": 8472590,
+        "cpuSpotChecks": 840
+      }
+    },
+    "1-0": {
+      "score": 0.940460205078125,
+      "fights": 3616478,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 15.323459899999994,
+        "gpuDuels": 3615454,
+        "cpuSpotChecks": 840
+      }
+    },
+    "1-1": {
+      "score": 0.919677734375,
+      "fights": 6058062,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 23.217335999999996,
+        "gpuDuels": 6044750,
+        "cpuSpotChecks": 840
+      }
+    },
+    "1-2": {
+      "score": 0.9480411305147058,
+      "fights": 8226228,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 23.2833925,
+        "gpuDuels": 8225204,
+        "cpuSpotChecks": 840
+      }
+    },
+    "2-0": {
+      "score": 0.92303466796875,
+      "fights": 3879382,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 18.84304419999999,
+        "gpuDuels": 3878358,
+        "cpuSpotChecks": 840
+      }
+    },
+    "2-1": {
+      "score": 0.888427734375,
+      "fights": 6018318,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 31.189883899999987,
+        "gpuDuels": 6012174,
+        "cpuSpotChecks": 840
+      }
+    },
+    "2-2": {
+      "score": 0.9465475643382353,
+      "fights": 8614250,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 34.4999742,
+        "gpuDuels": 8611178,
+        "cpuSpotChecks": 840
+      }
+    },
+    "3-0": {
+      "score": 0.955047607421875,
+      "fights": 3634264,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 22.54153880000001,
+        "gpuDuels": 3620952,
+        "cpuSpotChecks": 840
+      }
+    },
+    "3-1": {
+      "score": 0.93719482421875,
+      "fights": 5674298,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 24.645483399999996,
+        "gpuDuels": 5668154,
+        "cpuSpotChecks": 840
+      }
+    },
+    "3-2": {
+      "score": 0.962890625,
+      "fights": 8266884,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 30.10123610000001,
+        "gpuDuels": 8254596,
+        "cpuSpotChecks": 840
+      }
+    },
+    "0-4": {
+      "score": 0.881805419921875,
+      "fights": 2496306,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 19.6582418,
+        "gpuDuels": 2495282,
+        "cpuSpotChecks": 840
+      }
+    },
+    "0-5": {
+      "score": 0.900238037109375,
+      "fights": 3410702,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 14.685676600000003,
+        "gpuDuels": 3408654,
+        "cpuSpotChecks": 840
+      }
+    },
+    "1-4": {
+      "score": 0.891998291015625,
+      "fights": 3460306,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 16.627550899999996,
+        "gpuDuels": 3458258,
+        "cpuSpotChecks": 840
+      }
+    },
+    "1-5": {
+      "score": 0.816192626953125,
+      "fights": 6055332,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 25.164580899999986,
+        "gpuDuels": 6048164,
+        "cpuSpotChecks": 840
+      }
+    },
+    "2-4": {
+      "score": 0.94415283203125,
+      "fights": 3457272,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 15.868216100000005,
+        "gpuDuels": 3456248,
+        "cpuSpotChecks": 840
+      }
+    },
+    "2-5": {
+      "score": 0.92730712890625,
+      "fights": 5957972,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 24.892765399999988,
+        "gpuDuels": 5945684,
+        "cpuSpotChecks": 840
+      }
+    },
+    "3-4": {
+      "score": 0.961334228515625,
+      "fights": 3383568,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 19.181628600000025,
+        "gpuDuels": 3381520,
+        "cpuSpotChecks": 840
+      }
+    },
+    "3-5": {
+      "score": 0.91815185546875,
+      "fights": 5971870,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 26.73224469999998,
+        "gpuDuels": 5949342,
+        "cpuSpotChecks": 840
+      }
+    },
+    "0-3": {
+      "score": 0.81793212890625,
+      "fights": 1471166,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 14.4816854,
+        "gpuDuels": 1470142,
+        "cpuSpotChecks": 840
+      }
+    },
+    "1-3": {
+      "score": 0.911407470703125,
+      "fights": 1420906,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 14.589608700000001,
+        "gpuDuels": 1417834,
+        "cpuSpotChecks": 840
+      }
+    },
+    "2-3": {
+      "score": 0.846832275390625,
+      "fights": 1431098,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 15.801290700000001,
+        "gpuDuels": 1428026,
+        "cpuSpotChecks": 840
+      }
+    },
+    "3-3": {
+      "score": 0.940582275390625,
+      "fights": 1422494,
+      "compute": {
+        "backend": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+        "wallSeconds": 18.248771500000004,
+        "gpuDuels": 1418398,
+        "cpuSpotChecks": 840
+      }
+    }
+  },
+  "generatedAt": "2026-10-03T09:35:37.666Z"
+}
